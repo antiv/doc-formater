@@ -11,7 +11,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY docformat/ ./docformat/
+COPY styleguard/ ./styleguard/
 COPY locales/ ./locales/
 COPY assets/ ./assets/
 COPY presets/ ./presets/

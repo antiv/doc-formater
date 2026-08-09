@@ -32,8 +32,8 @@ from docx.shared import Cm
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from docformat.library import RuleLibrary  # noqa: E402
-from docformat.rules import Institution, load_rule_set  # noqa: E402
+from styleguard.library import RuleLibrary  # noqa: E402
+from styleguard.rules import Institution, load_rule_set  # noqa: E402
 
 OUT_DIR = Path(__file__).resolve().parent / "images"
 PORT = 8555
@@ -233,7 +233,7 @@ def seed_library(directory: Path) -> None:
         library.save(rule_set)
         # `save` stamps `updated_at`; rewrite it so the table shows a spread.
         rule_set.meta.updated_at = datetime.now(timezone.utc) - timedelta(days=days_ago)
-        from docformat.rules import dump_rule_set
+        from styleguard.rules import dump_rule_set
 
         dump_rule_set(rule_set, library.path_for(rule_set.meta.id))
 
@@ -296,7 +296,7 @@ def main() -> int:
     from playwright.sync_api import sync_playwright
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    workspace = Path(tempfile.mkdtemp(prefix="docformatter-shots-"))
+    workspace = Path(tempfile.mkdtemp(prefix="styleguardter-shots-"))
     thesis = workspace / "thesis.docx"
     guide = workspace / "formatting-guidelines.docx"
     library_dir = workspace / "library"

@@ -13,10 +13,6 @@ tests/
 samples/
 rules_library/
 
-# Stara jednokratna skripta, zadržana kao referenca u repozitorijumu.
-fix_document.py
-ameu_rules.json
-
 .env
 .env.*
 !.env.example

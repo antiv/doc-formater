@@ -28,7 +28,7 @@ is describing a different use case.
 
 1. Open [console.cloud.google.com](https://console.cloud.google.com/).
 2. Project picker in the top left → **New Project**.
-3. Name it something like `doc-formatter`. Leave the organisation alone if you
+3. Name it something like `styleguard`. Leave the organisation alone if you
    do not have one.
 4. Wait for it to be created and **select it** in the picker.
 
@@ -51,7 +51,7 @@ In the left menu: **APIs & Services → OAuth consent screen**.
      this if you have Workspace and want sign-in limited to it. No verification
      and no cap on users.
    - **External** — any Google account. Choose this if you have no Workspace.
-2. **App name** — e.g. `Doc Formatter`. This is what users see when signing in.
+2. **App name** — e.g. `StyleGuard`. This is what users see when signing in.
 3. **User support email** — yours.
 4. **Developer contact information** — yours.
 5. **Scopes** — add none. `openid`, `email` and `profile` are implicit and are
@@ -79,7 +79,7 @@ While the status is *Testing*, anyone not on the list gets
 **APIs & Services → Credentials → Create Credentials → OAuth client ID**.
 
 1. **Application type: Web application**.
-2. **Name** — e.g. `doc-formatter-web` (internal only; users never see it).
+2. **Name** — e.g. `styleguard-web` (internal only; users never see it).
 3. **Authorized JavaScript origins** — leave empty; not needed.
 4. **Authorized redirect URIs** → **Add URI**. This is the app's address plus
    the path `/oauth2callback`:

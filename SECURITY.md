@@ -5,7 +5,7 @@
 **Do not open a public GitHub issue for a security vulnerability.**
 
 Report it through
-[GitHub's private vulnerability reporting](https://github.com/antiv/doc-formater/security/advisories/new),
+[GitHub's private vulnerability reporting](https://github.com/antiv/styleguard/security/advisories/new),
 which keeps the report private until a fix is available.
 
 ### What to include

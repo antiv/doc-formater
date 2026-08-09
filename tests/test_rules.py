@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from docformat.rules import (
+from styleguard.rules import (
     Alignment,
     CaptionPosition,
     Casing,

@@ -46,7 +46,7 @@ def build_svg() -> str:
     body = "\n  ".join(rows)
     return (
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" '
-        'width="512" height="512" role="img" aria-label="Doc Formatter">\n'
+        'width="512" height="512" role="img" aria-label="StyleGuard">\n'
         f'  <rect width="512" height="512" rx="112" fill="{INK}"/>\n'
         f"  {body}\n"
         "</svg>\n"

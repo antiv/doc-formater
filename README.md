@@ -1,9 +1,9 @@
 <img src="assets/icon-192.png" alt="" width="88">
 
-# Doc Formatter
+# StyleGuard
 
-[![Release](https://img.shields.io/github/v/release/antiv/doc-formater?style=flat-square&color=1E2532)](https://github.com/antiv/doc-formater/releases/latest)
-[![CI](https://img.shields.io/github/actions/workflow/status/antiv/doc-formater/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/antiv/doc-formater/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/antiv/styleguard?style=flat-square&color=1E2532)](https://github.com/antiv/styleguard/releases/latest)
+[![CI](https://img.shields.io/github/actions/workflow/status/antiv/styleguard/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/antiv/styleguard/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-1E2532?style=flat-square)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11+-1E2532?style=flat-square&logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/Built%20with-Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://streamlit.io/)
@@ -104,7 +104,7 @@ Those are two different role checks and they are easy to confuse: the first
 belongs to the agent, the second to the API.
 
 The model is chosen in the dashboard. The agent instruction lives in
-[docformat/extract/prompt.py](docformat/extract/prompt.py); after editing it run
+[styleguard/extract/prompt.py](styleguard/extract/prompt.py); after editing it run
 `.venv/bin/python mate_agent/build_agent.py` and re-import the JSON. The rules
 JSON schema is deliberately **not** baked into the agent — it is generated into
 every request, so editing the model never requires a re-import.
@@ -309,7 +309,7 @@ in it are there for a reason:
 ```
 app.py                      Streamlit UI
 cli.py                      command line
-docformat/
+styleguard/
   rules.py                  Pydantic rule models
   identity.py               sign-in and permissions
   library.py                rule library and institution matching
@@ -379,7 +379,7 @@ cp locales/en.json locales/es.json     # translate the values, keep the keys
 ```
 
 Then add the native name to `LANGUAGE_NAMES` in
-[docformat/i18n.py](docformat/i18n.py) so the picker can label it.
+[styleguard/i18n.py](styleguard/i18n.py) so the picker can label it.
 `tests/test_i18n.py` checks that every catalogue covers exactly the English key
 set and that no translation drops or invents a `{placeholder}`.
 

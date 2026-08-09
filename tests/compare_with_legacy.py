@@ -20,8 +20,8 @@ from docx.shared import Length
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from docformat.formatting.engine import format_document  # noqa: E402
-from docformat.rules import load_rule_set  # noqa: E402
+from styleguard.formatting.engine import format_document  # noqa: E402
+from styleguard.rules import load_rule_set  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 # Dokumenti nisu deo repozitorijuma (lični su podaci); putanje se po potrebi

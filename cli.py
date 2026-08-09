@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Command line for doc-formatter.
+"""Command line for styleguard.
 
     format-doc format    --input thesis.docx --rules guide.pdf --out out.docx
     format-doc format    --input thesis.docx --rules-id ameu --out out.docx
@@ -18,13 +18,13 @@ import os
 import sys
 from pathlib import Path
 
-from docformat import __version__, i18n
-from docformat.extract.mate_client import MateClient, MateConfig
-from docformat.extract.pipeline import extract_rule_set
-from docformat.extract.source import NoTextLayerError, read_rules_document
-from docformat.formatting.engine import FormatOptions, format_document
-from docformat.library import RuleLibrary
-from docformat.rules import RuleSet, dump_rule_set, load_rule_set
+from styleguard import __version__, i18n
+from styleguard.extract.mate_client import MateClient, MateConfig
+from styleguard.extract.pipeline import extract_rule_set
+from styleguard.extract.source import NoTextLayerError, read_rules_document
+from styleguard.formatting.engine import FormatOptions, format_document
+from styleguard.library import RuleLibrary
+from styleguard.rules import RuleSet, dump_rule_set, load_rule_set
 
 PRESETS_DIR = Path(__file__).resolve().parent / "presets"
 
@@ -217,7 +217,7 @@ def cmd_structure(args) -> int:
     library = RuleLibrary(args.library_dir)
     rule_set = _resolve_rules(args, library)
 
-    from docformat.formatting.engine import describe_structure
+    from styleguard.formatting.engine import describe_structure
 
     counts = describe_structure(args.input, rule_set)
     for key in sorted(counts):

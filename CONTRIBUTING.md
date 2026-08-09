@@ -1,4 +1,4 @@
-# Contributing to Doc Formatter
+# Contributing to StyleGuard
 
 Thank you for considering a contribution. This document covers the things you
 cannot infer from reading the code — the rest is ordinary Python.
@@ -23,7 +23,7 @@ yourself reaching for `.upper()`, that is the pattern to copy.
 **2. Images, tables, charts, footnotes and links are never removed.**
 
 Only whitespace may be deleted, and only when the rules ask for it.
-[docformat/formatting/ops/cleanup.py](docformat/formatting/ops/cleanup.py) is
+[styleguard/formatting/ops/cleanup.py](styleguard/formatting/ops/cleanup.py) is
 the only destructive code in the project and it refuses to delete a paragraph
 containing `w:drawing`, `w:pict`, `w:object`, `mc:AlternateContent`, a
 footnote/endnote/comment reference, a field, a bookmark or `w:sectPr`.
@@ -41,7 +41,7 @@ images, tables, footnotes and links must not change.
 ## Rules that are easy to break by accident
 
 **`None` is not `0`.** Every field in
-[docformat/rules.py](docformat/rules.py) is optional and defaults to `None`,
+[styleguard/rules.py](styleguard/rules.py) is optional and defaults to `None`,
 meaning "the style guide is silent about this — do not touch it". Every
 operation must be a no-op for such a field. A "sensible default" silently
 rewrites a document that its author formatted deliberately, which is the exact
@@ -65,7 +65,7 @@ fails CI:
 - **Comments and docstrings are in Serbian.**
 - **Code identifiers are in English.**
 - **Every user-facing string is a catalogue key**, resolved through `t()` from
-  [docformat/i18n.py](docformat/i18n.py) — never a literal. A test fails the
+  [styleguard/i18n.py](styleguard/i18n.py) — never a literal. A test fails the
   build if a non-English literal reappears in a user-facing module.
 
 Adding a language means adding `locales/<code>.json` and an entry in
@@ -131,7 +131,7 @@ Regenerate these, do not hand-edit them:
 ```
 
 The agent instruction lives in
-[docformat/extract/prompt.py](docformat/extract/prompt.py) and is copied into
+[styleguard/extract/prompt.py](styleguard/extract/prompt.py) and is copied into
 the JSON template by the build script — one source, no drift.
 
 ## The Dockerfile is part of the change

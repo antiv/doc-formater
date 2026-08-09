@@ -1,4 +1,4 @@
-"""Streamlit UI za doc_formater.
+"""Streamlit UI za styleguard.
 
 Dve celine: formatiranje dokumenta i upravljanje bibliotekom pravila.
 
@@ -16,14 +16,14 @@ from pathlib import Path
 
 import streamlit as st
 
-from docformat import __version__, i18n, identity
-from docformat.i18n import t
-from docformat.extract.mate_client import MateClient, MateConfig
-from docformat.extract.pipeline import extract_rule_set, identify_institution
-from docformat.extract.source import NoTextLayerError, read_rules_document
-from docformat.formatting.engine import FormatOptions, format_document
-from docformat.library import RuleLibrary, suggest_display_name
-from docformat.rules import (
+from styleguard import __version__, i18n, identity
+from styleguard.i18n import t
+from styleguard.extract.mate_client import MateClient, MateConfig
+from styleguard.extract.pipeline import extract_rule_set, identify_institution
+from styleguard.extract.source import NoTextLayerError, read_rules_document
+from styleguard.formatting.engine import FormatOptions, format_document
+from styleguard.library import RuleLibrary, suggest_display_name
+from styleguard.rules import (
     Casing,
     Evidence,
     RuleSet,
@@ -37,7 +37,7 @@ PRESETS_DIR = Path(__file__).resolve().parent / "presets"
 ASSETS_DIR = Path(__file__).resolve().parent / "assets"
 
 st.set_page_config(
-    page_title="Doc Formatter",
+    page_title="StyleGuard",
     page_icon=str(ASSETS_DIR / "icon-192.png"),
     layout="wide",
 )

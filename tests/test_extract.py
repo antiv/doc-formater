@@ -4,17 +4,17 @@ from __future__ import annotations
 
 import unittest
 
-from docformat.extract import heuristic
-from docformat.extract.mate_client import MateClient, MateConfig, MateError, MateSession
-from docformat.extract.pipeline import (
+from styleguard.extract import heuristic
+from styleguard.extract.mate_client import MateClient, MateConfig, MateError, MateSession
+from styleguard.extract.pipeline import (
     apply_quote_verification,
     extract_rule_set,
     parse_json_reply,
     verify_quote,
     _normalize_ws,
 )
-from docformat.extract.source import RulesDocument, TextBlock
-from docformat.rules import Alignment, Evidence, FormattingRules
+from styleguard.extract.source import RulesDocument, TextBlock
+from styleguard.rules import Alignment, Evidence, FormattingRules
 
 PRAVILNIK = """\
 UNIVERZA ALMA MATER EUROPAEA

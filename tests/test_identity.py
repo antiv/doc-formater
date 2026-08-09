@@ -10,9 +10,9 @@ import os
 import unittest
 from unittest import mock
 
-from docformat import i18n, identity
-from docformat.identity import User
-from docformat.rules import RuleSet, RuleSetMeta
+from styleguard import i18n, identity
+from styleguard.identity import User
+from styleguard.rules import RuleSet, RuleSetMeta
 
 
 def _rule_set(owner: str | None = None) -> RuleSet:

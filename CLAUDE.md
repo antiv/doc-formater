@@ -34,7 +34,7 @@ and `re.sub`, which is exactly what this codebase forbids.
 Python 3.11 venv at `.venv`. `-t .` on `unittest discover` is not optional — the
 test package uses relative imports and without it every module fails to import.
 
-A release means three things must agree: `docformat.__version__`, the entry in
+A release means three things must agree: `styleguard.__version__`, the entry in
 [CHANGELOG.md](CHANGELOG.md), and the git tag. Bump all three or none.
 
 CI is [.github/workflows/ci.yml](.github/workflows/ci.yml). Anything the app
@@ -45,7 +45,7 @@ local test.
 
 ## The two invariants that drive the whole design
 
-Everything in `docformat/formatting/` follows from these, and
+Everything in `styleguard/formatting/` follows from these, and
 [tests/test_invariants.py](tests/test_invariants.py) measures them:
 
 1. **No character of text is ever rewritten.** No `re.sub` over content, no
@@ -59,7 +59,7 @@ Everything in `docformat/formatting/` follows from these, and
 
 ### `None` means "the style guide is silent — don't touch this"
 
-Every field in [docformat/rules.py](docformat/rules.py) is `Optional` and
+Every field in [styleguard/rules.py](styleguard/rules.py) is `Optional` and
 defaults to `None`. `None` and `0` are different: the engine may only change
 properties the style guide explicitly prescribes. Every op is a no-op for
 fields that are `None`. Preserve this when adding rules — a "sensible default"
@@ -67,7 +67,7 @@ silently rewrites a document the author formatted deliberately.
 
 ### Three-layer heading detection
 
-[docformat/analyze/structure.py](docformat/analyze/structure.py) resolves
+[styleguard/analyze/structure.py](styleguard/analyze/structure.py) resolves
 heading level from, in order: Word's `w:outlineLvl` → `style.style_id`
 (`"Heading1"` is stable across localised Word; `style.name` is `"Naslov 1"` in
 Slovenian) → manual numbering.
@@ -102,7 +102,7 @@ cannot send the document back to body text.
 
 ### Deletion is the only destructive operation
 
-[docformat/formatting/ops/cleanup.py](docformat/formatting/ops/cleanup.py)
+[styleguard/formatting/ops/cleanup.py](styleguard/formatting/ops/cleanup.py)
 refuses to delete a paragraph that contains `w:drawing`, `w:pict`, `w:object`,
 `mc:AlternateContent`, footnote/endnote/comment references, fields, bookmarks,
 or `w:sectPr`. It runs only over body-level paragraphs (never inside `w:tc`),
@@ -117,7 +117,7 @@ we have nothing to replace it with.
 
 Mate exposes agents on `POST /v1/chat/completions` (`server/openai_routes.py`),
 authenticated with `Authorization: Bearer <PAT>`. Two behaviours of that route
-shape [docformat/extract/mate_client.py](docformat/extract/mate_client.py):
+shape [styleguard/extract/mate_client.py](styleguard/extract/mate_client.py):
 
 - **The route is text-only.** `extract_content_text` drops non-text blocks and
   the ADK message is built as `[{"text": ...}]`, so a PDF cannot be attached.
@@ -146,7 +146,7 @@ Verified against a running Mate instance; four things bite in practice:
   gives the subprocess the wrong interpreter.
 
 The agent instruction lives in
-[docformat/extract/prompt.py](docformat/extract/prompt.py) and is copied into
+[styleguard/extract/prompt.py](styleguard/extract/prompt.py) and is copied into
 the JSON template by `mate_agent/build_agent.py` — one source, no drift. The
 rules JSON schema deliberately does **not** go into the agent; it is generated
 from the Pydantic model into every request payload, so editing `rules.py` never
@@ -162,7 +162,7 @@ it. This is why line-broken quotes from PDFs survive while invented ones do not.
 
 ## Access model
 
-[docformat/identity.py](docformat/identity.py). Formatting is open to anyone;
+[styleguard/identity.py](styleguard/identity.py). Formatting is open to anyone;
 identity exists only so a rule set can have an owner. Anonymous → format and
 read. Logged in (Google, via Streamlit's built-in OIDC) → owns what they save.
 `ADMIN_EMAILS` → may edit and delete anything.
@@ -201,7 +201,7 @@ whole script on every interaction, so an uncached ping would hammer Mate).
 ## Translations
 
 Everything a user reads goes through `t()` in
-[docformat/i18n.py](docformat/i18n.py); catalogues are JSON in `locales/`, with
+[styleguard/i18n.py](styleguard/i18n.py); catalogues are JSON in `locales/`, with
 `en.json` as the source of truth. Three things are deliberate:
 
 - **The active language is a `ContextVar`, not a module global.** Streamlit runs

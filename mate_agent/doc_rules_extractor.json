@@ -3,7 +3,7 @@
     "version": "1.0",
     "root_agent": "doc_rules_extractor",
     "total_agents": 1,
-    "generated_by": "doc_formater/presets/build_mate_agent.py"
+    "generated_by": "mate_agent/build_agent.py"
   },
   "agents": [
     {

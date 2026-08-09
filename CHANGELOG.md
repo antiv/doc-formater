@@ -1,11 +1,21 @@
 # Changelog
 
-All notable changes to Doc Formatter will be documented in this file.
+All notable changes to StyleGuard will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Changed
+
+- **Renamed from Doc Formatter to StyleGuard**, repository `doc-formater` to
+  `styleguard`, and the Python package `docformat` to `styleguard`. The old name
+  was generic enough to be unsearchable next to the several existing products
+  called some variation of "AI document formatter", said nothing about academic
+  style guides, and the repository spelled it `formater` with one `t` while the
+  application spelled it with two. GitHub redirects the old repository URL, so
+  existing links and clones keep working.
 
 ### Removed
 
@@ -77,5 +87,5 @@ First release.
   refuses to start without it rather than signing identity cookies with a value
   that changes on every restart.
 
-[Unreleased]: https://github.com/antiv/doc-formater/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/antiv/doc-formater/releases/tag/v1.0.0
+[Unreleased]: https://github.com/antiv/styleguard/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/antiv/styleguard/releases/tag/v1.0.0

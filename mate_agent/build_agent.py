@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generiše Mate agent template iz `docformat.extract.prompt.AGENT_INSTRUCTION`.
+"""Generiše Mate agent template iz `styleguard.extract.prompt.AGENT_INSTRUCTION`.
 
 Instrukcija živi u Python kodu i odavde se prepisuje u JSON, da ne postoje dve
 kopije koje se vremenom raziđu. Kad se instrukcija promeni:
@@ -20,7 +20,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from docformat.extract.prompt import AGENT_INSTRUCTION  # noqa: E402
+from styleguard.extract.prompt import AGENT_INSTRUCTION  # noqa: E402
 
 OUTPUT = Path(__file__).resolve().parent / "doc_rules_extractor.json"
 
@@ -31,7 +31,7 @@ template = {
         "version": "1.0",
         "root_agent": AGENT_NAME,
         "total_agents": 1,
-        "generated_by": "doc_formater/presets/build_mate_agent.py",
+        "generated_by": "mate_agent/build_agent.py",
     },
     "agents": [
         {

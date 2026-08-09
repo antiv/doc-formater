@@ -8,8 +8,8 @@ from __future__ import annotations
 
 import unittest
 
-from docformat.formatting.engine import FormatOptions, format_document
-from docformat.rules import load_rule_set
+from styleguard.formatting.engine import FormatOptions, format_document
+from styleguard.rules import load_rule_set
 
 from .helpers import (
     AMEU_PRESET,
@@ -127,8 +127,8 @@ class CleanupTest(unittest.TestCase):
         )
         import docx
 
-        from docformat.analyze.structure import analyze
-        from docformat.formatting.ops.cleanup import is_safe_to_delete
+        from styleguard.analyze.structure import analyze
+        from styleguard.formatting.ops.cleanup import is_safe_to_delete
 
         infos = {i.index: i for i in analyze(docx.Document(str(SAMPLE_DOCX)), self.rule_set.rules)}
         for change in result.report.deletions:

@@ -7,8 +7,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from docformat.library import RuleLibrary, new_rule_set, suggest_display_name
-from docformat.rules import Institution, load_rule_set
+from styleguard.library import RuleLibrary, new_rule_set, suggest_display_name
+from styleguard.rules import Institution, load_rule_set
 
 from .helpers import AMEU_PRESET
 

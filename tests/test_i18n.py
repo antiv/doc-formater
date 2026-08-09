@@ -11,7 +11,7 @@ import re
 import string
 import unittest
 
-from docformat import i18n
+from styleguard import i18n
 
 
 class CatalogueConsistencyTest(unittest.TestCase):
@@ -141,8 +141,8 @@ class NoHardcodedStringsTest(unittest.TestCase):
         root = Path(__file__).resolve().parent.parent
         modules = [
             root / "app.py",
-            root / "docformat" / "identity.py",
-            root / "docformat" / "report.py",
+            root / "styleguard" / "identity.py",
+            root / "styleguard" / "report.py",
         ]
         # Serbian-specific letters inside a string literal; comments and
         # docstrings are allowed to stay in Serbian.

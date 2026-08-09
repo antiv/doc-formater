@@ -12,10 +12,10 @@ import unittest
 
 import docx
 
-from docformat.analyze.structure import Role, Section, analyze
-from docformat.formatting.engine import format_document
-from docformat.formatting.ops.cleanup import is_safe_to_delete
-from docformat.rules import load_rule_set
+from styleguard.analyze.structure import Role, Section, analyze
+from styleguard.formatting.engine import format_document
+from styleguard.formatting.ops.cleanup import is_safe_to_delete
+from styleguard.rules import load_rule_set
 
 from .fixtures import build_numbered_headings_document, build_rich_document
 from .helpers import AMEU_PRESET, content_census, empty_paragraph_count, table_text, text_sequence
