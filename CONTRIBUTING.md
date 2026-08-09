@@ -98,10 +98,12 @@ A single module:
 ```
 
 Some tests need a real thesis and skip without one, because documents are not
-part of this repository. To run them, point at your own file:
+part of this repository. To run them, point at your own file. Keep it in
+`samples/`, which is ignored by git in its entirety:
 
 ```bash
-SAMPLE_DOCX=my-thesis.docx .venv/bin/python -m unittest discover -t . -s tests -p 'test_*.py'
+SAMPLE_DOCX=samples/my-thesis.docx \
+  .venv/bin/python -m unittest discover -t . -s tests -p 'test_*.py'
 ```
 
 Everything those tests cover is also covered by the synthetic document in
@@ -110,9 +112,11 @@ not hit every case — the sample has no tables and no footnotes.
 
 ## Things that are not committed
 
-- **Documents.** `*.docx` and `*.pdf` are in `.gitignore`. A working directory
-  holds other people's theses, which are personal data; they must never reach a
-  commit, a fixture or a screenshot.
+- **Documents.** `*.docx` and `*.pdf` are in `.gitignore`, and so is `samples/`
+  as a whole — the directory rather than a list of extensions, so that a note or
+  an exported JSON derived from someone's thesis cannot slip through either. A
+  working directory holds other people's theses, which are personal data; they
+  must never reach a commit, a fixture or a screenshot.
 - **Secrets.** `.env` and `.streamlit/secrets.toml` are ignored. The container
   renders `secrets.toml` from environment variables at startup.
 

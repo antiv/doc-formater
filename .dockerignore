@@ -10,6 +10,7 @@ tests/
 # Radovi i izlazi iz razvoja -- nemaju šta u slici.
 *.docx
 *.pdf
+samples/
 rules_library/
 
 # Stara jednokratna skripta, zadržana kao referenca u repozitorijumu.

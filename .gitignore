@@ -18,3 +18,8 @@ rules_library/
 *.pdf
 *.doc
 *.odt
+
+# Lokalni uzorci na koje pokazuju SAMPLE_DOCX i LEGACY_DOCX. Ceo direktorijum
+# je ignorisan, ne samo poznate ekstenzije -- da ovde ne završi ni beleška ni
+# izvezeni JSON izveden iz tuđeg rada.
+samples/

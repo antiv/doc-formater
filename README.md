@@ -273,11 +273,16 @@ the synthetic document in [tests/fixtures.py](tests/fixtures.py), which exists
 precisely because a real thesis does not hit every case (no tables, no
 footnotes).
 
-To run those tests too, point at your own `.docx`:
+To run those tests too, point at your own `.docx`. `samples/` is ignored by git
+in its entirety, so it is the place to keep one:
 
 ```bash
-SAMPLE_DOCX=my-thesis.docx .venv/bin/python -m unittest discover -t . -s tests -p 'test_*.py'
+SAMPLE_DOCX=samples/my-thesis.docx \
+  .venv/bin/python -m unittest discover -t . -s tests -p 'test_*.py'
 ```
+
+Both variables are resolved relative to the project root, so an absolute path
+works too.
 
 [tests/compare_with_legacy.py](tests/compare_with_legacy.py) diffs the result
 against the output of the original script; it needs both documents
