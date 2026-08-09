@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- `fix_document.py`, the original single-purpose script, and `ameu_rules.json`,
+  the file it read. Nothing imported either one, `presets/ameu.json` supersedes
+  the rules file, and `tests/compare_with_legacy.py` compares against a
+  pre-generated document rather than the script. Keeping it was actively
+  misleading: the script rewrites text with `.upper()` and `re.sub`, which
+  [CONTRIBUTING.md](CONTRIBUTING.md) forbids, and `ameu_rules.json` declared ten
+  sections of which the script ever read two. Both remain available at
+  `git show v1.0.0:fix_document.py`.
+
 ## [1.0.0] - 2026-08-09
 
 First release.

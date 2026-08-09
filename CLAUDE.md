@@ -10,8 +10,10 @@ institution's style guide. The user uploads the thesis and the style guide
 regex heuristic as fallback. Extracted rule sets are saved to a library and
 re-offered when the same institution is recognised.
 
-`fix_document.py` is the original single-purpose script, kept as reference. It
-is not imported by anything.
+The original single-purpose script (`fix_document.py`) and its rules file
+(`ameu_rules.json`) are gone; `git show v1.0.0:fix_document.py` still has them.
+Do not reintroduce them as reference — the script rewrites text with `.upper()`
+and `re.sub`, which is exactly what this codebase forbids.
 
 ## Commands
 
