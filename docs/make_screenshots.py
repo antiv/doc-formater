@@ -296,7 +296,7 @@ def main() -> int:
     from playwright.sync_api import sync_playwright
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    workspace = Path(tempfile.mkdtemp(prefix="styleguardter-shots-"))
+    workspace = Path(tempfile.mkdtemp(prefix="styleguard-shots-"))
     thesis = workspace / "thesis.docx"
     guide = workspace / "formatting-guidelines.docx"
     library_dir = workspace / "library"
