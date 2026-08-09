@@ -2,6 +2,7 @@
 
 # Doc Formatter
 
+[![Release](https://img.shields.io/github/v/release/antiv/doc-formater?style=flat-square&color=1E2532)](https://github.com/antiv/doc-formater/releases/latest)
 [![CI](https://img.shields.io/github/actions/workflow/status/antiv/doc-formater/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/antiv/doc-formater/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-1E2532?style=flat-square)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11+-1E2532?style=flat-square&logo=python&logoColor=white)](https://www.python.org/downloads/)
@@ -321,6 +322,9 @@ Dockerfile                  deployment image
 docker-compose.yml          Dokploy
 docker-entrypoint.sh        secrets.toml from environment variables
 .github/workflows/ci.yml    tests, and a smoke test of the built image
+CONTRIBUTING.md             invariants and conventions a change must respect
+SECURITY.md                 reporting a vulnerability, deploying safely
+CHANGELOG.md                release history
 ```
 
 `fix_document.py` is the original single-purpose script, kept for reference.
@@ -383,6 +387,16 @@ Code comments and docstrings are in Serbian — the project grew out of a
 Serbian-language thesis toolchain — while everything a user reads goes through
 the catalogues.
 
-## Licence
+## Contributing, security and licence
+
+Contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) first — the
+two invariants above constrain the design more than is obvious from the code,
+and the language conventions (Serbian comments, English identifiers, no
+user-facing literals) are the usual reason a first pull request fails CI.
+
+Found a vulnerability? Do not open a public issue — see
+[SECURITY.md](SECURITY.md).
+
+Release history is in [CHANGELOG.md](CHANGELOG.md).
 
 MIT — see [LICENSE](LICENSE).

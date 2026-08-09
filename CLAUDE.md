@@ -32,6 +32,9 @@ is not imported by anything.
 Python 3.11 venv at `.venv`. `-t .` on `unittest discover` is not optional — the
 test package uses relative imports and without it every module fails to import.
 
+A release means three things must agree: `docformat.__version__`, the entry in
+[CHANGELOG.md](CHANGELOG.md), and the git tag. Bump all three or none.
+
 CI is [.github/workflows/ci.yml](.github/workflows/ci.yml). Anything the app
 reads at runtime must be added to the `COPY` list in the `Dockerfile` — the
 image job asserts the catalogues, presets and icon are actually inside the

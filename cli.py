@@ -18,7 +18,7 @@ import os
 import sys
 from pathlib import Path
 
-from docformat import i18n
+from docformat import __version__, i18n
 from docformat.extract.mate_client import MateClient, MateConfig
 from docformat.extract.pipeline import extract_rule_set
 from docformat.extract.source import NoTextLayerError, read_rules_document
@@ -241,6 +241,7 @@ def cmd_mate(args) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="format-doc", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--version", action="version", version=__version__)
     parser.add_argument("--library-dir", default=None, help="rule library directory")
     parser.add_argument(
         "--lang",

@@ -16,7 +16,7 @@ from pathlib import Path
 
 import streamlit as st
 
-from docformat import i18n, identity
+from docformat import __version__, i18n, identity
 from docformat.i18n import t
 from docformat.extract.mate_client import MateClient, MateConfig
 from docformat.extract.pipeline import extract_rule_set, identify_institution
@@ -709,6 +709,8 @@ def main() -> None:
     _language_selector()
     st.sidebar.divider()
     st.sidebar.caption(t("app.promise"))
+    # Verzija nije prevodiva -- broj izdanja je isti na svakom jeziku.
+    st.sidebar.caption(f"v{__version__}")
 
     if page == "format":
         page_format(user)
