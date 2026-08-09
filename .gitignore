@@ -1,0 +1,20 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# Tajne — nikad u repozitorijum.
+.env
+.streamlit/secrets.toml
+
+# Sačuvani setovi pravila su podaci instance, ne kod.
+rules_library/
+
+# Dokumenti se NIKAD ne commit-uju. Radni direktorijum tokom razvoja sadrži
+# tuđe radove (diplomske teze i sl.); to su lični podaci i nemaju šta u
+# repozitorijumu. Testovi koji traže uzorak preskaču se kad ga nema.
+*.docx
+*.pdf
+*.doc
+*.odt

@@ -1,0 +1,218 @@
+{
+  "meta": {
+    "id": "ameu-akademija-za-ples",
+    "display_name": "AMEU — Akademija za ples (diplomski rad)",
+    "institution": {
+      "university": "Univerza Alma Mater Europaea",
+      "faculty": "Akademija za ples",
+      "department": null,
+      "organization": null,
+      "document_type": "diplomski rad",
+      "language": "sl"
+    },
+    "source_filename": null,
+    "created_at": "2026-08-09T00:00:00Z",
+    "updated_at": "2026-08-09T00:00:00Z",
+    "origin": "manual",
+    "copied_from": null
+  },
+  "rules": {
+    "page_setup": {
+      "paper_size": "A4",
+      "mirror_margins": true,
+      "margins_cm": {
+        "top": 2.5,
+        "bottom": 2.5,
+        "inside": 3.0,
+        "outside": 2.5
+      },
+      "different_first_page": true,
+      "page_numbering": {
+        "position": "bottom_center",
+        "start_at_section": "UVOD"
+      }
+    },
+    "typography": {
+      "font_family": "Times New Roman",
+      "fallback_fonts": []
+    },
+    "body": {
+      "size_pt": 12.0,
+      "line_spacing": 1.15,
+      "space_before_pt": 0.0,
+      "space_after_pt": 12.0,
+      "alignment": "JUSTIFY",
+      "first_line_indent_cm": null,
+      "allow_italic": false,
+      "allow_empty_paragraphs": false
+    },
+    "headings": [
+      {
+        "level": 1,
+        "size_pt": 14.0,
+        "bold": true,
+        "italic": false,
+        "casing": "UPPERCASE",
+        "alignment": "LEFT",
+        "space_before_pt": 12.0,
+        "space_after_pt": 6.0,
+        "page_break_before": true,
+        "keep_with_next": true
+      },
+      {
+        "level": 2,
+        "size_pt": 12.0,
+        "bold": true,
+        "italic": false,
+        "casing": "AS_IS",
+        "alignment": "LEFT",
+        "space_before_pt": 12.0,
+        "space_after_pt": 0.0,
+        "page_break_before": false,
+        "keep_with_next": true
+      },
+      {
+        "level": 3,
+        "size_pt": 12.0,
+        "bold": false,
+        "italic": false,
+        "casing": "AS_IS",
+        "alignment": "LEFT",
+        "space_before_pt": 12.0,
+        "space_after_pt": 0.0,
+        "page_break_before": false,
+        "keep_with_next": true
+      }
+    ],
+    "captions": {
+      "figure": {
+        "position": "BELOW",
+        "alignment": "CENTER",
+        "size_pt": 12.0,
+        "bold": true,
+        "italic": false,
+        "space_before_pt": 6.0,
+        "space_after_pt": 0.0,
+        "keep_with_next": true
+      },
+      "table": {
+        "position": "ABOVE",
+        "alignment": "CENTER",
+        "size_pt": 12.0,
+        "bold": true,
+        "italic": false,
+        "space_before_pt": 6.0,
+        "space_after_pt": 0.0,
+        "keep_with_next": true
+      },
+      "source_line": {
+        "position": "BELOW",
+        "alignment": "CENTER",
+        "size_pt": 12.0,
+        "bold": false,
+        "italic": false,
+        "space_before_pt": 0.0,
+        "space_after_pt": 12.0,
+        "keep_with_next": false
+      }
+    },
+    "bibliography": {
+      "title": "LITERATURA",
+      "size_pt": 12.0,
+      "line_spacing": 1.15,
+      "space_before_pt": 0.0,
+      "space_after_pt": 0.0,
+      "hanging_indent_cm": null,
+      "alignment": "JUSTIFY",
+      "page_break_before": true
+    },
+    "toc": {
+      "title": "Kazalo vsebine",
+      "insert_field": false,
+      "levels": 3
+    },
+    "tables": {
+      "alignment": "CENTER",
+      "header_row_bold": null,
+      "header_row_repeat": true,
+      "cell_size_pt": 12.0,
+      "cell_line_spacing": 1.15,
+      "cell_space_before_pt": 0.0,
+      "cell_space_after_pt": 0.0
+    },
+    "structure_profile": {
+      "language": "sl",
+      "section_keywords": {
+        "front_matter": [
+          "ZAHVALNICA",
+          "SAŽETAK",
+          "POVZETEK",
+          "ABSTRACT",
+          "KAZALO VSEBINE",
+          "KAZALO SLIK",
+          "KAZALO TABEL"
+        ],
+        "body_start": [
+          "UVOD"
+        ],
+        "bibliography": [
+          "LITERATURA",
+          "LITERATURA I IZVORI",
+          "SEZNAM LITERATURE",
+          "VIRI IN LITERATURA"
+        ],
+        "appendix": [
+          "PRILOGE",
+          "PRILOGA",
+          "PRILOG",
+          "IZJAVA"
+        ]
+      },
+      "figure_caption_prefixes": [
+        "Slika"
+      ],
+      "table_caption_prefixes": [
+        "Tabela"
+      ],
+      "source_line_prefixes": [
+        "Vir:",
+        "Izvor:"
+      ]
+    }
+  },
+  "evidence": [
+    {
+      "field_path": "typography.font_family",
+      "quote": "",
+      "page": null,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.margins_cm.inside",
+      "quote": "",
+      "page": null,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.size_pt",
+      "quote": "",
+      "page": null,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.line_spacing",
+      "quote": "",
+      "page": null,
+      "confidence": "high",
+      "source": "preset"
+    }
+  ],
+  "unresolved": [
+    "body.first_line_indent_cm",
+    "bibliography.hanging_indent_cm",
+    "tables.header_row_bold"
+  ]
+}

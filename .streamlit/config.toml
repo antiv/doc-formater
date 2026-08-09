@@ -1,0 +1,21 @@
+[server]
+headless = true
+address = "0.0.0.0"
+port = 8501
+# XSRF zaštita ostaje uključena i radi kroz proxy. `enableCORS = false` se ovde
+# namerno ne postavlja: Streamlit ga u kombinaciji sa XSRF zaštitom svejedno
+# pregazi na `true` i upozori. Iza Traefika je saobraćaj ionako same-origin.
+enableXsrfProtection = true
+# Radovi su reda veličine nekoliko MB; podrazumevanih 200 MB je nepotrebno
+# velika meta za zloupotrebu.
+maxUploadSize = 50
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = false
+
+[theme]
+base = "light"

@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+.git/
+.claude/
+tests/
+
+# Radovi i izlazi iz razvoja -- nemaju šta u slici.
+*.docx
+*.pdf
+rules_library/
+
+# Stara jednokratna skripta, zadržana kao referenca u repozitorijumu.
+fix_document.py
+ameu_rules.json
+
+.env
+.env.*
+!.env.example
+
+# Tajne se u kontejneru generišu iz env-a, ne kopiraju iz radnog direktorijuma.
+.streamlit/secrets.toml

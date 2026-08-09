@@ -1,0 +1,104 @@
+{
+    "university": "Univerza Alma Mater Europaea",
+    "faculty": "Akademija za ples",
+    "citation_style": "CMS (Chicago Manual of Style - Author-Date)",
+    "page_setup": {
+        "paper_size": "A4",
+        "mirror_margins": true,
+        "margins_cm": {
+            "inside": 3.0,
+            "top": 2.5,
+            "bottom": 2.5,
+            "outside": 2.5
+        },
+        "header_footer": {
+            "different_first_page": true,
+            "page_numbering": {
+                "start_page_number": 1,
+                "first_numbered_section": "UVOD",
+                "position": "bottom_center"
+            }
+        }
+    },
+    "typography": {
+        "font_family": "Times New Roman",
+        "body_text": {
+            "size_pt": 12,
+            "line_spacing": 1.15,
+            "space_before_pt": 0,
+            "space_after_pt": 12,
+            "alignment": "JUSTIFY",
+            "italic_allowed_in_body": false,
+            "empty_lines_between_paragraphs": false
+        },
+        "subheading_paragraph_rule": {
+            "separated_by_empty_line": true,
+            "space_before_pt": 0,
+            "space_after_pt": 0
+        }
+    },
+    "headings": {
+        "heading_level_1": {
+            "size_pt": 14,
+            "bold": true,
+            "casing": "UPPERCASE",
+            "font_family": "Times New Roman",
+            "starts_on_new_page": true
+        },
+        "heading_level_2": {
+            "size_pt": 12,
+            "bold": true,
+            "casing": "Sentence_case",
+            "font_family": "Times New Roman"
+        },
+        "heading_level_3_and_lower": {
+            "size_pt": 12,
+            "bold": false,
+            "italic": false,
+            "casing": "Sentence_case",
+            "font_family": "Times New Roman"
+        }
+    },
+    "table_of_contents": {
+        "title": "Kazalo vsebine",
+        "font_size_pt": 12,
+        "line_spacing": 1.15,
+        "space_before_pt": 0,
+        "space_after_pt": 0,
+        "alignment": "JUSTIFY",
+        "level_1_style": "UPPERCASE BOLD",
+        "level_2_style": "Lowercase Bold",
+        "level_3_style": "Lowercase Normal"
+    },
+    "figures_and_tables": {
+        "figure_caption": {
+            "position": "BELOW_IMAGE",
+            "alignment": "CENTER",
+            "font_size_pt": 12,
+            "bold_title": true,
+            "rename_charts_to_figures": true,
+            "keep_with_image_on_same_page": true,
+            "remove_self_source_captions": true
+        },
+        "table_caption": {
+            "position": "ABOVE_TABLE",
+            "alignment": "CENTER",
+            "font_size_pt": 12,
+            "bold_title": true
+        },
+        "list_of_figures_required_if_count_greater_than": 3
+    },
+    "punctuation_rules": {
+        "page_range_dash": "–",
+        "remove_hyphen_in_header": true,
+        "correct_header_title": "ALMA MATER EUROPAEA AKADEMIJA ZA PLES"
+    },
+    "bibliography": {
+        "title": "LITERATURA",
+        "line_spacing": 1.15,
+        "space_before_pt": 0,
+        "space_after_pt": 0,
+        "unified_sources_list": true,
+        "style": "CMS_Author_Date"
+    }
+}
