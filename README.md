@@ -2,6 +2,7 @@
 
 # Doc Formatter
 
+[![CI](https://img.shields.io/github/actions/workflow/status/antiv/doc-formater/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/antiv/doc-formater/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-1E2532?style=flat-square)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11+-1E2532?style=flat-square&logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/Built%20with-Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://streamlit.io/)
@@ -281,6 +282,22 @@ SAMPLE_DOCX=my-thesis.docx .venv/bin/python -m unittest discover -t . -s tests -
 against the output of the original script; it needs both documents
 (`SAMPLE_DOCX`, `LEGACY_DOCX`).
 
+### Continuous integration
+
+[.github/workflows/ci.yml](.github/workflows/ci.yml) runs on every push and
+pull request, on Python 3.11 (the version the image ships) and 3.12. Two things
+in it are there for a reason:
+
+- **It fails if too few tests actually ran.** Since documents are absent in CI,
+  some tests skip by design — and a suite that skipped itself entirely would
+  otherwise report success just as loudly as one that passed.
+- **It builds the Docker image and then reads from inside it.** Building only
+  proves the `Dockerfile` is valid; it does not prove the image contains what
+  the app opens at runtime. `locales/` was once missing from the `COPY` list, so
+  every string in a container fell back to a bare key while development was
+  perfect. The smoke step asserts the catalogues load and are complete, and that
+  the icon and presets are present.
+
 ## Layout
 
 ```
@@ -303,6 +320,7 @@ docs/google-oauth.md        Google sign-in setup
 Dockerfile                  deployment image
 docker-compose.yml          Dokploy
 docker-entrypoint.sh        secrets.toml from environment variables
+.github/workflows/ci.yml    tests, and a smoke test of the built image
 ```
 
 `fix_document.py` is the original single-purpose script, kept for reference.

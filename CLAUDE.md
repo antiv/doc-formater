@@ -25,10 +25,18 @@ is not imported by anything.
 .venv/bin/python tests/compare_with_legacy.py                        # diff vs old script
 
 .venv/bin/python mate_agent/build_agent.py    # regenerate agent JSON after prompt edits
+.venv/bin/python docs/make_icon.py            # regenerate assets/ from the SVG master
+.venv/bin/python docs/make_screenshots.py     # regenerate README images (needs playwright)
 ```
 
 Python 3.11 venv at `.venv`. `-t .` on `unittest discover` is not optional — the
 test package uses relative imports and without it every module fails to import.
+
+CI is [.github/workflows/ci.yml](.github/workflows/ci.yml). Anything the app
+reads at runtime must be added to the `COPY` list in the `Dockerfile` — the
+image job asserts the catalogues, presets and icon are actually inside the
+built image, because a missing `COPY` breaks only production and passes every
+local test.
 
 ## The two invariants that drive the whole design
 
