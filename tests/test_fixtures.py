@@ -50,7 +50,7 @@ class RichDocumentTest(unittest.TestCase):
         for info in image_infos:
             safe, reason = is_safe_to_delete(info)
             self.assertFalse(safe, "pasus sa slikom je označen kao bezbedan za brisanje")
-            self.assertIn("ugrađeni sadržaj", reason)
+            self.assertIn("embedded content", reason)
 
     def test_text_is_identical(self) -> None:
         self.assertEqual(text_sequence(self.source), text_sequence(self.output))
@@ -102,7 +102,7 @@ class MissingSectionTest(unittest.TestCase):
         self.rule_set.rules.structure_profile.section_keywords.appendix = ["DODATKI"]
         result = format_document(io.BytesIO(self.source), self.rule_set)
         self.assertTrue(
-            any("APPENDIX nije pronađena" in w for w in result.report.warnings),
+            any("APPENDIX was not found" in w for w in result.report.warnings),
             "nenađena sekcija nije prijavljena",
         )
 

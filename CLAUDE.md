@@ -185,10 +185,27 @@ Mate is optional. Unset `MATE_PAT` → regex heuristic, and the sidebar says so
 as information, not as an error. `_mate_ping` is cached (Streamlit reruns the
 whole script on every interaction, so an uncached ping would hammer Mate).
 
+## Translations
+
+Everything a user reads goes through `t()` in
+[docformat/i18n.py](docformat/i18n.py); catalogues are JSON in `locales/`, with
+`en.json` as the source of truth. Three things are deliberate:
+
+- **The active language is a `ContextVar`, not a module global.** Streamlit runs
+  each browser session's script in its own thread, so a global would let one
+  visitor's language leak into another's page.
+- **A missing key falls back to English, then to the key itself** — a
+  half-finished translation shows a bare key rather than crashing the page.
+- **`tests/test_i18n.py` enforces catalogue parity**, including that no
+  translation drops or invents a `{placeholder}`. A dropped placeholder would
+  silently produce an unformatted string.
+
+Adding a language is adding a file plus an entry in `LANGUAGE_NAMES`.
+
 ## Conventions
 
-- Comments, docstrings and user-facing strings are in Serbian; code identifiers
-  are English.
+- Comments and docstrings are in Serbian; code identifiers are English; every
+  user-facing string is a catalogue key, never a literal.
 - Ops signature is `apply(document, infos, rules) -> list[Change]`. Report every
   change; the report is the only way a user can verify a 100-page result.
 - Formatting must be idempotent — a second pass over an already-formatted

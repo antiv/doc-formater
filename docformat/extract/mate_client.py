@@ -21,6 +21,8 @@ from dataclasses import dataclass, field
 
 import requests
 
+from ..i18n import t
+
 DEFAULT_BASE_URL = "http://localhost:8000"
 DEFAULT_AGENT = "doc_rules_extractor"
 DEFAULT_TIMEOUT = 600.0
@@ -63,11 +65,7 @@ class MateClient:
 
     def _headers(self) -> dict[str, str]:
         if not self.config.token:
-            raise MateNotConfigured(
-                "MATE_PAT nije postavljen. Napravi Personal Access Token u Mate "
-                "dashboardu (korisnik mora imati rolu 'admin' ili 'developer') i "
-                "postavi ga u MATE_PAT."
-            )
+            raise MateNotConfigured(t("mate.not_configured"))
         return {
             "Authorization": f"Bearer {self.config.token}",
             "Content-Type": "application/json",
@@ -83,19 +81,12 @@ class MateClient:
             detail = response.text[:300]
 
         if response.status_code in (401, 403):
-            raise MateError(
-                f"Mate je odbio autentifikaciju ({response.status_code}). "
-                "Proveri MATE_PAT i da korisnik ima rolu 'admin' ili 'developer'. "
-                f"Detalj: {detail}"
-            )
+            raise MateError(t("mate.auth_failed", status=response.status_code, detail=detail))
         if response.status_code == 404:
             raise MateError(
-                f"Agent '{self.config.agent}' nije dostupan preko /v1 rute. "
-                "U Mate dashboardu agent mora imati 'expose_as_model' uključeno, "
-                "biti root agent (bez roditelja) i ne sme biti disabled. "
-                f"Detalj: {detail}"
+                t("mate.agent_not_exposed", agent=self.config.agent, detail=detail)
             )
-        raise MateError(f"Mate je vratio HTTP {response.status_code}. Detalj: {detail}")
+        raise MateError(t("mate.http_error", status=response.status_code, detail=detail))
 
     # -- javni API -------------------------------------------------------
 
@@ -108,7 +99,9 @@ class MateClient:
                 timeout=30,
             )
         except requests.RequestException as exc:
-            raise MateError(f"Mate nije dostupan na {self.config.base_url}: {exc}") from exc
+            raise MateError(
+                t("mate.unreachable", url=self.config.base_url, error=exc)
+            ) from exc
         self._raise_for_status(response)
         return [m["id"] for m in response.json().get("data", [])]
 
@@ -119,11 +112,12 @@ class MateClient:
         except MateError as exc:
             return False, str(exc)
         if self.config.agent not in models:
-            return False, (
-                f"Mate je dostupan, ali agent '{self.config.agent}' nije na listi "
-                f"izloženih modela ({', '.join(models) or 'lista je prazna'})."
+            return False, t(
+                "mate.agent_missing",
+                agent=self.config.agent,
+                models=", ".join(models) or t("mate.models_empty"),
             )
-        return True, f"Mate je dostupan, agent '{self.config.agent}' je spreman."
+        return True, t("mate.ready", agent=self.config.agent)
 
     def complete(self, messages: list[dict[str, str]]) -> str:
         payload = {
@@ -139,7 +133,7 @@ class MateClient:
                 timeout=self.config.timeout,
             )
         except requests.RequestException as exc:
-            raise MateError(f"Poziv Mate agentu nije uspeo: {exc}") from exc
+            raise MateError(t("mate.call_failed", error=exc)) from exc
 
         self._raise_for_status(response)
 
@@ -147,7 +141,7 @@ class MateClient:
             choices = response.json()["choices"]
             return choices[0]["message"]["content"] or ""
         except (KeyError, IndexError, ValueError) as exc:
-            raise MateError(f"Neočekivan oblik odgovora od Mate-a: {response.text[:300]}") from exc
+            raise MateError(t("mate.bad_response", body=response.text[:300])) from exc
 
 
 @dataclass

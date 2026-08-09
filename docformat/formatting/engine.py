@@ -22,6 +22,7 @@ from ..analyze.structure import (
     missing_sections,
     summarize,
 )
+from ..i18n import t
 from ..report import Report
 from ..rules import FormattingRules, RuleSet
 from .ops import cleanup, page_setup, paragraphs, tables, toc
@@ -77,11 +78,11 @@ def format_document(
 
     for section in missing_sections(infos, rules):
         report.warnings.append(
-            f"Sekcija {section.value} nije pronađena u dokumentu. Pravila je "
-            f"očekuju po ključnim rečima "
-            f"({', '.join(_keywords_for(rules, section)) or '—'}), ali ih dokument "
-            "imenuje drugačije. Njen sadržaj je pripisan prethodnoj sekciji i "
-            "dobija njena pravila — dopuni `structure_profile.section_keywords`."
+            t(
+                "engine.section_missing",
+                section=section.value,
+                keywords=", ".join(_keywords_for(rules, section)) or "—",
+            )
         )
 
     if opts.dry_run:
@@ -89,9 +90,7 @@ def format_document(
         # upisuju na disk, a brisanja su jedino što korisnik treba da odobri
         # pre nego što se dogode.
         report.extend(cleanup.preview(document, infos, rules))
-        report.warnings.append(
-            "Probni prolaz prikazuje samo brisanja; stilske izmene nisu računate."
-        )
+        report.warnings.append(t("engine.dry_run_note"))
         return FormatResult(document=document, report=report, structure=infos)
 
     report.extend(page_setup.apply(document, infos, rules))

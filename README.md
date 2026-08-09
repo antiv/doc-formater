@@ -106,6 +106,9 @@ cli.py library list | show <id> | copy <id> | delete <id> | import <file>
 # diagnostics
 cli.py structure thesis.docx --rules-id ameu
 cli.py mate ping
+
+# language for forwarded messages
+cli.py --lang de format --input thesis.docx --rules-id ameu --out out.docx
 ```
 
 `--offline` skips the LLM and uses the heuristic. `--dry-run` shows what would
@@ -267,6 +270,7 @@ docformat/
 mate_agent/                 agent template and generator
 presets/                    bundled rule sets
 rules_library/              saved sets (instance data, not in the repository)
+locales/                    UI translations, one JSON per language
 docs/google-oauth.md        Google sign-in setup
 Dockerfile                  deployment image
 docker-compose.yml          Dokploy
@@ -275,11 +279,33 @@ docker-entrypoint.sh        secrets.toml from environment variables
 
 `fix_document.py` is the original single-purpose script, kept for reference.
 
-## A note on language
+## Languages
 
-Documentation is in English. Code comments, docstrings and the user interface
-are in Serbian, because the people this tool was built for write their theses
-in Serbian and Slovenian and read style guides in those languages.
+The interface ships in **English (default), Serbian, French and German**. The
+language is picked from the browser's `Accept-Language` on first visit and can
+be changed in the sidebar; the choice holds for the session.
+
+Translations live in [`locales/`](locales/), one JSON file per language.
+`en.json` is the source of truth, and a key missing from another catalogue
+falls back to English rather than breaking the page.
+
+**Adding a language** means adding a file — no code change:
+
+```bash
+cp locales/en.json locales/es.json     # translate the values, keep the keys
+```
+
+Then add the native name to `LANGUAGE_NAMES` in
+[docformat/i18n.py](docformat/i18n.py) so the picker can label it.
+`tests/test_i18n.py` checks that every catalogue covers exactly the English key
+set and that no translation drops or invents a `{placeholder}`.
+
+The CLI's own output is English only; messages it forwards from the library
+follow `--lang` (or `DOC_FORMATTER_LANG`).
+
+Code comments and docstrings are in Serbian — the project grew out of a
+Serbian-language thesis toolchain — while everything a user reads goes through
+the catalogues.
 
 ## Licence
 

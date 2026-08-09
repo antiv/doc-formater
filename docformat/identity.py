@@ -23,6 +23,8 @@ import hmac
 import os
 from dataclasses import dataclass
 
+from .i18n import t
+
 APP_PASSWORD_ENV = "APP_PASSWORD"
 ADMIN_EMAILS_ENV = "ADMIN_EMAILS"
 
@@ -94,7 +96,7 @@ def current_user(st) -> User | None:
     razvojnoj mašini biblioteka bila nedodirljiva, jer prijava ne postoji.
     """
     if not oidc_configured(st):
-        return User(email=LOCAL_OWNER, name="Lokalni korisnik", is_admin=True, is_local=True)
+        return User(email=LOCAL_OWNER, name=t("auth.local_user"), is_admin=True, is_local=True)
 
     try:
         if not st.user.is_logged_in:
@@ -138,12 +140,12 @@ def can_create(user: User | None) -> bool:
 
 def describe_permission(rule_set, user: User | None) -> str:
     if user is None:
-        return "Prijavi se da bi čuvao i menjao pravila."
+        return t("auth.perm.sign_in")
     if can_edit(rule_set, user):
-        return "Ovaj set je tvoj." if not user.is_admin else "Admin pristup."
+        return t("auth.perm.admin") if user.is_admin else t("auth.perm.yours")
     owner = getattr(rule_set.meta, "owner", None)
-    whose = f"Vlasnik: {owner}." if owner else "Ugrađeni set."
-    return f"{whose} Napravi kopiju da bi ga menjao."
+    whose = t("auth.perm.owner", owner=owner) if owner else t("auth.perm.builtin")
+    return t("auth.perm.copy_hint", whose=whose)
 
 
 # --------------------------------------------------------------------------
@@ -160,32 +162,32 @@ def require_gate(st) -> bool:
     if gate_is_open() or st.session_state.get(_GATE_KEY):
         return True
 
-    st.title("📄 Doc Formatter")
-    st.caption("Pristup aplikaciji je zaštićen lozinkom.")
+    st.title(f"📄 {t('app.title')}")
+    st.caption(t("auth.gate_caption"))
     with st.form("gate"):
-        entered = st.text_input("Lozinka", type="password")
-        if st.form_submit_button("Uđi", type="primary"):
+        entered = st.text_input(t("auth.password"), type="password")
+        if st.form_submit_button(t("auth.enter"), type="primary"):
             if check_password(entered, app_password()):
                 st.session_state[_GATE_KEY] = True
                 st.rerun()
             else:
-                st.error("Pogrešna lozinka.")
+                st.error(t("auth.wrong_password"))
     return False
 
 
 def render_sidebar(st, user: User | None) -> None:
     """Prijava/odjava i ko je trenutno na vezi."""
     if not oidc_configured(st):
-        st.sidebar.caption("Lokalni režim — prijava nije podešena, sve je dozvoljeno.")
+        st.sidebar.caption(t("auth.local_mode"))
         return
 
     if user is None:
-        st.sidebar.info("Formatiranje radi i bez prijave.\n\nPrijavi se da bi čuvao pravila.")
-        if st.sidebar.button("Prijavi se preko Google-a", type="primary", width="stretch"):
+        st.sidebar.info(t("auth.sign_in_hint"))
+        if st.sidebar.button(t("auth.sign_in_google"), type="primary", width="stretch"):
             st.login("google")
         return
 
-    badge = " · admin" if user.is_admin else ""
+    badge = t("auth.admin_badge") if user.is_admin else ""
     st.sidebar.success(f"{user.label}{badge}")
-    if st.sidebar.button("Odjavi se", width="stretch"):
+    if st.sidebar.button(t("auth.sign_out"), width="stretch"):
         st.logout()

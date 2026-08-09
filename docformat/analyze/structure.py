@@ -22,6 +22,7 @@ from docx.document import Document as DocxDocument
 from docx.oxml.ns import qn
 from docx.text.paragraph import Paragraph
 
+from ..i18n import t
 from ..rules import FormattingRules
 
 
@@ -341,17 +342,17 @@ def analyze(
         )
 
     if strict and not body_found and keywords.body_start:
-        outline_hint = (
-            "Dokument koristi Word heading stilove."
+        hint = t(
+            "structure.hint_outline"
             if uses_word_outline(document)
-            else "Dokument nema nijedan Word heading stil, pa se detekcija oslanja "
-            "samo na numeraciju naslova."
+            else "structure.hint_no_outline"
         )
         raise StructureError(
-            "Nije pronađen početak glavnog teksta. Očekivane ključne reči: "
-            f"{', '.join(keywords.body_start)}. {outline_hint} Dopuni "
-            "`structure_profile.section_keywords.body_start` u pravilima naslovom "
-            "kojim ovaj dokument počinje glavni deo."
+            t(
+                "structure.body_not_found",
+                keywords=", ".join(keywords.body_start),
+                hint=hint,
+            )
         )
 
     return infos

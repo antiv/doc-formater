@@ -12,6 +12,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterator, Literal
 
+from ..i18n import t
+
 BlockKind = Literal["paragraph", "table_row", "heading"]
 
 # Ispod ovoga smatramo da PDF nema tekstualni sloj (skeniran dokument).
@@ -124,8 +126,7 @@ def read_pdf(path: str | Path) -> RulesDocument:
     doc = RulesDocument(blocks, path.name)
     if doc.char_count < MIN_MEANINGFUL_CHARS:
         raise NoTextLayerError(
-            f"'{path.name}' nema tekstualni sloj (pronađeno {doc.char_count} karaktera). "
-            "Verovatno je skeniran. Izaberi set iz biblioteke ili unesi pravila ručno."
+            t("error.no_text_layer", filename=path.name, chars=doc.char_count)
         )
     return doc
 
@@ -170,7 +171,7 @@ def read_docx(path: str | Path) -> RulesDocument:
 
     doc = RulesDocument(blocks, path.name)
     if doc.char_count < MIN_MEANINGFUL_CHARS:
-        raise NoTextLayerError(f"'{path.name}' je prazan ili nečitljiv.")
+        raise NoTextLayerError(t("error.empty_document", filename=path.name))
     return doc
 
 
@@ -181,4 +182,4 @@ def read_rules_document(path: str | Path) -> RulesDocument:
         return read_pdf(path)
     if suffix == ".docx":
         return read_docx(path)
-    raise ValueError(f"Nepodržan format pravilnika: '{suffix}'. Podržani su .pdf i .docx.")
+    raise ValueError(t("error.unsupported_format", suffix=suffix))

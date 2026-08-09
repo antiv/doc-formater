@@ -144,7 +144,7 @@ class PipelineFallbackTest(unittest.TestCase):
             _document(), client=BrokenClient(MateConfig(token="x"))
         )
         self.assertEqual("heuristic", outcome.source)
-        self.assertTrue(any("Mate nije upotrebljen" in w for w in outcome.warnings))
+        self.assertTrue(any("not used" in w for w in outcome.warnings))
 
     def test_mate_reply_is_validated_and_verified(self) -> None:
         class StubClient(MateClient):

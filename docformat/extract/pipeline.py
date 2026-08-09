@@ -12,6 +12,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Callable
 
+from ..i18n import t
 from ..library import RuleLibrary, new_rule_set, suggest_display_name
 from ..rules import (
     Evidence,
@@ -66,9 +67,9 @@ def parse_json_reply(reply: str) -> dict:
         try:
             return json.loads(text[start : end + 1])
         except json.JSONDecodeError as exc:
-            raise ValueError(f"Odgovor nije ispravan JSON: {exc}") from exc
+            raise ValueError(t("pipeline.invalid_json", error=exc)) from exc
 
-    raise ValueError("Odgovor ne sadrži JSON objekat.")
+    raise ValueError(t("pipeline.no_json"))
 
 
 # --------------------------------------------------------------------------
@@ -164,7 +165,7 @@ def _extract_via_mate(
 ) -> tuple[FormattingRules, list[Evidence], list[str]]:
     session = MateSession(client, discriminator=f"extract::{document.filename}")
 
-    on_progress("Šaljem pravilnik Mate agentu…")
+    on_progress(t("pipeline.sending"))
     reply = session.send(build_extract_payload(document))
 
     for attempt in (1, 2):
@@ -178,11 +179,11 @@ def _extract_via_mate(
             return rules, evidence, unresolved
         except Exception as exc:
             if attempt == 2:
-                raise MateError(f"Agent nije vratio upotrebljiv JSON: {exc}") from exc
-            on_progress("Odgovor nije prošao validaciju — tražim ispravku…")
+                raise MateError(t("pipeline.bad_json", error=exc)) from exc
+            on_progress(t("pipeline.repairing"))
             reply = session.send(build_repair_payload(str(exc)))
 
-    raise MateError("Ekstrakcija nije uspela.")  # pragma: no cover
+    raise MateError(t("pipeline.failed"))  # pragma: no cover
 
 
 def extract_rule_set(
@@ -200,7 +201,7 @@ def extract_rule_set(
     if institution is None:
         institution, origin = identify_institution(document, client)
         if origin == "heuristic" and client is not None:
-            warnings.append("Instituciju je prepoznala heuristika, ne agent.")
+            warnings.append(t("pipeline.institution_heuristic"))
 
     rules: FormattingRules
     evidence: list[Evidence]
@@ -212,12 +213,12 @@ def extract_rule_set(
             rules, evidence, unresolved = _extract_via_mate(document, client, progress)
             source = "mate"
         except MateError as exc:
-            warnings.append(f"Mate nije upotrebljen: {exc}")
-            progress("Prelazim na regex heuristiku…")
+            warnings.append(t("pipeline.agent_unused", error=exc))
+            progress(t("pipeline.falling_back"))
             rules, evidence, unresolved = heuristic.extract_rules(document.plain_text)
             source = "heuristic"
     else:
-        progress("Mate nije konfigurisan — koristim regex heuristiku…")
+        progress(t("pipeline.no_agent"))
         rules, evidence, unresolved = heuristic.extract_rules(document.plain_text)
         source = "heuristic"
 
@@ -226,8 +227,7 @@ def extract_rule_set(
         evidence, rejected = apply_quote_verification(rules, evidence, document)
         if rejected:
             warnings.append(
-                f"Odbačeno {len(rejected)} pravila jer im se citat ne nalazi u pravilniku: "
-                + ", ".join(rejected)
+                t("pipeline.rejected", count=len(rejected), fields=", ".join(rejected))
             )
             unresolved = sorted(set(unresolved) | set(rejected))
 
@@ -242,7 +242,7 @@ def extract_rule_set(
     rule_set.evidence = evidence
     rule_set.unresolved = unresolved
 
-    progress("Ekstrakcija završena.")
+    progress(t("pipeline.finished"))
     return ExtractionOutcome(
         rule_set=rule_set, source=source, warnings=warnings, rejected=rejected
     )

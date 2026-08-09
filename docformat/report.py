@@ -11,6 +11,8 @@ from collections import Counter
 from dataclasses import dataclass, field
 from typing import Literal
 
+from .i18n import t
+
 ChangeKind = Literal["style", "delete", "insert"]
 
 
@@ -27,9 +29,13 @@ class Change:
 
     def describe(self) -> str:
         if self.kind == "delete":
-            return f"[{self.paragraph_index}] obrisano: {self.detail or self.rule_path}"
+            return t(
+                "report.deleted",
+                index=self.paragraph_index,
+                detail=self.detail or self.rule_path,
+            )
         if self.kind == "insert":
-            return f"ubačeno: {self.detail or self.rule_path}"
+            return t("report.inserted", detail=self.detail or self.rule_path)
         return f"[{self.paragraph_index}] {self.rule_path}: {self.before!r} → {self.after!r}"
 
 
@@ -107,35 +113,35 @@ class Report:
     def to_text(self, max_deletions: int = 20) -> str:
         lines: list[str] = []
         if self.dry_run:
-            lines.append("*** PROBNI PROLAZ — dokument nije izmenjen ***\n")
+            lines.append(t("report.dry_run") + "\n")
 
-        lines.append(f"Stilske izmene: {len(self.style_changes)}")
+        lines.append(t("report.style_changes_count", count=len(self.style_changes)))
         for summary in self.by_rule():
             lines.append(
                 f"  {summary.label:52} {summary.count:5}×   {summary.describe_transitions()}"
             )
 
         if self.deletions:
-            lines.append(f"\nBrisanja: {len(self.deletions)}")
+            lines.append("\n" + t("report.deletions_count", count=len(self.deletions)))
             for path, count in sorted(self.deletion_counts().items()):
                 lines.append(f"  {path:42} {count:5}×")
-            lines.append("  detalji:")
+            lines.append("  " + t("report.details"))
             for change in self.deletions[:max_deletions]:
                 lines.append(f"    {change.describe()}")
             if len(self.deletions) > max_deletions:
-                lines.append(f"    … i još {len(self.deletions) - max_deletions}")
+                lines.append("    " + t("report.and_more", count=len(self.deletions) - max_deletions))
 
         if self.insertions:
-            lines.append(f"\nDodato: {len(self.insertions)}")
+            lines.append("\n" + t("report.insertions_count", count=len(self.insertions)))
             for change in self.insertions:
                 lines.append(f"  {change.describe()}")
 
         if self.warnings:
-            lines.append("\nUpozorenja:")
+            lines.append("\n" + t("report.warnings"))
             for warning in self.warnings:
                 lines.append(f"  ! {warning}")
 
         if not self.changes:
-            lines.append("\nNijedna izmena nije bila potrebna.")
+            lines.append("\n" + t("report.no_changes"))
 
         return "\n".join(lines)

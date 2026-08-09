@@ -26,6 +26,7 @@ from ...analyze.structure import (
     has_page_break,
     missing_sections,
 )
+from ...i18n import t
 from ...report import Change
 from ...rules import FormattingRules
 
@@ -44,11 +45,11 @@ def carries_section_properties(paragraph: Paragraph) -> bool:
 def is_safe_to_delete(info: ParagraphInfo) -> tuple[bool, str]:
     """(sme li da se obriše, razlog kad ne sme)."""
     if info.text:
-        return False, "sadrži tekst"
+        return False, t("cleanup.reason.has_text")
     if info.has_content:
-        return False, "sadrži sliku, polje, fusnotu ili drugi ugrađeni sadržaj"
+        return False, t("cleanup.reason.has_content")
     if carries_section_properties(info.paragraph):
-        return False, "nosi svojstva sekcije (w:sectPr)"
+        return False, t("cleanup.reason.section_properties")
     return True, ""
 
 
@@ -107,10 +108,10 @@ def apply(
             # prelom, pa ga ostavljamo.
             continue
 
-        detail = (
-            "prazan pasus sa ručnim prelomom strane"
+        detail = t(
+            "cleanup.empty_paragraph_with_break"
             if carries_break
-            else "prazan pasus"
+            else "cleanup.empty_paragraph"
         )
         rule_path = (
             "cleanup.page_break" if carries_break else "cleanup.empty_paragraph"
