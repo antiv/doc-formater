@@ -1,4 +1,12 @@
+<img src="assets/icon-192.png" alt="" width="88">
+
 # Doc Formatter
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-1E2532?style=flat-square)](LICENSE)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11+-1E2532?style=flat-square&logo=python&logoColor=white)](https://www.python.org/downloads/)
+[![Streamlit](https://img.shields.io/badge/Built%20with-Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![Docker](https://img.shields.io/badge/Docker-ready-1E2532?style=flat-square&logo=docker&logoColor=white)](Dockerfile)
+[![Languages](https://img.shields.io/badge/UI-EN%20%C2%B7%20SR%20%C2%B7%20FR%20%C2%B7%20DE-1E2532?style=flat-square)](locales/)
 
 Formats a `.docx` academic thesis to match an institution's style guide. You
 upload the style guide as `.pdf` or `.docx`; an LLM agent extracts the rules
@@ -290,6 +298,7 @@ mate_agent/                 agent template and generator
 presets/                    bundled rule sets
 rules_library/              saved sets (instance data, not in the repository)
 locales/                    UI translations, one JSON per language
+assets/                     application icon (SVG master + PNG exports)
 docs/google-oauth.md        Google sign-in setup
 Dockerfile                  deployment image
 docker-compose.yml          Dokploy
@@ -314,6 +323,19 @@ involved.
 With `MATE_PAT` set the extraction runs through the agent and the evidence
 column shows verbatim quotes; without it the run falls back to the heuristic and
 the screenshots show that instead.
+
+## Icon
+
+The icon is drawn in code by [docs/make_icon.py](docs/make_icon.py) rather than
+committed as an opaque binary, so a colour or a proportion is one number away.
+It shows a page whose upper lines are ragged and whose lower lines have settled
+onto a margin guide — the same text, brought into alignment, which is the whole
+of what this application does. Running the script rewrites `assets/icon.svg` and
+re-exports every PNG size from it:
+
+```bash
+.venv/bin/python docs/make_icon.py
+```
 
 ## Languages
 

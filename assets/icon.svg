@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Doc Formatter">
+  <rect width="512" height="512" rx="112" fill="#1E2532"/>
+  <rect x="112" y="80" width="288" height="368" rx="24" fill="#FFFFFF"/>
+  <rect x="176" y="168" width="108" height="16" rx="8" fill="#C3CBD9"/>
+  <rect x="190" y="210" width="152" height="16" rx="8" fill="#C3CBD9"/>
+  <rect x="172" y="252" width="124" height="16" rx="8" fill="#C3CBD9"/>
+  <rect x="160" y="300" width="200" height="16" rx="8" fill="#1E2532"/>
+  <rect x="160" y="338" width="200" height="16" rx="8" fill="#1E2532"/>
+  <rect x="160" y="376" width="200" height="16" rx="8" fill="#1E2532"/>
+  <rect x="160" y="414" width="128" height="16" rx="8" fill="#1E2532"/>
+  <rect x="136" y="160" width="10" height="270" rx="5" fill="#FF4B4B"/>
+</svg>

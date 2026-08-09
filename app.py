@@ -34,8 +34,13 @@ from docformat.rules import (
 )
 
 PRESETS_DIR = Path(__file__).resolve().parent / "presets"
+ASSETS_DIR = Path(__file__).resolve().parent / "assets"
 
-st.set_page_config(page_title="Doc Formatter", page_icon="📄", layout="wide")
+st.set_page_config(
+    page_title="Doc Formatter",
+    page_icon=str(ASSETS_DIR / "icon-192.png"),
+    layout="wide",
+)
 
 
 # --------------------------------------------------------------------------
@@ -691,7 +696,8 @@ def main() -> None:
 
     user = identity.current_user(st)
 
-    st.sidebar.title(f"📄 {t('app.title')}")
+    st.logo(str(ASSETS_DIR / "icon-192.png"), size="large")
+    st.sidebar.title(t("app.title"))
     identity.render_sidebar(st, user)
     st.sidebar.divider()
     mate_status_banner()

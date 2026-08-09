@@ -12,6 +12,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY docformat/ ./docformat/
+COPY locales/ ./locales/
+COPY assets/ ./assets/
 COPY presets/ ./presets/
 COPY mate_agent/ ./mate_agent/
 COPY .streamlit/ ./.streamlit/

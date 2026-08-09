@@ -22,8 +22,11 @@ from __future__ import annotations
 import hmac
 import os
 from dataclasses import dataclass
+from pathlib import Path
 
 from .i18n import t
+
+ICON_PATH = Path(__file__).resolve().parent.parent / "assets" / "icon-192.png"
 
 APP_PASSWORD_ENV = "APP_PASSWORD"
 ADMIN_EMAILS_ENV = "ADMIN_EMAILS"
@@ -162,7 +165,8 @@ def require_gate(st) -> bool:
     if gate_is_open() or st.session_state.get(_GATE_KEY):
         return True
 
-    st.title(f"📄 {t('app.title')}")
+    st.image(str(ICON_PATH), width=72)
+    st.title(t("app.title"))
     st.caption(t("auth.gate_caption"))
     with st.form("gate"):
         entered = st.text_input(t("auth.password"), type="password")
