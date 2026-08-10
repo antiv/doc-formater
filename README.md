@@ -146,6 +146,36 @@ exported and imported.
 
 ![The rule library](docs/images/04-library.png)
 
+### Bundled rule sets
+
+`presets/` ships rule sets read from real, published style guides, so the
+library is not empty on a fresh install:
+
+| `--rules-id` | Institution | Document |
+|---|---|---|
+| `ub-master` | Univerzitet u Beogradu | master rad |
+| `bg-ekof-seminarski` | Ekonomski fakultet, Beograd | seminarski rad |
+| `ns-poljoprivredni` | Poljoprivredni fakultet, Novi Sad | diplomski rad |
+| `ni-elfak` | Elektronski fakultet, Niš | diplomski rad |
+| `zg-pravni` | Pravni fakultet, Zagreb | diplomski rad |
+| `zg-agronomski` | Agronomski fakultet, Zagreb | diplomski rad |
+| `lj-pef` | Pedagoška fakulteta, Ljubljana | diplomsko delo |
+| `lj-fpp` | Fakulteta za pomorstvo in promet, Ljubljana | diplomska naloga |
+| `ameu` | Alma Mater Europaea, Akademija za ples | diplomski rad |
+
+Each one records the URL it was read from in `meta.source_filename`, and every
+value carries the sentence it came from, with a page number. Those quotes are
+not decoration: all 54 of them were checked back against the source PDF with
+the same `verify_quote` guard the LLM extraction uses, and every one is an
+exact substring. Nothing in these files was inferred.
+
+Fields the guide does not prescribe are left `null` and listed in
+`unresolved` — a preset does not invent a margin because most theses have one.
+
+**Style guides change.** These were read on 2026-08-10; check the rules against
+your faculty's current version before submitting, and edit the set if it has
+moved on.
+
 ## Reviewing rules before applying them
 
 Extraction gets things wrong, so nothing is applied without confirmation. Every

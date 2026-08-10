@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "id": "bg-ekof-seminarski",
+    "display_name": "Ekonomski fakultet u Beogradu — seminarski rad",
+    "institution": {
+      "university": "Univerzitet u Beogradu",
+      "faculty": "Ekonomski fakultet",
+      "department": null,
+      "organization": null,
+      "document_type": "seminarski rad",
+      "language": "sr"
+    },
+    "source_filename": "https://www.ekof.bg.ac.rs/wp-content/uploads/2014/05/uputstvo-za-izradu-seminarskog-rada.pdf",
+    "created_at": "2026-08-10T00:00:00Z",
+    "updated_at": "2026-08-10T00:00:00Z",
+    "origin": "manual",
+    "copied_from": null
+  },
+  "rules": {
+    "page_setup": {
+      "paper_size": "A4",
+      "mirror_margins": null,
+      "margins_cm": {
+        "top": 2.5,
+        "bottom": 2.5,
+        "inside": 2.5,
+        "outside": 2.5
+      },
+      "different_first_page": null,
+      "page_numbering": {
+        "position": null,
+        "start_at_section": null
+      }
+    },
+    "typography": {
+      "font_family": "Times New Roman",
+      "fallback_fonts": []
+    },
+    "body": {
+      "size_pt": 12.0,
+      "line_spacing": 1.0,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "alignment": null,
+      "first_line_indent_cm": null,
+      "allow_italic": null,
+      "allow_empty_paragraphs": null
+    },
+    "headings": [],
+    "captions": {
+      "figure": {
+        "position": null,
+        "alignment": null,
+        "size_pt": 10.0,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "table": {
+        "position": null,
+        "alignment": null,
+        "size_pt": 10.0,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "source_line": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      }
+    },
+    "bibliography": {
+      "title": null,
+      "size_pt": null,
+      "line_spacing": null,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "hanging_indent_cm": null,
+      "alignment": null,
+      "page_break_before": null
+    },
+    "toc": {
+      "title": null,
+      "insert_field": null,
+      "levels": null
+    },
+    "tables": {
+      "alignment": null,
+      "header_row_bold": null,
+      "header_row_repeat": null,
+      "cell_size_pt": null,
+      "cell_line_spacing": null,
+      "cell_space_before_pt": null,
+      "cell_space_after_pt": null
+    },
+    "structure_profile": {
+      "language": "sr",
+      "section_keywords": {
+        "front_matter": [
+          "SADRŽAJ"
+        ],
+        "body_start": [
+          "UVOD"
+        ],
+        "bibliography": [
+          "LITERATURA"
+        ],
+        "appendix": [
+          "PRILOG"
+        ]
+      },
+      "figure_caption_prefixes": [],
+      "table_caption_prefixes": [],
+      "source_line_prefixes": []
+    }
+  },
+  "evidence": [
+    {
+      "field_path": "page_setup.paper_size",
+      "quote": "Format teksta: A4 (210x297 mm), margine sve po 2.5 cm, pro-",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.margins_cm.top",
+      "quote": "Format teksta: A4 (210x297 mm), margine sve po 2.5 cm, pro-",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "typography.font_family",
+      "quote": "red 1, font Times New Roman 12.",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.size_pt",
+      "quote": "red 1, font Times New Roman 12.",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.line_spacing",
+      "quote": "red 1, font Times New Roman 12.",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "captions.figure.size_pt",
+      "quote": "Koristi se font Times New Roman 10.",
+      "page": 3,
+      "confidence": "high",
+      "source": "preset"
+    }
+  ],
+  "unresolved": [
+    "body.alignment",
+    "headings"
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "meta": {
+    "id": "zg-agronomski",
+    "display_name": "Agronomski fakultet u Zagrebu — diplomski rad",
+    "institution": {
+      "university": "Sveučilište u Zagrebu",
+      "faculty": "Agronomski fakultet",
+      "department": null,
+      "organization": null,
+      "document_type": "diplomski rad",
+      "language": "hr"
+    },
+    "source_filename": "https://www.agr.unizg.hr/upload/nastava/ms_dipl_rad_upute_20190410.pdf",
+    "created_at": "2026-08-10T00:00:00Z",
+    "updated_at": "2026-08-10T00:00:00Z",
+    "origin": "manual",
+    "copied_from": null
+  },
+  "rules": {
+    "page_setup": {
+      "paper_size": "A4",
+      "mirror_margins": null,
+      "margins_cm": {
+        "top": 2.5,
+        "bottom": 2.5,
+        "inside": 2.5,
+        "outside": 2.5
+      },
+      "different_first_page": null,
+      "page_numbering": {
+        "position": null,
+        "start_at_section": null
+      }
+    },
+    "typography": {
+      "font_family": "Arial",
+      "fallback_fonts": [
+        "Times New Roman",
+        "Calibri"
+      ]
+    },
+    "body": {
+      "size_pt": 12.0,
+      "line_spacing": 1.15,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "alignment": "JUSTIFY",
+      "first_line_indent_cm": null,
+      "allow_italic": null,
+      "allow_empty_paragraphs": null
+    },
+    "headings": [
+      {
+        "level": 1,
+        "size_pt": 16.0,
+        "bold": true,
+        "italic": null,
+        "casing": "AS_IS",
+        "alignment": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": true,
+        "keep_with_next": true
+      },
+      {
+        "level": 2,
+        "size_pt": 14.0,
+        "bold": true,
+        "italic": null,
+        "casing": "AS_IS",
+        "alignment": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": null,
+        "keep_with_next": true
+      },
+      {
+        "level": 3,
+        "size_pt": 14.0,
+        "bold": true,
+        "italic": null,
+        "casing": "AS_IS",
+        "alignment": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": null,
+        "keep_with_next": true
+      }
+    ],
+    "captions": {
+      "figure": {
+        "position": null,
+        "alignment": null,
+        "size_pt": 10.0,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "table": {
+        "position": null,
+        "alignment": null,
+        "size_pt": 10.0,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "source_line": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      }
+    },
+    "bibliography": {
+      "title": null,
+      "size_pt": null,
+      "line_spacing": null,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "hanging_indent_cm": null,
+      "alignment": null,
+      "page_break_before": null
+    },
+    "toc": {
+      "title": null,
+      "insert_field": null,
+      "levels": null
+    },
+    "tables": {
+      "alignment": null,
+      "header_row_bold": null,
+      "header_row_repeat": null,
+      "cell_size_pt": null,
+      "cell_line_spacing": null,
+      "cell_space_before_pt": null,
+      "cell_space_after_pt": null
+    },
+    "structure_profile": {
+      "language": "hr",
+      "section_keywords": {
+        "front_matter": [
+          "SADRŽAJ",
+          "SAŽETAK",
+          "ABSTRACT"
+        ],
+        "body_start": [
+          "UVOD"
+        ],
+        "bibliography": [
+          "POPIS LITERATURE",
+          "LITERATURA"
+        ],
+        "appendix": [
+          "PRILOZI",
+          "PRILOG",
+          "ŽIVOTOPIS"
+        ]
+      },
+      "figure_caption_prefixes": [],
+      "table_caption_prefixes": [],
+      "source_line_prefixes": []
+    }
+  },
+  "evidence": [
+    {
+      "field_path": "body.size_pt",
+      "quote": "– rad se piše veličinom slova 12 pt, prored 1,15",
+      "page": 16,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.line_spacing",
+      "quote": "– rad se piše veličinom slova 12 pt, prored 1,15",
+      "page": 16,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "typography.font_family",
+      "quote": "– preporučeni fontovi su: Arial, Times New Roman, Calibri)",
+      "page": 16,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.margins_cm.top",
+      "quote": "– margine rada trebaju iznositi 2,5 cm",
+      "page": 16,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "headings.1.size_pt",
+      "quote": "– naslovi poglavlja pišu se malim slovima veličine 16 pt, podebljano (Bold) – 1. razina, naslov prvog",
+      "page": 16,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "headings.1.page_break_before",
+      "quote": "– poglavlja započinju na novoj stranici, a između naslova poglavlja i teksta potrebno je ostaviti jedan red",
+      "page": 16,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.alignment",
+      "quote": "– potrebno je koristiti obostrano poravnanje teksta (Justify)",
+      "page": 16,
+      "confidence": "high",
+      "source": "preset"
+    }
+  ],
+  "unresolved": [
+    "body.first_line_indent_cm",
+    "toc.title"
+  ]
+}

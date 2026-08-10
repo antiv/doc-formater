@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Eight bundled rule sets read from real published style guides**, covering
+  Belgrade, Novi Sad, Niš, Zagreb and Ljubljana, so the library is not empty on
+  a fresh install. Every value carries the sentence it came from and a page
+  number; all 54 quotes were checked back against the source PDFs with the same
+  `verify_quote` guard the LLM extraction uses, and every one is an exact
+  substring. Fields the guides do not prescribe are left `null` rather than
+  filled with a plausible default.
+- `tests/test_presets.py` — presets must load, resolve by both filename and
+  `meta.id`, name an identifiable institution, agree with themselves about
+  language, and attach every quote to a field that exists and is actually set.
+
 ### Changed
 
 - **Renamed from Doc Formatter to StyleGuard**, repository `doc-formater` to

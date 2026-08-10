@@ -1,0 +1,210 @@
+{
+  "meta": {
+    "id": "ni-elfak",
+    "display_name": "Elektronski fakultet u Nišu — diplomski rad",
+    "institution": {
+      "university": "Univerzitet u Nišu",
+      "faculty": "Elektronski fakultet",
+      "department": null,
+      "organization": null,
+      "document_type": "diplomski rad",
+      "language": "sr"
+    },
+    "source_filename": "https://sip.elfak.ni.ac.rs/downloads/obrasci/forma-diplomski-rad.pdf",
+    "created_at": "2026-08-10T00:00:00Z",
+    "updated_at": "2026-08-10T00:00:00Z",
+    "origin": "manual",
+    "copied_from": null
+  },
+  "rules": {
+    "page_setup": {
+      "paper_size": "A4",
+      "mirror_margins": null,
+      "margins_cm": {
+        "top": 2.5,
+        "bottom": 2.5,
+        "inside": 2.5,
+        "outside": 2.5
+      },
+      "different_first_page": null,
+      "page_numbering": {
+        "position": "bottom_center",
+        "start_at_section": null
+      }
+    },
+    "typography": {
+      "font_family": "Times New Roman",
+      "fallback_fonts": []
+    },
+    "body": {
+      "size_pt": 12.0,
+      "line_spacing": 1.0,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "alignment": "JUSTIFY",
+      "first_line_indent_cm": 1.27,
+      "allow_italic": null,
+      "allow_empty_paragraphs": null
+    },
+    "headings": [
+      {
+        "level": 1,
+        "size_pt": 16.0,
+        "bold": true,
+        "italic": null,
+        "casing": "AS_IS",
+        "alignment": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": null,
+        "keep_with_next": true
+      },
+      {
+        "level": 2,
+        "size_pt": 14.0,
+        "bold": true,
+        "italic": null,
+        "casing": "AS_IS",
+        "alignment": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": null,
+        "keep_with_next": true
+      }
+    ],
+    "captions": {
+      "figure": {
+        "position": "BELOW",
+        "alignment": "CENTER",
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "table": {
+        "position": "ABOVE",
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "source_line": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      }
+    },
+    "bibliography": {
+      "title": null,
+      "size_pt": null,
+      "line_spacing": null,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "hanging_indent_cm": null,
+      "alignment": null,
+      "page_break_before": null
+    },
+    "toc": {
+      "title": null,
+      "insert_field": null,
+      "levels": null
+    },
+    "tables": {
+      "alignment": null,
+      "header_row_bold": null,
+      "header_row_repeat": null,
+      "cell_size_pt": null,
+      "cell_line_spacing": null,
+      "cell_space_before_pt": null,
+      "cell_space_after_pt": null
+    },
+    "structure_profile": {
+      "language": "sr",
+      "section_keywords": {
+        "front_matter": [
+          "SADRŽAJ",
+          "APSTRAKT",
+          "ABSTRACT",
+          "REZIME"
+        ],
+        "body_start": [
+          "UVOD"
+        ],
+        "bibliography": [
+          "LITERATURA"
+        ],
+        "appendix": [
+          "PRILOG"
+        ]
+      },
+      "figure_caption_prefixes": [],
+      "table_caption_prefixes": [],
+      "source_line_prefixes": []
+    }
+  },
+  "evidence": [
+    {
+      "field_path": "typography.font_family",
+      "quote": "Vrsta slova: Times New Roman, 12 pt, latinica ili ćirilica.",
+      "page": 11,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.size_pt",
+      "quote": "Vrsta slova: Times New Roman, 12 pt, latinica ili ćirilica.",
+      "page": 11,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.margins_cm.top",
+      "quote": "Margine: Gornje i donje: 2.5 cm; leva i desna: 2.5 cm (opcija Page",
+      "page": 11,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.first_line_indent_cm",
+      "quote": "Pasusi: Uvučeni za 1 tab veličine 12.7mm.",
+      "page": 11,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.alignment",
+      "quote": "Poravnanje teksta: Sa obe strane (opcija Justified za format paragrafa).",
+      "page": 11,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.page_numbering.position",
+      "quote": "Brojevi stranica: Arapskim ciframa, dole i na sredini.",
+      "page": 11,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "headings.1.size_pt",
+      "quote": "Naslovi i podnaslovi: Masnim slogom, veličina slova 16p odn. 14p, odvojeni jednim redom od ostatka teksta.",
+      "page": 11,
+      "confidence": "high",
+      "source": "preset"
+    }
+  ],
+  "unresolved": [
+    "body.space_after_pt",
+    "bibliography.hanging_indent_cm"
+  ]
+}

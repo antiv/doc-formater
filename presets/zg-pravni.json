@@ -1,0 +1,181 @@
+{
+  "meta": {
+    "id": "zg-pravni",
+    "display_name": "Pravni fakultet u Zagrebu — diplomski rad",
+    "institution": {
+      "university": "Sveučilište u Zagrebu",
+      "faculty": "Pravni fakultet",
+      "department": null,
+      "organization": null,
+      "document_type": "diplomski rad",
+      "language": "hr"
+    },
+    "source_filename": "https://www.pravo.unizg.hr/wp-content/uploads/2023/02/UPUTE-za-izradu-diplomskih-i-seminarskih-radova-copy.pdf",
+    "created_at": "2026-08-10T00:00:00Z",
+    "updated_at": "2026-08-10T00:00:00Z",
+    "origin": "manual",
+    "copied_from": null
+  },
+  "rules": {
+    "page_setup": {
+      "paper_size": "A4",
+      "mirror_margins": null,
+      "margins_cm": {
+        "top": null,
+        "bottom": null,
+        "inside": null,
+        "outside": null
+      },
+      "different_first_page": null,
+      "page_numbering": {
+        "position": "bottom_right",
+        "start_at_section": null
+      }
+    },
+    "typography": {
+      "font_family": "Times New Roman",
+      "fallback_fonts": []
+    },
+    "body": {
+      "size_pt": 12.0,
+      "line_spacing": 1.5,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "alignment": "JUSTIFY",
+      "first_line_indent_cm": null,
+      "allow_italic": null,
+      "allow_empty_paragraphs": null
+    },
+    "headings": [],
+    "captions": {
+      "figure": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "table": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "source_line": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      }
+    },
+    "bibliography": {
+      "title": null,
+      "size_pt": null,
+      "line_spacing": null,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "hanging_indent_cm": null,
+      "alignment": null,
+      "page_break_before": null
+    },
+    "toc": {
+      "title": null,
+      "insert_field": null,
+      "levels": null
+    },
+    "tables": {
+      "alignment": null,
+      "header_row_bold": null,
+      "header_row_repeat": null,
+      "cell_size_pt": null,
+      "cell_line_spacing": null,
+      "cell_space_before_pt": null,
+      "cell_space_after_pt": null
+    },
+    "structure_profile": {
+      "language": "hr",
+      "section_keywords": {
+        "front_matter": [
+          "SADRŽAJ",
+          "SAŽETAK",
+          "ABSTRACT"
+        ],
+        "body_start": [
+          "UVOD"
+        ],
+        "bibliography": [
+          "POPIS LITERATURE",
+          "LITERATURA",
+          "POPIS IZVORA"
+        ],
+        "appendix": [
+          "PRILOZI",
+          "PRILOG"
+        ]
+      },
+      "figure_caption_prefixes": [],
+      "table_caption_prefixes": [],
+      "source_line_prefixes": []
+    }
+  },
+  "evidence": [
+    {
+      "field_path": "typography.font_family",
+      "quote": "FONT, PRORED I DRUGE FORMALNOSTI: Rad se piše upotrebom fonta „Times New",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.size_pt",
+      "quote": "Roman“ veličine 12 s proredom 1,5 između redova teksta. Veličina fonta u bilješkama iznosi 10",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.line_spacing",
+      "quote": "Roman“ veličine 12 s proredom 1,5 između redova teksta. Veličina fonta u bilješkama iznosi 10",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.alignment",
+      "quote": "s proredom 1,15 između redova teksta. Tekst mora biti poravnat s lijevom i desnom marginom",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.page_numbering.position",
+      "quote": "(justified). Stranice Rada moraju biti numerirane na doljnjem desnom rubu stranice (naslovna",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.paper_size",
+      "quote": "Prije obrane, diplomski rad je potrebno isprintati u standardnom A4 formatu te spiralno uvesti u",
+      "page": 3,
+      "confidence": "high",
+      "source": "preset"
+    }
+  ],
+  "unresolved": [
+    "page_setup.margins_cm.top",
+    "headings",
+    "captions.figure.size_pt"
+  ]
+}
