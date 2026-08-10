@@ -151,23 +151,44 @@ exported and imported.
 `presets/` ships rule sets read from real, published style guides, so the
 library is not empty on a fresh install:
 
-| `--rules-id` | Institution | Document |
-|---|---|---|
-| `ub-master` | Univerzitet u Beogradu | master rad |
-| `bg-ekof-seminarski` | Ekonomski fakultet, Beograd | seminarski rad |
-| `ns-poljoprivredni` | Poljoprivredni fakultet, Novi Sad | diplomski rad |
-| `ni-elfak` | Elektronski fakultet, Niš | diplomski rad |
-| `zg-pravni` | Pravni fakultet, Zagreb | diplomski rad |
-| `zg-agronomski` | Agronomski fakultet, Zagreb | diplomski rad |
-| `lj-pef` | Pedagoška fakulteta, Ljubljana | diplomsko delo |
-| `lj-fpp` | Fakulteta za pomorstvo in promet, Ljubljana | diplomska naloga |
-| `ameu` | Alma Mater Europaea, Akademija za ples | diplomski rad |
+| `--rules-id` | Institution | City | Lang |
+|---|---|---|---|
+| `ub-master` | Univerzitet u Beogradu | Beograd | sr |
+| `bg-ekof-seminarski` | Ekonomski fakultet | Beograd | sr |
+| `ns-poljoprivredni` | Poljoprivredni fakultet | Novi Sad | sr |
+| `ni-elfak` | Elektronski fakultet | Niš | sr |
+| `sa-medicinski` | Medicinski fakultet | Sarajevo | bs |
+| `sa-ppf` | Poljoprivredno-prehrambeni fakultet | Sarajevo | bs |
+| `mo-masinski` | Mašinski fakultet, Univerzitet „Džemal Bijedić“ | Mostar | bs |
+| `bl-tehnoloski` | Tehnološki fakultet | Banja Luka | sr |
+| `zg-pravni` | Pravni fakultet | Zagreb | hr |
+| `zg-agronomski` | Agronomski fakultet | Zagreb | hr |
+| `st-ekonomski` | Ekonomski fakultet | Split | hr |
+| `ri-pomorski` | Pomorski fakultet | Rijeka | hr |
+| `me-ucg` | Univerzitet Crne Gore | Podgorica | sr |
+| `sk-ekonomski` | Економски факултет, УКИМ | Скопје | mk |
+| `lj-pef` | Pedagoška fakulteta | Ljubljana | sl |
+| `lj-fpp` | Fakulteta za pomorstvo in promet | Ljubljana | sl |
+| `mb-strojnistvo` | Fakulteta za strojništvo | Maribor | sl |
+| `ameu` | Alma Mater Europaea, Akademija za ples | Ljubljana | sl |
 
 Each one records the URL it was read from in `meta.source_filename`, and every
 value carries the sentence it came from, with a page number. Those quotes are
-not decoration: all 54 of them were checked back against the source PDF with
+not decoration: all 113 of them were checked back against the source PDF with
 the same `verify_quote` guard the LLM extraction uses, and every one is an
 exact substring. Nothing in these files was inferred.
+
+They are not variations on one house style. Banja Luka's technology faculty
+sets the body in **Arial 10 pt with 1.15 spacing** where almost everyone else
+uses Times New Roman 12 at 1.5; Skopje measures its margins in **2.54 cm**
+because the guide thinks in inches; Maribor's mechanical engineering faculty
+and the Ljubljana maritime faculty both use **mirror margins** for
+double-sided printing, so their inside margin is wider than the outside one.
+
+A rule set is matched to the language it was written for. The Macedonian set
+looks for `ВОВЕД`, not `UVOD`; applied to a Serbian thesis the run stops with
+"the start of the main text was not found" rather than guessing — which is the
+intended behaviour, not a limitation.
 
 Fields the guide does not prescribe are left `null` and listed in
 `unresolved` — a preset does not invent a margin because most theses have one.

@@ -1,0 +1,213 @@
+{
+  "meta": {
+    "id": "mb-strojnistvo",
+    "display_name": "Fakulteta za strojništvo UM — diplomsko delo",
+    "institution": {
+      "university": "Univerza v Mariboru",
+      "faculty": "Fakulteta za strojništvo",
+      "department": null,
+      "organization": null,
+      "document_type": "diplomsko delo",
+      "language": "sl"
+    },
+    "source_filename": "http://www.oblikovanje-diplom.eu/navodila%20za%20pisanje%20diplome/Fakulteta%20za%20strojnistvo%20MB%20-%20Pravilnik%20o%20pisanju%20diplome.pdf",
+    "created_at": "2026-08-10T00:00:00Z",
+    "updated_at": "2026-08-10T00:00:00Z",
+    "origin": "manual",
+    "copied_from": null
+  },
+  "rules": {
+    "page_setup": {
+      "paper_size": null,
+      "mirror_margins": true,
+      "margins_cm": {
+        "top": 2.5,
+        "bottom": 2.5,
+        "inside": 3.0,
+        "outside": 2.0
+      },
+      "different_first_page": null,
+      "page_numbering": {
+        "position": null,
+        "start_at_section": null
+      }
+    },
+    "typography": {
+      "font_family": null,
+      "fallback_fonts": []
+    },
+    "body": {
+      "size_pt": null,
+      "line_spacing": 1.5,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "alignment": "JUSTIFY",
+      "first_line_indent_cm": null,
+      "allow_italic": null,
+      "allow_empty_paragraphs": null
+    },
+    "headings": [
+      {
+        "level": 1,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "casing": null,
+        "alignment": "LEFT",
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": true,
+        "keep_with_next": true
+      },
+      {
+        "level": 2,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "casing": null,
+        "alignment": "LEFT",
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": null,
+        "keep_with_next": true
+      }
+    ],
+    "captions": {
+      "figure": {
+        "position": null,
+        "alignment": "CENTER",
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "table": {
+        "position": null,
+        "alignment": "CENTER",
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "source_line": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      }
+    },
+    "bibliography": {
+      "title": null,
+      "size_pt": null,
+      "line_spacing": null,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "hanging_indent_cm": null,
+      "alignment": null,
+      "page_break_before": null
+    },
+    "toc": {
+      "title": null,
+      "insert_field": null,
+      "levels": null
+    },
+    "tables": {
+      "alignment": null,
+      "header_row_bold": null,
+      "header_row_repeat": null,
+      "cell_size_pt": null,
+      "cell_line_spacing": null,
+      "cell_space_before_pt": null,
+      "cell_space_after_pt": null
+    },
+    "structure_profile": {
+      "language": "sl",
+      "section_keywords": {
+        "front_matter": [
+          "POVZETEK",
+          "ABSTRACT",
+          "KAZALO VSEBINE",
+          "ZAHVALA"
+        ],
+        "body_start": [
+          "UVOD"
+        ],
+        "bibliography": [
+          "VIRI IN LITERATURA",
+          "LITERATURA"
+        ],
+        "appendix": [
+          "PRILOGE",
+          "PRILOGA"
+        ]
+      },
+      "figure_caption_prefixes": [],
+      "table_caption_prefixes": [],
+      "source_line_prefixes": []
+    }
+  },
+  "evidence": [
+    {
+      "field_path": "page_setup.margins_cm.top",
+      "quote": "Robovi besedila naj bodo zgoraj in spodaj oddaljeni 25 mm od roba strani, na levi",
+      "page": 5,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.margins_cm.inside",
+      "quote": "(notranji) strani 30 mm in na desni (zunanji) strani 20 mm od roba strani.",
+      "page": 5,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.alignment",
+      "quote": "Osnovno besedilo naj bo obojestransko poravnano. Naslovi poglavij in podpoglavij naj bodo",
+      "page": 5,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "headings.1.page_break_before",
+      "quote": "levo poravnani; poglavja naj se pričnejo na novi strani (vedno sprednji-lihi strani, če delo",
+      "page": 5,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "captions.figure.alignment",
+      "quote": "tiskate obojestransko). Naslovi slik in tabel naj bodo poravnani na sredino.",
+      "page": 5,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.line_spacing",
+      "quote": "Razmik med vrsticami besedila naj bo 1,5 vrstice. Posamezni odstavki besedila naj se",
+      "page": 5,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.mirror_margins",
+      "quote": "(notranji) strani 30 mm in na desni (zunanji) strani 20 mm od roba strani.",
+      "page": 5,
+      "confidence": "high",
+      "source": "preset"
+    }
+  ],
+  "unresolved": [
+    "typography.font_family",
+    "body.size_pt",
+    "headings.1.size_pt"
+  ]
+}

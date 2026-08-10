@@ -1,0 +1,233 @@
+{
+  "meta": {
+    "id": "bl-tehnoloski",
+    "display_name": "Tehnološki fakultet u Banjoj Luci — završni rad",
+    "institution": {
+      "university": "Univerzitet u Banjoj Luci",
+      "faculty": "Tehnološki fakultet",
+      "department": null,
+      "organization": null,
+      "document_type": "završni rad",
+      "language": "sr"
+    },
+    "source_filename": "https://tf.unibl.org/wp-content/uploads/2018/09/UPUTSTVO-za-pisanje-zavrsnog-rada-TF_finalna-verzija.pdf",
+    "created_at": "2026-08-10T00:00:00Z",
+    "updated_at": "2026-08-10T00:00:00Z",
+    "origin": "manual",
+    "copied_from": null
+  },
+  "rules": {
+    "page_setup": {
+      "paper_size": "A4",
+      "mirror_margins": null,
+      "margins_cm": {
+        "top": 2.5,
+        "bottom": 2.5,
+        "inside": 2.5,
+        "outside": 2.5
+      },
+      "different_first_page": null,
+      "page_numbering": {
+        "position": null,
+        "start_at_section": null
+      }
+    },
+    "typography": {
+      "font_family": "Arial",
+      "fallback_fonts": []
+    },
+    "body": {
+      "size_pt": 10.0,
+      "line_spacing": 1.15,
+      "space_before_pt": null,
+      "space_after_pt": 6.0,
+      "alignment": "JUSTIFY",
+      "first_line_indent_cm": 0.0,
+      "allow_italic": null,
+      "allow_empty_paragraphs": null
+    },
+    "headings": [
+      {
+        "level": 1,
+        "size_pt": 12.0,
+        "bold": true,
+        "italic": null,
+        "casing": "AS_IS",
+        "alignment": null,
+        "space_before_pt": null,
+        "space_after_pt": 12.0,
+        "page_break_before": null,
+        "keep_with_next": true
+      },
+      {
+        "level": 2,
+        "size_pt": 10.0,
+        "bold": true,
+        "italic": null,
+        "casing": "AS_IS",
+        "alignment": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": null,
+        "keep_with_next": true
+      }
+    ],
+    "captions": {
+      "figure": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "table": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "source_line": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      }
+    },
+    "bibliography": {
+      "title": null,
+      "size_pt": null,
+      "line_spacing": null,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "hanging_indent_cm": null,
+      "alignment": null,
+      "page_break_before": null
+    },
+    "toc": {
+      "title": null,
+      "insert_field": null,
+      "levels": null
+    },
+    "tables": {
+      "alignment": null,
+      "header_row_bold": null,
+      "header_row_repeat": null,
+      "cell_size_pt": null,
+      "cell_line_spacing": null,
+      "cell_space_before_pt": null,
+      "cell_space_after_pt": null
+    },
+    "structure_profile": {
+      "language": "sr",
+      "section_keywords": {
+        "front_matter": [
+          "SADRŽAJ",
+          "SAŽETAK",
+          "APSTRAKT",
+          "ABSTRACT",
+          "ZAHVALA"
+        ],
+        "body_start": [
+          "UVOD"
+        ],
+        "bibliography": [
+          "LITERATURA"
+        ],
+        "appendix": [
+          "PRILOZI",
+          "PRILOG"
+        ]
+      },
+      "figure_caption_prefixes": [],
+      "table_caption_prefixes": [],
+      "source_line_prefixes": []
+    }
+  },
+  "evidence": [
+    {
+      "field_path": "page_setup.paper_size",
+      "quote": "Format stranice je A4 (21 x 29,7 cm), a sve margine (gornju, donju, lijevu i desnu) je potrebno",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.margins_cm.top",
+      "quote": "podesiti na 2.5 cm. Tekst rada se piše u stilu Normal, font Arial, 10 pt, prored 1,15 i da tekst bude",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "typography.font_family",
+      "quote": "podesiti na 2.5 cm. Tekst rada se piše u stilu Normal, font Arial, 10 pt, prored 1,15 i da tekst bude",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.size_pt",
+      "quote": "podesiti na 2.5 cm. Tekst rada se piše u stilu Normal, font Arial, 10 pt, prored 1,15 i da tekst bude",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.line_spacing",
+      "quote": "podesiti na 2.5 cm. Tekst rada se piše u stilu Normal, font Arial, 10 pt, prored 1,15 i da tekst bude",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.alignment",
+      "quote": "od ivice do ivice (obostrano poravnanje teksta ili justify). Razmak nakon pasusa iznosi 6pt.",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.space_after_pt",
+      "quote": "od ivice do ivice (obostrano poravnanje teksta ili justify). Razmak nakon pasusa iznosi 6pt.",
+      "page": 2,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "headings.1.size_pt",
+      "quote": "1. UVOD - je naslov poglavlja i piše se u stilu Heading 1 - font Arial, 12pt, bold, Spacing After",
+      "page": 4,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "headings.2.size_pt",
+      "quote": "1.1. Uređivanje teksta (podnaslov u okviru poglavlja Uvod, stil: Heading 2 - Arial, 10 pt, bold,",
+      "page": 5,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.first_line_indent_cm",
+      "quote": "to u ovom uputstvu. Ne uvlačiti prvi red pasusa.",
+      "page": 5,
+      "confidence": "high",
+      "source": "preset"
+    }
+  ],
+  "unresolved": [
+    "captions.figure.size_pt",
+    "bibliography.hanging_indent_cm"
+  ]
+}

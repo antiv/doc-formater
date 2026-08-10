@@ -1,0 +1,224 @@
+{
+  "meta": {
+    "id": "mo-masinski",
+    "display_name": "Mašinski fakultet Mostar — diplomski rad",
+    "institution": {
+      "university": "Univerzitet „Džemal Bijedić“ u Mostaru",
+      "faculty": "Mašinski fakultet",
+      "department": null,
+      "organization": null,
+      "document_type": "diplomski rad",
+      "language": "bs"
+    },
+    "source_filename": "https://mf.unmo.ba/media/1226/uputstvo_za_pisanje_diplomskog_rada.pdf",
+    "created_at": "2026-08-10T00:00:00Z",
+    "updated_at": "2026-08-10T00:00:00Z",
+    "origin": "manual",
+    "copied_from": null
+  },
+  "rules": {
+    "page_setup": {
+      "paper_size": null,
+      "mirror_margins": null,
+      "margins_cm": {
+        "top": 2.5,
+        "bottom": 2.5,
+        "inside": 2.5,
+        "outside": 2.5
+      },
+      "different_first_page": null,
+      "page_numbering": {
+        "position": null,
+        "start_at_section": null
+      }
+    },
+    "typography": {
+      "font_family": "Times New Roman",
+      "fallback_fonts": []
+    },
+    "body": {
+      "size_pt": 12.0,
+      "line_spacing": 1.5,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "alignment": "JUSTIFY",
+      "first_line_indent_cm": null,
+      "allow_italic": null,
+      "allow_empty_paragraphs": null
+    },
+    "headings": [
+      {
+        "level": 1,
+        "size_pt": 14.0,
+        "bold": true,
+        "italic": null,
+        "casing": "UPPERCASE",
+        "alignment": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": true,
+        "keep_with_next": true
+      },
+      {
+        "level": 2,
+        "size_pt": 12.0,
+        "bold": true,
+        "italic": null,
+        "casing": "AS_IS",
+        "alignment": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": null,
+        "keep_with_next": true
+      },
+      {
+        "level": 3,
+        "size_pt": 12.0,
+        "bold": false,
+        "italic": null,
+        "casing": "AS_IS",
+        "alignment": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "page_break_before": null,
+        "keep_with_next": true
+      }
+    ],
+    "captions": {
+      "figure": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "table": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      },
+      "source_line": {
+        "position": null,
+        "alignment": null,
+        "size_pt": null,
+        "bold": null,
+        "italic": null,
+        "space_before_pt": null,
+        "space_after_pt": null,
+        "keep_with_next": null
+      }
+    },
+    "bibliography": {
+      "title": null,
+      "size_pt": null,
+      "line_spacing": null,
+      "space_before_pt": null,
+      "space_after_pt": null,
+      "hanging_indent_cm": null,
+      "alignment": null,
+      "page_break_before": null
+    },
+    "toc": {
+      "title": null,
+      "insert_field": null,
+      "levels": null
+    },
+    "tables": {
+      "alignment": null,
+      "header_row_bold": null,
+      "header_row_repeat": null,
+      "cell_size_pt": null,
+      "cell_line_spacing": null,
+      "cell_space_before_pt": null,
+      "cell_space_after_pt": null
+    },
+    "structure_profile": {
+      "language": "bs",
+      "section_keywords": {
+        "front_matter": [
+          "SADRŽAJ",
+          "SAŽETAK",
+          "APSTRAKT",
+          "ABSTRACT",
+          "ZAHVALA"
+        ],
+        "body_start": [
+          "UVOD"
+        ],
+        "bibliography": [
+          "LITERATURA"
+        ],
+        "appendix": [
+          "PRILOZI",
+          "PRILOG"
+        ]
+      },
+      "figure_caption_prefixes": [],
+      "table_caption_prefixes": [],
+      "source_line_prefixes": []
+    }
+  },
+  "evidence": [
+    {
+      "field_path": "headings.1.size_pt",
+      "quote": "naslov. Naslov poglavlja piše se velikim slovima veličine 14 pt. Bold. Svako novo poglavlje",
+      "page": 4,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "headings.2.size_pt",
+      "quote": "Prvi nivo potpoglavlja piše se malim slovima veličine 12 pt. Bold, a drugi nivo potpoglavlja",
+      "page": 4,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.size_pt",
+      "quote": "• Odabrati veličinu slova 12 i prored 1.5, preporučujese font Times New Roman,",
+      "page": 4,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.line_spacing",
+      "quote": "• Odabrati veličinu slova 12 i prored 1.5, preporučujese font Times New Roman,",
+      "page": 4,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "typography.font_family",
+      "quote": "• Odabrati veličinu slova 12 i prored 1.5, preporučujese font Times New Roman,",
+      "page": 4,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "page_setup.margins_cm.top",
+      "quote": "• Koristiti standardne margine-margine dolje, gore, lijevo i desno po 2,5 cm;",
+      "page": 4,
+      "confidence": "high",
+      "source": "preset"
+    },
+    {
+      "field_path": "body.alignment",
+      "quote": "• Odabrati poravnanje na obje strane;",
+      "page": 4,
+      "confidence": "high",
+      "source": "preset"
+    }
+  ],
+  "unresolved": [
+    "body.first_line_indent_cm",
+    "captions.figure.size_pt"
+  ]
+}
