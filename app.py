@@ -749,19 +749,35 @@ def main() -> None:
     st.sidebar.divider()
     mate_status_banner()
 
-    pages = {
-        "format": t("app.page.format"),
-        "library": t("app.page.library"),
-        "help": t("app.page.help"),
-    }
-    # Dugme mora doći PRE radija: Streamlit odbija izmenu `session_state` ključa
-    # widgeta koji je već instanciran u istom prolazu.
-    if st.sidebar.button(f"ℹ️ {t('app.page.help')}", width="stretch"):
-        st.session_state["nav"] = "help"
-        st.rerun()
-    st.session_state.setdefault("nav", "format")
+    pages = {"format": t("app.page.format"), "library": t("app.page.library")}
+
+    # Pomoć nije stavka navigacije nego preklop preko nje: otvara je sopstveno
+    # dugme, a zatvara izbor bilo koje strane.
+    def close_help() -> None:
+        st.session_state["help_open"] = False
+
+    # Dugme je prekidač, ne prečica. `on_change` radija zatvara pomoć samo kad
+    # se izbor stvarno promeni, pa bi bez prekidača korisnik koji je na
+    # biblioteci, otvori pomoć i klikne „biblioteka" ostao zaglavljen.
+    #
+    # Bez `st.rerun()` ovde. Klik ionako pokreće nov prolaz, a rerun pre radija
+    # bi odbacio stanje widgeta koji u tom prolazu nije stigao da se renderuje
+    # -- `nav` bi nestao i izbor strane bi se vratio na početak.
+    if st.sidebar.button(
+        f"ℹ️ {t('app.page.help')}",
+        key="help_button",
+        width="stretch",
+        type="primary" if st.session_state.get("help_open") else "secondary",
+    ):
+        st.session_state["help_open"] = not st.session_state.get("help_open", False)
+    help_open = st.session_state.get("help_open", False)
+
     page = st.sidebar.radio(
-        t("app.page"), list(pages), key="nav", format_func=lambda key: pages[key]
+        t("app.page"),
+        list(pages),
+        key="nav",
+        on_change=close_help,
+        format_func=lambda key: pages[key],
     )
     _language_selector()
     st.sidebar.divider()
@@ -769,12 +785,12 @@ def main() -> None:
     # Verzija nije prevodiva -- broj izdanja je isti na svakom jeziku.
     st.sidebar.caption(f"v{__version__}")
 
-    if page == "format":
-        page_format(user)
-    elif page == "library":
-        page_library(user)
-    else:
+    if help_open:
         page_help()
+    elif page == "format":
+        page_format(user)
+    else:
+        page_library(user)
 
 
 if __name__ == "__main__":
