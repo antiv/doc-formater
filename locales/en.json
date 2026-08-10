@@ -5,15 +5,12 @@
   "app.page.library": "Rule library",
   "app.promise": "The document's text is never rewritten. Only blank space is removed, and only when the rules ask for it. Images, tables and charts stay.",
   "app.language": "Language",
-
   "mate.heuristic_only": "Rule extraction: regex heuristic. Connect an LLM agent for better results (`MATE_BASE_URL`, `MATE_PAT`).",
-
   "source.mate": "LLM agent",
   "source.heuristic": "heuristic",
   "source.manual": "manual",
   "source.preset": "preset",
   "evidence.page": "p. {page}",
-
   "editor.group": "{group}  ({filled}/{total} set)",
   "editor.leave_alone": "(leave alone)",
   "editor.yes": "yes",
@@ -31,7 +28,6 @@
   "editor.none": "—",
   "editor.keywords": "structure_profile — section keywords",
   "editor.keywords_help": "This is how the document is split into sections. If `body_start` does not match the heading your thesis starts its main part with, formatting stops with an error.",
-
   "format.header": "Format a document",
   "format.thesis": "Thesis (.docx)",
   "format.rules_source": "Where the rules come from",
@@ -59,7 +55,6 @@
   "format.run": "Format",
   "format.failed": "Formatting failed: {error}",
   "format.download": "Download the formatted .docx",
-
   "extract.identifying": "Identifying the institution…",
   "extract.institution": "Institution ({origin}): {name}",
   "extract.institution_unknown": "not identified",
@@ -68,7 +63,6 @@
   "extract.extracting": "Extracting rules…",
   "extract.done": "Done — source: {source}",
   "extract.rejected": "Rules discarded because their quote is not in the style guide: {fields}",
-
   "save.expander": "Save to the library",
   "save.requires_login": "Saving rules requires signing in — a set has to belong to someone. Without signing in you can download them as JSON and import them later.",
   "save.download_json": "Download rules.json",
@@ -76,7 +70,6 @@
   "save.name": "Name",
   "save.button": "Save",
   "save.saved": "Saved: {id}",
-
   "report.style_changes": "Style changes",
   "report.deletions": "Deletions",
   "report.insertions": "Additions",
@@ -98,7 +91,6 @@
   "report.no_changes": "No change was necessary.",
   "report.deleted": "[{index}] deleted: {detail}",
   "report.inserted": "inserted: {detail}",
-
   "library.header": "Rule library",
   "library.anonymous": "You can browse and use the library without signing in. To save or change rules, sign in — every set belongs to whoever created it.",
   "library.admin": "Admin: you can edit and delete every set.",
@@ -126,7 +118,6 @@
   "library.import_file": "Import rules.json",
   "library.import": "Import",
   "library.imported": "Imported: {id}",
-
   "auth.gate_caption": "Access to this app is password protected.",
   "auth.password": "Password",
   "auth.enter": "Enter",
@@ -143,11 +134,9 @@
   "auth.perm.owner": "Owner: {owner}.",
   "auth.perm.builtin": "Built-in set.",
   "auth.perm.copy_hint": "{whose} Make a copy to edit it.",
-
   "error.no_text_layer": "'{filename}' has no text layer ({chars} characters found). It is probably a scan. Pick a set from the library or enter the rules by hand.",
   "error.empty_document": "'{filename}' is empty or unreadable.",
   "error.unsupported_format": "Unsupported style guide format: '{suffix}'. Supported: .pdf and .docx.",
-
   "mate.not_configured": "MATE_PAT is not set. Create a Personal Access Token in the agent dashboard (the user needs the 'admin' or 'developer' role) and put it in MATE_PAT.",
   "mate.auth_failed": "The agent server rejected authentication ({status}). Check MATE_PAT and that the user has the 'admin' or 'developer' role. Detail: {detail}",
   "mate.agent_not_exposed": "Agent '{agent}' is not reachable on the /v1 route. In the dashboard the agent must have 'expose_as_model' enabled, be a root agent (no parents), and not be disabled. Detail: {detail}",
@@ -158,7 +147,6 @@
   "mate.ready": "Agent server reachable, '{agent}' is ready.",
   "mate.agent_missing": "The agent server is reachable, but '{agent}' is not among the exposed models ({models}).",
   "mate.models_empty": "the list is empty",
-
   "pipeline.sending": "Sending the style guide to the agent…",
   "pipeline.repairing": "The reply failed validation — asking for a correction…",
   "pipeline.falling_back": "Falling back to the regex heuristic…",
@@ -171,17 +159,46 @@
   "pipeline.invalid_json": "The reply is not valid JSON: {error}",
   "pipeline.no_json": "The reply contains no JSON object.",
   "pipeline.failed": "Extraction failed.",
-
   "structure.body_not_found": "The start of the main text was not found. Expected keywords: {keywords}. {hint} Add the heading this document starts its main part with to `structure_profile.section_keywords.body_start`.",
   "structure.hint_outline": "The document uses Word heading styles.",
   "structure.hint_no_outline": "The document has no Word heading styles, so detection relies on heading numbering alone.",
-
   "engine.section_missing": "Section {section} was not found in the document. The rules expect it by keyword ({keywords}), but the document names it differently. Its content has been attributed to the preceding section and takes that section's rules — extend `structure_profile.section_keywords`.",
   "engine.dry_run_note": "A dry run reports deletions only; style changes are not counted.",
-
   "cleanup.empty_paragraph": "empty paragraph",
   "cleanup.empty_paragraph_with_break": "empty paragraph with a manual page break",
   "cleanup.reason.has_text": "contains text",
   "cleanup.reason.has_content": "contains an image, field, footnote or other embedded content",
-  "cleanup.reason.section_properties": "carries section properties (w:sectPr)"
+  "cleanup.reason.section_properties": "carries section properties (w:sectPr)",
+  "app.page.help": "Help",
+  "help.header": "About StyleGuard",
+  "help.intro": "StyleGuard takes the thesis you have already written and makes it match your institution's style guide. It changes how the document looks — margins, fonts, line spacing, headings — and nothing about what it says.",
+  "help.how.title": "How to use it",
+  "help.how.body": "1. **Upload your thesis** as a `.docx` file.\n2. **Say where the rules come from** — upload your faculty's style guide as a `.pdf` or `.docx`, pick a set from the library, or start from one of the bundled sets for a university in the region.\n3. **Check the rules.** Every rule shows where it came from and the sentence in the style guide it was read from. Correct anything that is wrong, and leave a field empty if the guide says nothing about it.\n4. **Apply and download.** You get a report of every change, so a hundred-page result does not have to be taken on trust.",
+  "help.privacy.title": "What happens to your documents",
+  "help.privacy.lead": "Your thesis is never stored and is never sent to an AI. Only the style guide is read by a language model, and only so the rules can be taken out of it.",
+  "help.privacy.thesis.title": "Your thesis",
+  "help.privacy.thesis.body": "- Never written to disk — it is read from the upload into memory, formatted there, and handed straight back to you.\n- Never sent to a language model. The formatting runs entirely on this server.\n- Kept after you leave: nothing.",
+  "help.privacy.guide.title": "The style guide",
+  "help.privacy.guide.body": "- Its **text** is sent to the language model so the rules can be read out of it. This is the only thing that ever leaves the server.\n- The file itself is written to a temporary file only while it is being read — a PDF cannot be parsed from memory — and deleted immediately afterwards.\n- Kept after you leave: nothing.",
+  "help.privacy.stored.title": "What is kept",
+  "help.privacy.stored.body": "Only rule sets that someone chooses to save to the library: font sizes, margins, heading levels, the name of the institution, and the quotes the rules were read from. No documents, and no part of anyone's thesis.",
+  "help.privacy.offline": "On this instance no language model is configured, so nothing leaves this server at all. Rules are read from the style guide by a pattern-matching heuristic instead.",
+  "help.invariants.title": "What it will never do",
+  "help.invariants.body": "- **Rewrite a single character of your text.** No renaming, no substitutions. A heading that has to be in capitals is set in capitals through a Word property, so the letters you typed stay exactly as you typed them.\n- **Remove an image, table, chart, footnote or link.** Only blank space is ever deleted, and only when the rules ask for it.\n- **Invent a rule.** A value the style guide does not prescribe is left alone rather than set to something that looks reasonable.",
+  "help.library.title": "The rule library",
+  "help.library.body": "Reading a style guide is the slow and error-prone part, so it is done once per institution and reused. When you upload a guide, the university and faculty are identified first and matched against sets that already exist — if yours is recognised, you are offered it instead of extracting again. Anyone can use and copy a set; only its owner, or an administrator, can change or delete it.",
+  "help.faq.title": "Questions",
+  "help.faq.q1": "Will my text be changed?",
+  "help.faq.a1": "No. Not one character. Only formatting properties change — size, spacing, alignment, and so on. This is checked by tests that compare every paragraph before and after, character for character.",
+  "help.faq.q2": "Does an AI read my thesis?",
+  "help.faq.a2": "No. The thesis is formatted on this server and never sent anywhere. The language model only ever sees the text of the style guide, which is a public document from your faculty.",
+  "help.faq.q3": "What if the extracted rules are wrong?",
+  "help.faq.a3": "You see every rule before anything is applied, together with the sentence in the style guide it came from, and you can correct it. A rule whose quote cannot be found in the guide is discarded automatically — that is the guard against an invented value.",
+  "help.faq.q4": "Do I have to sign in?",
+  "help.faq.a4": "No. Formatting is open to anyone. Signing in exists only so a rule set can have an owner, which is what stops one visitor from editing another's work.",
+  "help.faq.q5": "A field is empty. Should I fill it in?",
+  "help.faq.a5": "Only if you know what your guide says. An empty field means \"the style guide is silent about this\", and that property will be left exactly as you wrote it. That is not the same as zero.",
+  "help.opensource.title": "Open source",
+  "help.opensource.body": "StyleGuard is free and open source under the MIT licence. You can read every line of it, check the claims on this page against the code, run it on your own server, or contribute a fix.",
+  "help.opensource.button": "View the project on GitHub"
 }

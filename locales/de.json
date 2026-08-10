@@ -5,15 +5,12 @@
   "app.page.library": "Regelbibliothek",
   "app.promise": "Der Text des Dokuments wird nie umgeschrieben. Entfernt werden nur Leerräume, und nur wenn die Regeln es verlangen. Bilder, Tabellen und Diagramme bleiben erhalten.",
   "app.language": "Sprache",
-
   "mate.heuristic_only": "Regelextraktion: Regex-Heuristik. Für bessere Ergebnisse einen LLM-Agenten anbinden (`MATE_BASE_URL`, `MATE_PAT`).",
-
   "source.mate": "LLM-Agent",
   "source.heuristic": "Heuristik",
   "source.manual": "manuell",
   "source.preset": "Vorlage",
   "evidence.page": "S. {page}",
-
   "editor.group": "{group}  ({filled}/{total} gesetzt)",
   "editor.leave_alone": "(unverändert lassen)",
   "editor.yes": "ja",
@@ -31,7 +28,6 @@
   "editor.none": "—",
   "editor.keywords": "structure_profile — Abschnitts-Schlüsselwörter",
   "editor.keywords_help": "So wird das Dokument in Abschnitte geteilt. Trifft `body_start` nicht die Überschrift, mit der der Hauptteil beginnt, bricht die Formatierung mit einem Fehler ab.",
-
   "format.header": "Dokument formatieren",
   "format.thesis": "Arbeit (.docx)",
   "format.rules_source": "Woher die Regeln kommen",
@@ -59,7 +55,6 @@
   "format.run": "Formatieren",
   "format.failed": "Formatierung fehlgeschlagen: {error}",
   "format.download": "Formatierte .docx herunterladen",
-
   "extract.identifying": "Einrichtung wird erkannt…",
   "extract.institution": "Einrichtung ({origin}): {name}",
   "extract.institution_unknown": "nicht erkannt",
@@ -68,7 +63,6 @@
   "extract.extracting": "Regeln werden extrahiert…",
   "extract.done": "Fertig — Quelle: {source}",
   "extract.rejected": "Verworfene Regeln, deren Zitat nicht in der Richtlinie steht: {fields}",
-
   "save.expander": "In der Bibliothek speichern",
   "save.requires_login": "Zum Speichern von Regeln ist eine Anmeldung nötig — ein Regelsatz muss jemandem gehören. Ohne Anmeldung können Sie ihn als JSON herunterladen und später importieren.",
   "save.download_json": "rules.json herunterladen",
@@ -76,7 +70,6 @@
   "save.name": "Name",
   "save.button": "Speichern",
   "save.saved": "Gespeichert: {id}",
-
   "report.style_changes": "Stiländerungen",
   "report.deletions": "Löschungen",
   "report.insertions": "Ergänzungen",
@@ -98,7 +91,6 @@
   "report.no_changes": "Keine Änderung war nötig.",
   "report.deleted": "[{index}] gelöscht: {detail}",
   "report.inserted": "eingefügt: {detail}",
-
   "library.header": "Regelbibliothek",
   "library.anonymous": "Die Bibliothek können Sie ohne Anmeldung ansehen und verwenden. Zum Speichern oder Ändern von Regeln melden Sie sich an — jeder Regelsatz gehört dem, der ihn erstellt hat.",
   "library.admin": "Admin: Sie können alle Regelsätze bearbeiten und löschen.",
@@ -126,7 +118,6 @@
   "library.import_file": "rules.json importieren",
   "library.import": "Importieren",
   "library.imported": "Importiert: {id}",
-
   "auth.gate_caption": "Der Zugang zu dieser Anwendung ist durch ein Passwort geschützt.",
   "auth.password": "Passwort",
   "auth.enter": "Eintreten",
@@ -143,11 +134,9 @@
   "auth.perm.owner": "Eigentümer: {owner}.",
   "auth.perm.builtin": "Integrierter Regelsatz.",
   "auth.perm.copy_hint": "{whose} Erstellen Sie eine Kopie, um ihn zu bearbeiten.",
-
   "error.no_text_layer": "„{filename}“ hat keine Textebene ({chars} Zeichen gefunden). Vermutlich ein Scan. Wählen Sie einen Regelsatz aus der Bibliothek oder geben Sie die Regeln von Hand ein.",
   "error.empty_document": "„{filename}“ ist leer oder nicht lesbar.",
   "error.unsupported_format": "Nicht unterstütztes Richtlinienformat: „{suffix}“. Unterstützt werden .pdf und .docx.",
-
   "mate.not_configured": "MATE_PAT ist nicht gesetzt. Erstellen Sie im Agenten-Dashboard ein Personal Access Token (der Benutzer braucht die Rolle „admin“ oder „developer“) und tragen Sie es in MATE_PAT ein.",
   "mate.auth_failed": "Der Agenten-Server hat die Authentifizierung abgelehnt ({status}). Prüfen Sie MATE_PAT und ob der Benutzer die Rolle „admin“ oder „developer“ hat. Detail: {detail}",
   "mate.agent_not_exposed": "Agent „{agent}“ ist über die /v1-Route nicht erreichbar. Im Dashboard muss der Agent „expose_as_model“ aktiviert haben, ein Root-Agent sein (ohne Eltern) und darf nicht deaktiviert sein. Detail: {detail}",
@@ -158,7 +147,6 @@
   "mate.ready": "Agenten-Server erreichbar, „{agent}“ ist bereit.",
   "mate.agent_missing": "Der Agenten-Server ist erreichbar, aber „{agent}“ ist nicht unter den bereitgestellten Modellen ({models}).",
   "mate.models_empty": "die Liste ist leer",
-
   "pipeline.sending": "Richtlinie wird an den Agenten gesendet…",
   "pipeline.repairing": "Die Antwort hat die Validierung nicht bestanden — Korrektur wird angefordert…",
   "pipeline.falling_back": "Rückfall auf die Regex-Heuristik…",
@@ -171,17 +159,46 @@
   "pipeline.invalid_json": "Die Antwort ist kein gültiges JSON: {error}",
   "pipeline.no_json": "Die Antwort enthält kein JSON-Objekt.",
   "pipeline.failed": "Die Extraktion ist fehlgeschlagen.",
-
   "structure.body_not_found": "Der Anfang des Haupttextes wurde nicht gefunden. Erwartete Schlüsselwörter: {keywords}. {hint} Ergänzen Sie `structure_profile.section_keywords.body_start` um die Überschrift, mit der dieses Dokument seinen Hauptteil beginnt.",
   "structure.hint_outline": "Das Dokument verwendet Word-Überschriftenformatvorlagen.",
   "structure.hint_no_outline": "Das Dokument hat keine Word-Überschriftenformatvorlagen; die Erkennung stützt sich daher allein auf die Nummerierung.",
-
   "engine.section_missing": "Abschnitt {section} wurde im Dokument nicht gefunden. Die Regeln erwarten ihn per Schlüsselwort ({keywords}), das Dokument benennt ihn aber anders. Sein Inhalt wurde dem vorhergehenden Abschnitt zugerechnet und folgt dessen Regeln — ergänzen Sie `structure_profile.section_keywords`.",
   "engine.dry_run_note": "Ein Trockenlauf meldet nur Löschungen; Stiländerungen werden nicht gezählt.",
-
   "cleanup.empty_paragraph": "leerer Absatz",
   "cleanup.empty_paragraph_with_break": "leerer Absatz mit manuellem Seitenumbruch",
   "cleanup.reason.has_text": "enthält Text",
   "cleanup.reason.has_content": "enthält ein Bild, ein Feld, eine Fußnote oder anderen eingebetteten Inhalt",
-  "cleanup.reason.section_properties": "trägt Abschnittseigenschaften (w:sectPr)"
+  "cleanup.reason.section_properties": "trägt Abschnittseigenschaften (w:sectPr)",
+  "app.page.help": "Hilfe",
+  "help.header": "Über StyleGuard",
+  "help.intro": "StyleGuard nimmt die Arbeit, die Sie bereits geschrieben haben, und bringt sie in Übereinstimmung mit dem Style Guide Ihrer Hochschule. Es ändert das Aussehen des Dokuments — Ränder, Schriften, Zeilenabstand, Überschriften — und nichts an dem, was darin steht.",
+  "help.how.title": "So wird es benutzt",
+  "help.how.body": "1. **Laden Sie Ihre Arbeit hoch** als `.docx`-Datei.\n2. **Geben Sie an, woher die Regeln kommen** — laden Sie den Style Guide Ihrer Fakultät als `.pdf` oder `.docx` hoch, wählen Sie einen Satz aus der Bibliothek, oder beginnen Sie mit einem der mitgelieferten Sätze für eine Hochschule der Region.\n3. **Prüfen Sie die Regeln.** Zu jeder Regel steht, woher sie stammt und aus welchem Satz des Style Guide sie gelesen wurde. Korrigieren Sie Falsches und lassen Sie ein Feld leer, wenn der Style Guide dazu nichts sagt.\n4. **Anwenden und herunterladen.** Sie erhalten einen Bericht über jede Änderung, damit ein hundertseitiges Ergebnis nicht auf Vertrauen beruht.",
+  "help.privacy.title": "Was mit Ihren Dokumenten geschieht",
+  "help.privacy.lead": "Ihre Arbeit wird niemals gespeichert und niemals an eine KI gesendet. Nur der Style Guide wird von einem Sprachmodell gelesen, und ausschließlich, um die Regeln daraus zu gewinnen.",
+  "help.privacy.thesis.title": "Ihre Arbeit",
+  "help.privacy.thesis.body": "- Wird nie auf die Festplatte geschrieben — sie wird aus dem Upload in den Arbeitsspeicher gelesen, dort formatiert und direkt zurückgegeben.\n- Wird nie an ein Sprachmodell gesendet. Die Formatierung läuft vollständig auf diesem Server.\n- Bleibt nach Ihrem Besuch gespeichert: nichts.",
+  "help.privacy.guide.title": "Der Style Guide",
+  "help.privacy.guide.body": "- Sein **Text** wird an das Sprachmodell gesendet, damit die Regeln daraus gelesen werden können. Das ist das Einzige, was den Server jemals verlässt.\n- Die Datei selbst wird nur während des Lesens in eine temporäre Datei geschrieben — ein PDF lässt sich nicht aus dem Speicher auswerten — und unmittelbar danach gelöscht.\n- Bleibt nach Ihrem Besuch gespeichert: nichts.",
+  "help.privacy.stored.title": "Was gespeichert bleibt",
+  "help.privacy.stored.body": "Nur Regelsätze, die jemand in der Bibliothek speichert: Schriftgrößen, Ränder, Überschriftenebenen, der Name der Hochschule und die Zitate, aus denen die Regeln gelesen wurden. Keine Dokumente und kein Teil irgendeiner Arbeit.",
+  "help.privacy.offline": "Auf dieser Instanz ist kein Sprachmodell konfiguriert, es verlässt also überhaupt nichts diesen Server. Die Regeln werden stattdessen mit einer musterbasierten Heuristik aus dem Style Guide gelesen.",
+  "help.invariants.title": "Was es niemals tut",
+  "help.invariants.body": "- **Ein einziges Zeichen Ihres Textes umschreiben.** Kein Umbenennen, keine Ersetzungen. Eine Überschrift, die in Großbuchstaben stehen muss, wird über eine Word-Eigenschaft groß dargestellt — die Buchstaben, die Sie getippt haben, bleiben genau so.\n- **Ein Bild, eine Tabelle, ein Diagramm, eine Fußnote oder einen Link entfernen.** Gelöscht wird nur Leerraum, und nur wenn die Regeln es verlangen.\n- **Eine Regel erfinden.** Ein Wert, den der Style Guide nicht vorschreibt, bleibt unangetastet, statt auf etwas Plausibles gesetzt zu werden.",
+  "help.library.title": "Die Regelbibliothek",
+  "help.library.body": "Einen Style Guide zu lesen ist der langsame und fehleranfällige Schritt, also geschieht er einmal pro Hochschule und wird wiederverwendet. Beim Hochladen eines Guide werden zuerst Universität und Fakultät erkannt und mit vorhandenen Sätzen abgeglichen — wird Ihrer erkannt, wird er Ihnen angeboten, statt erneut zu extrahieren. Jede Person darf einen Satz verwenden und kopieren; ändern oder löschen darf ihn nur die Eigentümerin oder ein Administrator.",
+  "help.faq.title": "Fragen",
+  "help.faq.q1": "Wird mein Text verändert?",
+  "help.faq.a1": "Nein. Kein einziges Zeichen. Es ändern sich nur Formatierungseigenschaften — Größe, Abstand, Ausrichtung und so weiter. Tests prüfen das, indem sie jeden Absatz vorher und nachher Zeichen für Zeichen vergleichen.",
+  "help.faq.q2": "Liest eine KI meine Arbeit?",
+  "help.faq.a2": "Nein. Die Arbeit wird auf diesem Server formatiert und nirgendwohin gesendet. Das Sprachmodell sieht ausschließlich den Text des Style Guide, ein öffentliches Dokument Ihrer Fakultät.",
+  "help.faq.q3": "Was, wenn die gewonnenen Regeln falsch sind?",
+  "help.faq.a3": "Sie sehen jede Regel, bevor irgendetwas angewendet wird, zusammen mit dem Satz aus dem Style Guide, aus dem sie stammt, und können sie korrigieren. Eine Regel, deren Zitat sich im Guide nicht finden lässt, wird automatisch verworfen — das ist der Schutz gegen einen erfundenen Wert.",
+  "help.faq.q4": "Muss ich mich anmelden?",
+  "help.faq.a4": "Nein. Das Formatieren steht allen offen. Die Anmeldung gibt es nur, damit ein Regelsatz eine Eigentümerin haben kann — das verhindert, dass eine Besucherin die Arbeit einer anderen ändert.",
+  "help.faq.q5": "Ein Feld ist leer. Soll ich es ausfüllen?",
+  "help.faq.a5": "Nur wenn Sie wissen, was Ihr Style Guide sagt. Ein leeres Feld bedeutet „der Style Guide sagt dazu nichts“, und diese Eigenschaft bleibt genau so, wie Sie sie geschrieben haben. Das ist nicht dasselbe wie null.",
+  "help.opensource.title": "Open Source",
+  "help.opensource.body": "StyleGuard ist frei und quelloffen unter der MIT-Lizenz. Sie können jede Zeile lesen, die Aussagen auf dieser Seite im Code überprüfen, es auf Ihrem eigenen Server betreiben oder eine Korrektur beisteuern.",
+  "help.opensource.button": "Projekt auf GitHub ansehen"
 }

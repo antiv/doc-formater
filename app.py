@@ -35,6 +35,7 @@ from styleguard.rules import (
 
 PRESETS_DIR = Path(__file__).resolve().parent / "presets"
 ASSETS_DIR = Path(__file__).resolve().parent / "assets"
+REPO_URL = "https://github.com/antiv/styleguard"
 
 st.set_page_config(
     page_title="StyleGuard",
@@ -673,6 +674,52 @@ def _apply_language() -> None:
     i18n.set_language(chosen)
 
 
+def page_help() -> None:
+    """Opis aplikacije, uputstvo i -- najvažnije -- šta se dešava sa dokumentima.
+
+    Tvrdnje o privatnosti ovde moraju da odgovaraju kodu, ne marketingu:
+    rad zaista nikad ne dodiruje disk (`format_document` ga čita iz
+    `io.BytesIO`), a pravilnik dodiruje samo privremeno jer pdfplumber traži
+    pravi fajl, pa se briše u `finally` (`temp_upload`). Na model odlazi tekst
+    pravilnika, nikad tekst rada.
+    """
+    st.header(t("help.header"))
+    st.write(t("help.intro"))
+
+    st.subheader(t("help.how.title"))
+    st.markdown(t("help.how.body"))
+
+    st.subheader(t("help.privacy.title"))
+    st.success(t("help.privacy.lead"))
+    left, right = st.columns(2)
+    with left:
+        st.markdown(f"**{t('help.privacy.thesis.title')}**")
+        st.markdown(t("help.privacy.thesis.body"))
+    with right:
+        st.markdown(f"**{t('help.privacy.guide.title')}**")
+        st.markdown(t("help.privacy.guide.body"))
+    st.markdown(f"**{t('help.privacy.stored.title')}**")
+    st.markdown(t("help.privacy.stored.body"))
+    if not MateConfig.from_env().is_configured:
+        # Bez agenta ništa ne napušta server, i to je vest koju korisnik želi.
+        st.info(t("help.privacy.offline"))
+
+    st.subheader(t("help.invariants.title"))
+    st.markdown(t("help.invariants.body"))
+
+    st.subheader(t("help.library.title"))
+    st.markdown(t("help.library.body"))
+
+    st.subheader(t("help.faq.title"))
+    for number in range(1, 6):
+        with st.expander(t(f"help.faq.q{number}")):
+            st.markdown(t(f"help.faq.a{number}"))
+
+    st.subheader(t("help.opensource.title"))
+    st.markdown(t("help.opensource.body"))
+    st.link_button(t("help.opensource.button"), REPO_URL)
+
+
 def _language_selector() -> None:
     languages = list(i18n.available_languages())
     current = st.session_state.get("language", i18n.DEFAULT_LANGUAGE)
@@ -702,9 +749,19 @@ def main() -> None:
     st.sidebar.divider()
     mate_status_banner()
 
-    pages = {"format": t("app.page.format"), "library": t("app.page.library")}
+    pages = {
+        "format": t("app.page.format"),
+        "library": t("app.page.library"),
+        "help": t("app.page.help"),
+    }
+    # Dugme mora doći PRE radija: Streamlit odbija izmenu `session_state` ključa
+    # widgeta koji je već instanciran u istom prolazu.
+    if st.sidebar.button(f"ℹ️ {t('app.page.help')}", width="stretch"):
+        st.session_state["nav"] = "help"
+        st.rerun()
+    st.session_state.setdefault("nav", "format")
     page = st.sidebar.radio(
-        t("app.page"), list(pages), format_func=lambda key: pages[key]
+        t("app.page"), list(pages), key="nav", format_func=lambda key: pages[key]
     )
     _language_selector()
     st.sidebar.divider()
@@ -714,8 +771,10 @@ def main() -> None:
 
     if page == "format":
         page_format(user)
-    else:
+    elif page == "library":
         page_library(user)
+    else:
+        page_help()
 
 
 if __name__ == "__main__":

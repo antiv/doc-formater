@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **A Help page**, reachable from an ℹ️ button in the sidebar as well as from
+  the page list, describing what the application does, how to use it, and — in
+  its own section — exactly what happens to an uploaded document: the thesis is
+  never written to disk and never sent to a language model, only the style
+  guide's text is, and that only to read the rules out of it. When no model is
+  configured the page says so, because then nothing leaves the server at all.
+  It also states that the project is open source under the MIT licence and
+  links to the repository. Translated into all four interface languages.
+
 - **Seventeen bundled rule sets read from real published style guides**, so the
   library is not empty on a fresh install: Belgrade, Novi Sad, Niš, Sarajevo
   (two), Mostar, Banja Luka, Zagreb (two), Split, Rijeka, Podgorica, Skopje,

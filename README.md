@@ -34,6 +34,15 @@ substitution, no `.upper()` — the `UPPERCASE` rule is applied through Word's
 `w:caps` run property, so the heading renders in capitals while the text stays
 untouched.
 
+**Never sends your thesis to a language model.** The thesis is read from the
+upload into memory, formatted on the server and handed straight back; it is
+never written to disk. Only the *style guide* — a public document from your
+faculty — has its text sent to the model, and only so the rules can be read out
+of it. With no model configured, nothing leaves the server at all and a regex
+heuristic reads the guide instead. The only thing kept is a rule set someone
+saves to the library. The in-app **Help** page says all of this to the user, in
+their own language.
+
 **Deletes whitespace only**, and only when the rules ask for it
 (`body.allow_empty_paragraphs: false`): empty paragraphs in the body and
 bibliography, and empty paragraphs carrying a manual page break. It never

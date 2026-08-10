@@ -5,15 +5,12 @@
   "app.page.library": "Biblioteka pravila",
   "app.promise": "Tekst dokumenta se nikad ne prepisuje. Briše se samo prazan prostor, i to samo kad pravila to traže. Slike, tabele i grafikoni ostaju.",
   "app.language": "Jezik",
-
   "mate.heuristic_only": "Ekstrakcija pravila: regex heuristika. Za bolje rezultate poveži LLM agenta (`MATE_BASE_URL`, `MATE_PAT`).",
-
   "source.mate": "LLM agent",
   "source.heuristic": "heuristika",
   "source.manual": "ručno",
   "source.preset": "preset",
   "evidence.page": "str. {page}",
-
   "editor.group": "{group}  ({filled}/{total} popunjeno)",
   "editor.leave_alone": "(ne diraj)",
   "editor.yes": "da",
@@ -31,7 +28,6 @@
   "editor.none": "—",
   "editor.keywords": "structure_profile — ključne reči sekcija",
   "editor.keywords_help": "Ovim se dokument deli na sekcije. Ako `body_start` ne pogodi naslov kojim rad počinje glavni deo, formatiranje staje sa greškom.",
-
   "format.header": "Formatiranje dokumenta",
   "format.thesis": "Rad (.docx)",
   "format.rules_source": "Odakle pravila",
@@ -59,7 +55,6 @@
   "format.run": "Formatiraj",
   "format.failed": "Formatiranje nije uspelo: {error}",
   "format.download": "Preuzmi formatiran .docx",
-
   "extract.identifying": "Prepoznajem instituciju…",
   "extract.institution": "Institucija ({origin}): {name}",
   "extract.institution_unknown": "nije prepoznata",
@@ -68,7 +63,6 @@
   "extract.extracting": "Izvlačim pravila…",
   "extract.done": "Gotovo — izvor: {source}",
   "extract.rejected": "Odbačena pravila čiji citat ne postoji u pravilniku: {fields}",
-
   "save.expander": "Sačuvaj u biblioteku",
   "save.requires_login": "Čuvanje pravila traži prijavu — set mora nekome da pripada. Bez prijave ih možeš preuzeti kao JSON i kasnije uvesti.",
   "save.download_json": "Preuzmi rules.json",
@@ -76,7 +70,6 @@
   "save.name": "Naziv",
   "save.button": "Sačuvaj",
   "save.saved": "Sačuvano: {id}",
-
   "report.style_changes": "Stilske izmene",
   "report.deletions": "Brisanja",
   "report.insertions": "Dodato",
@@ -98,7 +91,6 @@
   "report.no_changes": "Nijedna izmena nije bila potrebna.",
   "report.deleted": "[{index}] obrisano: {detail}",
   "report.inserted": "ubačeno: {detail}",
-
   "library.header": "Biblioteka pravila",
   "library.anonymous": "Biblioteku možeš pregledati i koristiti bez prijave. Za čuvanje i menjanje pravila prijavi se — svaki set pripada onome ko ga je napravio.",
   "library.admin": "Admin: možeš menjati i brisati sve setove.",
@@ -126,7 +118,6 @@
   "library.import_file": "Uvezi rules.json",
   "library.import": "Uvezi",
   "library.imported": "Uvezeno: {id}",
-
   "auth.gate_caption": "Pristup aplikaciji je zaštićen lozinkom.",
   "auth.password": "Lozinka",
   "auth.enter": "Uđi",
@@ -143,11 +134,9 @@
   "auth.perm.owner": "Vlasnik: {owner}.",
   "auth.perm.builtin": "Ugrađeni set.",
   "auth.perm.copy_hint": "{whose} Napravi kopiju da bi ga menjao.",
-
   "error.no_text_layer": "„{filename}” nema tekstualni sloj (pronađeno {chars} karaktera). Verovatno je skeniran. Izaberi set iz biblioteke ili unesi pravila ručno.",
   "error.empty_document": "„{filename}” je prazan ili nečitljiv.",
   "error.unsupported_format": "Nepodržan format pravilnika: „{suffix}”. Podržani su .pdf i .docx.",
-
   "mate.not_configured": "MATE_PAT nije postavljen. Napravi Personal Access Token u dashboardu agenta (korisnik mora imati rolu „admin” ili „developer”) i postavi ga u MATE_PAT.",
   "mate.auth_failed": "Server agenta je odbio autentifikaciju ({status}). Proveri MATE_PAT i da korisnik ima rolu „admin” ili „developer”. Detalj: {detail}",
   "mate.agent_not_exposed": "Agent „{agent}” nije dostupan preko /v1 rute. U dashboardu agent mora imati „expose_as_model” uključeno, biti root agent (bez roditelja) i ne sme biti disabled. Detalj: {detail}",
@@ -158,7 +147,6 @@
   "mate.ready": "Server agenta je dostupan, „{agent}” je spreman.",
   "mate.agent_missing": "Server agenta je dostupan, ali „{agent}” nije na listi izloženih modela ({models}).",
   "mate.models_empty": "lista je prazna",
-
   "pipeline.sending": "Šaljem pravilnik agentu…",
   "pipeline.repairing": "Odgovor nije prošao validaciju — tražim ispravku…",
   "pipeline.falling_back": "Prelazim na regex heuristiku…",
@@ -171,17 +159,46 @@
   "pipeline.invalid_json": "Odgovor nije ispravan JSON: {error}",
   "pipeline.no_json": "Odgovor ne sadrži JSON objekat.",
   "pipeline.failed": "Ekstrakcija nije uspela.",
-
   "structure.body_not_found": "Nije pronađen početak glavnog teksta. Očekivane ključne reči: {keywords}. {hint} Dopuni `structure_profile.section_keywords.body_start` naslovom kojim ovaj dokument počinje glavni deo.",
   "structure.hint_outline": "Dokument koristi Word heading stilove.",
   "structure.hint_no_outline": "Dokument nema nijedan Word heading stil, pa se detekcija oslanja samo na numeraciju naslova.",
-
   "engine.section_missing": "Sekcija {section} nije pronađena u dokumentu. Pravila je očekuju po ključnim rečima ({keywords}), ali je dokument imenuje drugačije. Njen sadržaj je pripisan prethodnoj sekciji i dobija njena pravila — dopuni `structure_profile.section_keywords`.",
   "engine.dry_run_note": "Probni prolaz prikazuje samo brisanja; stilske izmene nisu računate.",
-
   "cleanup.empty_paragraph": "prazan pasus",
   "cleanup.empty_paragraph_with_break": "prazan pasus sa ručnim prelomom strane",
   "cleanup.reason.has_text": "sadrži tekst",
   "cleanup.reason.has_content": "sadrži sliku, polje, fusnotu ili drugi ugrađeni sadržaj",
-  "cleanup.reason.section_properties": "nosi svojstva sekcije (w:sectPr)"
+  "cleanup.reason.section_properties": "nosi svojstva sekcije (w:sectPr)",
+  "app.page.help": "Pomoć",
+  "help.header": "O aplikaciji StyleGuard",
+  "help.intro": "StyleGuard uzima rad koji ste već napisali i usklađuje ga sa pravilnikom vaše institucije. Menja kako dokument izgleda — margine, fontove, prored, naslove — i ništa od onoga što piše.",
+  "help.how.title": "Kako se koristi",
+  "help.how.body": "1. **Otpremite svoj rad** kao `.docx` fajl.\n2. **Recite odakle dolaze pravila** — otpremite pravilnik svog fakulteta kao `.pdf` ili `.docx`, izaberite set iz biblioteke, ili krenite od nekog od priloženih setova za fakultete u regionu.\n3. **Proverite pravila.** Uz svako pravilo stoji odakle potiče i rečenica iz pravilnika iz koje je pročitano. Ispravite ono što nije tačno, a polje ostavite prazno ako pravilnik o tome ne govori.\n4. **Primenite i preuzmite.** Dobijate izveštaj o svakoj izmeni, pa rezultat od sto strana ne morate da uzmete na veru.",
+  "help.privacy.title": "Šta se dešava sa vašim dokumentima",
+  "help.privacy.lead": "Vaš rad se nikada ne čuva i nikada se ne šalje veštačkoj inteligenciji. Model čita samo pravilnik, i to isključivo da bi se iz njega izvukla pravila.",
+  "help.privacy.thesis.title": "Vaš rad",
+  "help.privacy.thesis.body": "- Nikada se ne upisuje na disk — čita se iz otpremanja u memoriju, tamo se formatira i odmah vraća vama.\n- Nikada se ne šalje jezičkom modelu. Formatiranje se u celosti odvija na ovom serveru.\n- Ostaje sačuvano nakon vašeg odlaska: ništa.",
+  "help.privacy.guide.title": "Pravilnik",
+  "help.privacy.guide.body": "- Njegov **tekst** se šalje jezičkom modelu da bi se iz njega pročitala pravila. To je jedino što ikada napušta server.\n- Sam fajl se upisuje u privremeni fajl samo dok se čita — PDF se ne može raščlaniti iz memorije — i briše se odmah zatim.\n- Ostaje sačuvano nakon vašeg odlaska: ništa.",
+  "help.privacy.stored.title": "Šta se čuva",
+  "help.privacy.stored.body": "Samo setovi pravila koje neko izabere da sačuva u biblioteci: veličine fonta, margine, nivoi naslova, naziv institucije i citati iz kojih su pravila pročitana. Nijedan dokument, i nijedan deo ičijeg rada.",
+  "help.privacy.offline": "Na ovoj instanci jezički model nije podešen, pa ništa uopšte ne napušta ovaj server. Pravila se iz pravilnika čitaju heuristikom zasnovanom na obrascima.",
+  "help.invariants.title": "Šta nikada neće uraditi",
+  "help.invariants.body": "- **Prepisati nijedan karakter vašeg teksta.** Nema preimenovanja ni zamena. Naslov koji mora biti velikim slovima prikazuje se velikim slovima kroz Word-ovo svojstvo, pa slova koja ste otkucali ostaju tačno onakva kakva ste ih otkucali.\n- **Ukloniti sliku, tabelu, grafik, fusnotu ili link.** Briše se samo prazan prostor, i to samo kada pravila to traže.\n- **Izmisliti pravilo.** Vrednost koju pravilnik ne propisuje ostaje netaknuta, umesto da se postavi na nešto što deluje razumno.",
+  "help.library.title": "Biblioteka pravila",
+  "help.library.body": "Čitanje pravilnika je spor i nepouzdan korak, pa se radi jednom po instituciji i ponovo koristi. Kada otpremite pravilnik, prvo se prepoznaju univerzitet i fakultet i uporede sa postojećim setovima — ako je vaš prepoznat, biva vam ponuđen umesto nove ekstrakcije. Svako može da koristi i kopira set; menjati ga i brisati može samo njegov vlasnik ili administrator.",
+  "help.faq.title": "Pitanja",
+  "help.faq.q1": "Da li će moj tekst biti izmenjen?",
+  "help.faq.a1": "Neće. Nijedan karakter. Menjaju se samo svojstva formatiranja — veličina, prored, poravnanje i slično. To proveravaju testovi koji upoređuju svaki pasus pre i posle, karakter po karakter.",
+  "help.faq.q2": "Da li veštačka inteligencija čita moj rad?",
+  "help.faq.a2": "Ne. Rad se formatira na ovom serveru i nikuda se ne šalje. Jezički model vidi isključivo tekst pravilnika, koji je javni dokument vašeg fakulteta.",
+  "help.faq.q3": "Šta ako su izvučena pravila pogrešna?",
+  "help.faq.a3": "Svako pravilo vidite pre nego što se bilo šta primeni, zajedno sa rečenicom iz pravilnika iz koje potiče, i možete ga ispraviti. Pravilo čiji se citat ne može naći u pravilniku automatski se odbacuje — to je zaštita od izmišljene vrednosti.",
+  "help.faq.q4": "Moram li da se prijavim?",
+  "help.faq.a4": "Ne. Formatiranje je otvoreno za svakoga. Prijava postoji samo da bi set pravila mogao da ima vlasnika, što sprečava da jedan posetilac menja tuđ rad.",
+  "help.faq.q5": "Polje je prazno. Treba li da ga popunim?",
+  "help.faq.a5": "Samo ako znate šta vaš pravilnik kaže. Prazno polje znači „pravilnik o ovome ćuti\", i to svojstvo ostaje tačno onakvo kakvim ste ga napisali. To nije isto što i nula.",
+  "help.opensource.title": "Otvoreni kod",
+  "help.opensource.body": "StyleGuard je besplatan i otvorenog koda, pod MIT licencom. Možete pročitati svaku njegovu liniju, proveriti tvrdnje sa ove strane u samom kodu, pokrenuti ga na svom serveru ili doprineti ispravkom.",
+  "help.opensource.button": "Pogledajte projekat na GitHub-u"
 }

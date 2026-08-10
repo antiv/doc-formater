@@ -5,15 +5,12 @@
   "app.page.library": "Bibliothèque de règles",
   "app.promise": "Le texte du document n'est jamais réécrit. Seuls les espaces vides sont supprimés, et uniquement si les règles l'exigent. Les images, tableaux et graphiques restent.",
   "app.language": "Langue",
-
   "mate.heuristic_only": "Extraction des règles : heuristique regex. Connectez un agent LLM pour de meilleurs résultats (`MATE_BASE_URL`, `MATE_PAT`).",
-
   "source.mate": "agent LLM",
   "source.heuristic": "heuristique",
   "source.manual": "manuel",
   "source.preset": "préréglage",
   "evidence.page": "p. {page}",
-
   "editor.group": "{group}  ({filled}/{total} définis)",
   "editor.leave_alone": "(ne pas modifier)",
   "editor.yes": "oui",
@@ -31,7 +28,6 @@
   "editor.none": "—",
   "editor.keywords": "structure_profile — mots-clés des sections",
   "editor.keywords_help": "C'est ainsi que le document est découpé en sections. Si `body_start` ne correspond pas au titre par lequel commence la partie principale, le formatage s'arrête avec une erreur.",
-
   "format.header": "Formater un document",
   "format.thesis": "Mémoire (.docx)",
   "format.rules_source": "Origine des règles",
@@ -59,7 +55,6 @@
   "format.run": "Formater",
   "format.failed": "Le formatage a échoué : {error}",
   "format.download": "Télécharger le .docx formaté",
-
   "extract.identifying": "Identification de l'établissement…",
   "extract.institution": "Établissement ({origin}) : {name}",
   "extract.institution_unknown": "non identifié",
@@ -68,7 +63,6 @@
   "extract.extracting": "Extraction des règles…",
   "extract.done": "Terminé — source : {source}",
   "extract.rejected": "Règles écartées car leur citation est absente du guide de style : {fields}",
-
   "save.expander": "Enregistrer dans la bibliothèque",
   "save.requires_login": "Enregistrer des règles exige une connexion — un jeu doit appartenir à quelqu'un. Sans connexion, vous pouvez les télécharger en JSON et les importer plus tard.",
   "save.download_json": "Télécharger rules.json",
@@ -76,7 +70,6 @@
   "save.name": "Nom",
   "save.button": "Enregistrer",
   "save.saved": "Enregistré : {id}",
-
   "report.style_changes": "Modifications de style",
   "report.deletions": "Suppressions",
   "report.insertions": "Ajouts",
@@ -98,7 +91,6 @@
   "report.no_changes": "Aucune modification n'était nécessaire.",
   "report.deleted": "[{index}] supprimé : {detail}",
   "report.inserted": "inséré : {detail}",
-
   "library.header": "Bibliothèque de règles",
   "library.anonymous": "Vous pouvez consulter et utiliser la bibliothèque sans vous connecter. Pour enregistrer ou modifier des règles, connectez-vous — chaque jeu appartient à celui qui l'a créé.",
   "library.admin": "Admin : vous pouvez modifier et supprimer tous les jeux.",
@@ -126,7 +118,6 @@
   "library.import_file": "Importer rules.json",
   "library.import": "Importer",
   "library.imported": "Importé : {id}",
-
   "auth.gate_caption": "L'accès à cette application est protégé par mot de passe.",
   "auth.password": "Mot de passe",
   "auth.enter": "Entrer",
@@ -143,11 +134,9 @@
   "auth.perm.owner": "Propriétaire : {owner}.",
   "auth.perm.builtin": "Jeu intégré.",
   "auth.perm.copy_hint": "{whose} Faites-en une copie pour le modifier.",
-
   "error.no_text_layer": "« {filename} » n'a pas de couche de texte ({chars} caractères trouvés). Il s'agit probablement d'un scan. Choisissez un jeu dans la bibliothèque ou saisissez les règles à la main.",
   "error.empty_document": "« {filename} » est vide ou illisible.",
   "error.unsupported_format": "Format de guide de style non pris en charge : « {suffix} ». Formats acceptés : .pdf et .docx.",
-
   "mate.not_configured": "MATE_PAT n'est pas défini. Créez un Personal Access Token dans le tableau de bord de l'agent (l'utilisateur doit avoir le rôle « admin » ou « developer ») et placez-le dans MATE_PAT.",
   "mate.auth_failed": "Le serveur de l'agent a rejeté l'authentification ({status}). Vérifiez MATE_PAT et que l'utilisateur a le rôle « admin » ou « developer ». Détail : {detail}",
   "mate.agent_not_exposed": "L'agent « {agent} » n'est pas accessible sur la route /v1. Dans le tableau de bord, l'agent doit avoir « expose_as_model » activé, être un agent racine (sans parents) et ne pas être désactivé. Détail : {detail}",
@@ -158,7 +147,6 @@
   "mate.ready": "Serveur de l'agent joignable, « {agent} » est prêt.",
   "mate.agent_missing": "Le serveur de l'agent est joignable, mais « {agent} » ne figure pas parmi les modèles exposés ({models}).",
   "mate.models_empty": "la liste est vide",
-
   "pipeline.sending": "Envoi du guide de style à l'agent…",
   "pipeline.repairing": "La réponse n'a pas passé la validation — demande de correction…",
   "pipeline.falling_back": "Repli sur l'heuristique regex…",
@@ -171,17 +159,46 @@
   "pipeline.invalid_json": "La réponse n'est pas un JSON valide : {error}",
   "pipeline.no_json": "La réponse ne contient aucun objet JSON.",
   "pipeline.failed": "L'extraction a échoué.",
-
   "structure.body_not_found": "Le début du texte principal est introuvable. Mots-clés attendus : {keywords}. {hint} Ajoutez à `structure_profile.section_keywords.body_start` le titre par lequel ce document commence sa partie principale.",
   "structure.hint_outline": "Le document utilise les styles de titre Word.",
   "structure.hint_no_outline": "Le document n'a aucun style de titre Word ; la détection repose donc uniquement sur la numérotation des titres.",
-
   "engine.section_missing": "La section {section} est introuvable dans le document. Les règles l'attendent par mot-clé ({keywords}), mais le document la nomme autrement. Son contenu a été rattaché à la section précédente et suit les règles de celle-ci — complétez `structure_profile.section_keywords`.",
   "engine.dry_run_note": "Une simulation ne rapporte que les suppressions ; les modifications de style ne sont pas comptées.",
-
   "cleanup.empty_paragraph": "paragraphe vide",
   "cleanup.empty_paragraph_with_break": "paragraphe vide avec saut de page manuel",
   "cleanup.reason.has_text": "contient du texte",
   "cleanup.reason.has_content": "contient une image, un champ, une note de bas de page ou un autre contenu incorporé",
-  "cleanup.reason.section_properties": "porte les propriétés de section (w:sectPr)"
+  "cleanup.reason.section_properties": "porte les propriétés de section (w:sectPr)",
+  "app.page.help": "Aide",
+  "help.header": "À propos de StyleGuard",
+  "help.intro": "StyleGuard prend le mémoire que vous avez déjà écrit et le met en conformité avec le guide de style de votre établissement. Il modifie l'apparence du document — marges, polices, interligne, titres — et rien de ce qu'il dit.",
+  "help.how.title": "Comment l'utiliser",
+  "help.how.body": "1. **Téléversez votre mémoire** au format `.docx`.\n2. **Indiquez d'où viennent les règles** — téléversez le guide de style de votre faculté en `.pdf` ou `.docx`, choisissez un jeu dans la bibliothèque, ou partez d'un des jeux fournis pour une université de la région.\n3. **Vérifiez les règles.** Chaque règle indique son origine et la phrase du guide dont elle est tirée. Corrigez ce qui est faux et laissez un champ vide si le guide n'en dit rien.\n4. **Appliquez et téléchargez.** Vous recevez un rapport de chaque modification : un résultat de cent pages ne se prend pas sur parole.",
+  "help.privacy.title": "Ce qu'il advient de vos documents",
+  "help.privacy.lead": "Votre mémoire n'est jamais conservé et n'est jamais envoyé à une IA. Seul le guide de style est lu par un modèle de langage, et uniquement pour en extraire les règles.",
+  "help.privacy.thesis.title": "Votre mémoire",
+  "help.privacy.thesis.body": "- Jamais écrit sur le disque — il est lu du téléversement vers la mémoire vive, mis en forme là, puis rendu directement.\n- Jamais envoyé à un modèle de langage. La mise en forme se fait entièrement sur ce serveur.\n- Conservé après votre départ : rien.",
+  "help.privacy.guide.title": "Le guide de style",
+  "help.privacy.guide.body": "- Son **texte** est envoyé au modèle de langage afin d'en extraire les règles. C'est la seule chose qui quitte le serveur.\n- Le fichier lui-même n'est écrit dans un fichier temporaire que le temps de sa lecture — un PDF ne peut pas être analysé depuis la mémoire — et supprimé aussitôt après.\n- Conservé après votre départ : rien.",
+  "help.privacy.stored.title": "Ce qui est conservé",
+  "help.privacy.stored.body": "Uniquement les jeux de règles que quelqu'un choisit d'enregistrer dans la bibliothèque : tailles de police, marges, niveaux de titre, nom de l'établissement, et les citations dont les règles sont tirées. Aucun document, et aucune partie du mémoire de qui que ce soit.",
+  "help.privacy.offline": "Sur cette instance, aucun modèle de langage n'est configuré : rien ne quitte donc ce serveur. Les règles sont lues dans le guide par une heuristique fondée sur des motifs.",
+  "help.invariants.title": "Ce qu'il ne fera jamais",
+  "help.invariants.body": "- **Réécrire un seul caractère de votre texte.** Aucun renommage, aucune substitution. Un titre qui doit être en capitales est rendu en capitales par une propriété Word : les lettres que vous avez tapées restent exactement telles quelles.\n- **Supprimer une image, un tableau, un graphique, une note de bas de page ou un lien.** Seuls les espaces vides sont supprimés, et seulement si les règles le demandent.\n- **Inventer une règle.** Une valeur que le guide ne prescrit pas est laissée telle quelle plutôt que fixée à quelque chose de plausible.",
+  "help.library.title": "La bibliothèque de règles",
+  "help.library.body": "Lire un guide de style est l'étape lente et faillible : elle est donc faite une fois par établissement, puis réutilisée. Quand vous téléversez un guide, l'université et la faculté sont d'abord identifiées et comparées aux jeux existants — si le vôtre est reconnu, il vous est proposé plutôt que de tout réextraire. Chacun peut utiliser et copier un jeu ; seul son propriétaire, ou un administrateur, peut le modifier ou le supprimer.",
+  "help.faq.title": "Questions",
+  "help.faq.q1": "Mon texte sera-t-il modifié ?",
+  "help.faq.a1": "Non. Pas un caractère. Seules les propriétés de mise en forme changent — taille, interligne, alignement, etc. Des tests le vérifient en comparant chaque paragraphe avant et après, caractère par caractère.",
+  "help.faq.q2": "Une IA lit-elle mon mémoire ?",
+  "help.faq.a2": "Non. Le mémoire est mis en forme sur ce serveur et n'est envoyé nulle part. Le modèle de langage ne voit que le texte du guide de style, qui est un document public de votre faculté.",
+  "help.faq.q3": "Et si les règles extraites sont fausses ?",
+  "help.faq.a3": "Vous voyez chaque règle avant toute application, accompagnée de la phrase du guide dont elle provient, et vous pouvez la corriger. Une règle dont la citation est introuvable dans le guide est écartée automatiquement : c'est la protection contre une valeur inventée.",
+  "help.faq.q4": "Dois-je me connecter ?",
+  "help.faq.a4": "Non. La mise en forme est ouverte à tous. La connexion n'existe que pour qu'un jeu de règles ait un propriétaire, ce qui empêche un visiteur de modifier le travail d'un autre.",
+  "help.faq.q5": "Un champ est vide. Dois-je le remplir ?",
+  "help.faq.a5": "Seulement si vous savez ce que dit votre guide. Un champ vide signifie « le guide n'en dit rien » : cette propriété restera exactement telle que vous l'avez écrite. Ce n'est pas la même chose que zéro.",
+  "help.opensource.title": "Logiciel libre",
+  "help.opensource.body": "StyleGuard est libre et open source sous licence MIT. Vous pouvez en lire chaque ligne, vérifier dans le code les affirmations de cette page, l'héberger sur votre propre serveur ou proposer un correctif.",
+  "help.opensource.button": "Voir le projet sur GitHub"
 }
