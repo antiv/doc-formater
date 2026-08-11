@@ -201,5 +201,9 @@
   "help.opensource.button": "Pogledajte projekat na GitHub-u",
   "help.close": "Zatvori pomoć",
   "library.bundled": "priložen",
-  "library.bundled_hint": "Isporučen uz aplikaciju i pročitan iz objavljenog pravilnika. Ovde se ne može menjati ni brisati — kopirajte ga da biste dobili svoju verziju."
+  "library.bundled_hint": "Isporučen uz aplikaciju i pročitan iz objavljenog pravilnika. Ovde se ne može menjati ni brisati — kopirajte ga da biste dobili svoju verziju.",
+  "library.search": "Pretraga",
+  "library.search_placeholder": "Fakultet, grad ili univerzitet — npr. „nis elektronski”",
+  "library.no_match": "Ništa ne odgovara upitu „{query}”. Probaj naziv fakulteta ili grada.",
+  "library.match_count": "{shown} od {total} setova"
 }

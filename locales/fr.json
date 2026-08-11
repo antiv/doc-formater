@@ -201,5 +201,9 @@
   "help.opensource.button": "Voir le projet sur GitHub",
   "help.close": "Fermer l'aide",
   "library.bundled": "fourni",
-  "library.bundled_hint": "Fourni avec l'application et lu dans un guide de style publié. Il ne peut être ni modifié ni supprimé ici — copiez-le pour en avoir une version à vous."
+  "library.bundled_hint": "Fourni avec l'application et lu dans un guide de style publié. Il ne peut être ni modifié ni supprimé ici — copiez-le pour en avoir une version à vous.",
+  "library.search": "Recherche",
+  "library.search_placeholder": "Faculté, ville ou université — p. ex. « nis elektronski »",
+  "library.no_match": "Rien ne correspond à « {query} ». Essayez la faculté ou la ville.",
+  "library.match_count": "{shown} jeux sur {total}"
 }

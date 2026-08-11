@@ -201,5 +201,9 @@
   "help.opensource.button": "View the project on GitHub",
   "help.close": "Close help",
   "library.bundled": "bundled",
-  "library.bundled_hint": "Shipped with the application and read from a published style guide. It cannot be edited or deleted here — copy it to make a version of your own."
+  "library.bundled_hint": "Shipped with the application and read from a published style guide. It cannot be edited or deleted here — copy it to make a version of your own.",
+  "library.search": "Search",
+  "library.search_placeholder": "Faculty, city or university — e.g. “nis elektronski”",
+  "library.no_match": "Nothing matches “{query}”. Try the faculty or the city.",
+  "library.match_count": "{shown} of {total} sets"
 }

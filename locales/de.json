@@ -201,5 +201,9 @@
   "help.opensource.button": "Projekt auf GitHub ansehen",
   "help.close": "Hilfe schließen",
   "library.bundled": "mitgeliefert",
-  "library.bundled_hint": "Wird mit der Anwendung ausgeliefert und stammt aus einem veröffentlichten Style Guide. Hier nicht änderbar oder löschbar — kopieren Sie ihn für eine eigene Fassung."
+  "library.bundled_hint": "Wird mit der Anwendung ausgeliefert und stammt aus einem veröffentlichten Style Guide. Hier nicht änderbar oder löschbar — kopieren Sie ihn für eine eigene Fassung.",
+  "library.search": "Suche",
+  "library.search_placeholder": "Fakultät, Stadt oder Hochschule — z. B. „nis elektronski“",
+  "library.no_match": "Nichts passt zu „{query}“. Versuchen Sie die Fakultät oder die Stadt.",
+  "library.match_count": "{shown} von {total} Sätzen"
 }

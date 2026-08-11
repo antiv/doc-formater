@@ -27,6 +27,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the same `verify_quote` guard the LLM extraction uses, and every one is an
   exact substring. Fields the guides do not prescribe are left `null` rather
   than filled with a plausible default.
+- **Search over the rule sets**, on both the format page and the library. It
+  folds diacritics, transliterates Cyrillic so a Latin query finds a Macedonian
+  set, and tolerates the case endings this region inflects names with — "rijeka"
+  finds "Sveučilište u Rijeci". Results are ranked by how many words matched
+  rather than filtered on all of them, so typing more never empties the list.
+- `tests/test_search.py` — the cases that fail silently: Cyrillic, diacritics,
+  inflection, ranking, and an assertion that every bundled set is reachable by
+  its own faculty name.
 - `tests/test_presets.py` — presets must load, resolve by both filename and
   `meta.id`, name an identifiable institution, agree with themselves about
   language, and attach every quote to a field that exists and is actually set.

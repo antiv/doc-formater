@@ -23,6 +23,7 @@ from styleguard.extract.pipeline import extract_rule_set, identify_institution
 from styleguard.extract.source import NoTextLayerError, read_rules_document
 from styleguard.formatting.engine import FormatOptions, format_document
 from styleguard.library import RuleLibrary, suggest_display_name
+from styleguard.search import search as search_rule_sets
 from styleguard.rules import (
     Casing,
     Evidence,
@@ -62,6 +63,32 @@ def load_presets() -> list[RuleSet]:
         except Exception:
             continue
     return out
+
+
+def pick_rule_set(sets, bundled_ids, *, key: str, label: str) -> RuleSet | None:
+    """Izbor seta uz pretragu.
+
+    Sa dvadesetak setova padajuća lista prestaje da bude izbor i postaje
+    pretraživanje očima. Pretraga gleda naziv, id i instituciju, podnosi
+    dijakritiku i padeže, i preslovljava ćirilicu -- „skopje" nalazi „Скопје".
+    """
+    query = st.text_input(
+        t("library.search"),
+        key=f"{key}:query",
+        placeholder=t("library.search_placeholder"),
+    )
+    found = search_rule_sets(sets, query)
+    if not found:
+        st.warning(t("library.no_match", query=query))
+        return None
+    if query.strip():
+        st.caption(t("library.match_count", shown=len(found), total=len(sets)))
+
+    def label_of(rule_set: RuleSet) -> str:
+        mark = f" · {t('library.bundled')}" if rule_set.meta.id in bundled_ids else ""
+        return f"{rule_set.meta.display_name}  ({rule_set.meta.id}){mark}"
+
+    return st.selectbox(label, found, format_func=label_of, key=f"{key}:choice")
 
 
 def mate_client() -> MateClient | None:
@@ -330,12 +357,10 @@ def page_format(user) -> None:
         if not available:
             st.info(t("format.library_empty"))
         else:
-            def label(rs: RuleSet) -> str:
-                mark = f" · {t('library.bundled')}" if rs.meta.id in bundled_ids else ""
-                return f"{rs.meta.display_name}  ({rs.meta.id}){mark}"
-
-            chosen = st.selectbox(t("format.set"), available, format_func=label)
-            if st.button(t("format.load"), type="primary"):
+            chosen = pick_rule_set(
+                available, bundled_ids, key="format", label=t("format.set")
+            )
+            if chosen is not None and st.button(t("format.load"), type="primary"):
                 # Priložen set se kopira, ne učitava: izmene u editoru ne smeju
                 # da završe u fajlu koji je deo isporuke.
                 rule_set = (
@@ -589,10 +614,10 @@ def page_library(user) -> None:
             hide_index=True,
         )
 
-        chosen = st.selectbox(
-            t("library.set"), sets,
-            format_func=lambda rs: f"{rs.meta.display_name}  ({rs.meta.id})",
-        )
+        chosen = pick_rule_set(sets, bundled_ids, key="library", label=t("library.set"))
+        if chosen is None:
+            return
+
         # Preset je fajl isporučen uz aplikaciju, ne podatak instance: izmena bi
         # nestala pri sledećem redeployu, a brisanje bi se vratilo. Kopija je
         # jedini put koji vodi negde, pa je jedina ponuđena.
