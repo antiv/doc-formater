@@ -200,5 +200,8 @@
   "help.faq.a5": "Seulement si vous savez ce que dit votre guide. Un champ vide signifie « le guide n'en dit rien » : cette propriété restera exactement telle que vous l'avez écrite. Ce n'est pas la même chose que zéro.",
   "help.opensource.title": "Logiciel libre",
   "help.opensource.body": "StyleGuard est libre et open source sous licence MIT. Vous pouvez en lire chaque ligne, vérifier dans le code les affirmations de cette page, l'héberger sur votre propre serveur ou proposer un correctif.",
-  "help.opensource.button": "Voir le projet sur GitHub"
+  "help.opensource.button": "Voir le projet sur GitHub",
+  "help.close": "Fermer l'aide",
+  "library.bundled": "fourni",
+  "library.bundled_hint": "Fourni avec l'application et lu dans un guide de style publié. Il ne peut être ni modifié ni supprimé ici — copiez-le pour en avoir une version à vous."
 }

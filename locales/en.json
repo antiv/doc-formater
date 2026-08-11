@@ -200,5 +200,8 @@
   "help.faq.a5": "Only if you know what your guide says. An empty field means \"the style guide is silent about this\", and that property will be left exactly as you wrote it. That is not the same as zero.",
   "help.opensource.title": "Open source",
   "help.opensource.body": "StyleGuard is free and open source under the MIT licence. You can read every line of it, check the claims on this page against the code, run it on your own server, or contribute a fix.",
-  "help.opensource.button": "View the project on GitHub"
+  "help.opensource.button": "View the project on GitHub",
+  "help.close": "Close help",
+  "library.bundled": "bundled",
+  "library.bundled_hint": "Shipped with the application and read from a published style guide. It cannot be edited or deleted here — copy it to make a version of your own."
 }

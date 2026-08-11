@@ -31,6 +31,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `meta.id`, name an identifiable institution, agree with themselves about
   language, and attach every quote to a field that exists and is actually set.
 
+### Fixed
+
+- **The bundled rule sets were invisible in the rule library.** The library page
+  listed only `rules_library/`, so a fresh install appeared to ship exactly one
+  set while seventeen more sat one page away, reachable only by choosing
+  "Preset" as the rule source. They are now listed together, marked `bundled`;
+  they cannot be edited or deleted there — that would not survive a redeploy —
+  but they can be copied, which is how they become yours.
+- **The Help page had no way back.** It now carries a ✕ in the top right, which
+  returns to whichever page you came from.
+- **The Help button was coloured the wrong way round.** Its `type` was computed
+  from the state before the click, and no rerun followed, so it turned red
+  exactly when help was *closed*. The button no longer changes colour; the ✕
+  says what the state is.
+
 ### Changed
 
 - **Renamed from Doc Formatter to StyleGuard**, repository `doc-formater` to

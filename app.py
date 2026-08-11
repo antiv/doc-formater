@@ -550,7 +550,15 @@ def page_library(user) -> None:
     elif user.is_admin:
         st.caption(t("library.admin"))
 
-    sets = library.list()
+    # Priloženi preseti se prikazuju ovde zajedno sa snimljenim setovima. Bez
+    # toga su nevidljivi: biblioteka je prvo mesto na kome ih korisnik traži, a
+    # oni su dotad postojali samo kao izvor pravila na strani za formatiranje.
+    saved = library.list()
+    saved_ids = {rs.meta.id for rs in saved}
+    bundled = [p for p in load_presets() if p.meta.id not in saved_ids]
+    bundled_ids = {p.meta.id for p in bundled}
+    sets = saved + bundled
+
     if not sets:
         st.info(t("library.empty"))
     else:
@@ -559,7 +567,9 @@ def page_library(user) -> None:
                 {
                     t("library.col.name"): rs.meta.display_name,
                     t("library.col.owner"): (
-                        rs.meta.owner_name or rs.meta.owner or t("library.builtin")
+                        t("library.bundled")
+                        if rs.meta.id in bundled_ids
+                        else rs.meta.owner_name or rs.meta.owner or t("library.builtin")
                     ),
                     t("library.col.university"): rs.meta.institution.university or "—",
                     t("library.col.faculty"): rs.meta.institution.faculty or "—",
@@ -576,8 +586,16 @@ def page_library(user) -> None:
             t("library.set"), sets,
             format_func=lambda rs: f"{rs.meta.display_name}  ({rs.meta.id})",
         )
-        may_edit = identity.can_edit(chosen, user)
-        st.caption(identity.describe_permission(chosen, user))
+        # Preset je fajl isporučen uz aplikaciju, ne podatak instance: izmena bi
+        # nestala pri sledećem redeployu, a brisanje bi se vratilo. Kopija je
+        # jedini put koji vodi negde, pa je jedina ponuđena.
+        is_bundled = chosen.meta.id in bundled_ids
+        may_edit = identity.can_edit(chosen, user) and not is_bundled
+        st.caption(
+            t("library.bundled_hint")
+            if is_bundled
+            else identity.describe_permission(chosen, user)
+        )
 
         columns = st.columns(4)
         if columns[0].button(t("library.edit"), width='stretch', disabled=not may_edit):
@@ -587,7 +605,7 @@ def page_library(user) -> None:
         if columns[1].button(
             t("library.copy"), width='stretch', disabled=not identity.can_create(user)
         ):
-            copy = library.duplicate(chosen.meta.id)
+            copy = library.duplicate_of(chosen)
             copy.meta.owner = user.email
             copy.meta.owner_name = user.name
             library.save(copy)
@@ -683,7 +701,13 @@ def page_help() -> None:
     pravi fajl, pa se briše u `finally` (`temp_upload`). Na model odlazi tekst
     pravilnika, nikad tekst rada.
     """
-    st.header(t("help.header"))
+    heading, closer = st.columns([12, 1])
+    heading.header(t("help.header"))
+    # `st.rerun()` je ovde bezbedan: radio je već renderovan u `main()`, pa mu
+    # stanje preživljava. Isti poziv pre radija ga je ranije brisao.
+    if closer.button("✕", key="help_close", help=t("help.close")):
+        st.session_state["help_open"] = False
+        st.rerun()
     st.write(t("help.intro"))
 
     st.subheader(t("help.how.title"))
@@ -756,20 +780,16 @@ def main() -> None:
     def close_help() -> None:
         st.session_state["help_open"] = False
 
-    # Dugme je prekidač, ne prečica. `on_change` radija zatvara pomoć samo kad
-    # se izbor stvarno promeni, pa bi bez prekidača korisnik koji je na
-    # biblioteci, otvori pomoć i klikne „biblioteka" ostao zaglavljen.
+    # Dugme samo otvara; zatvara se sa ✕ na samoj strani ili izborom druge
+    # strane. Boja se namerno ne menja: `type` bi se računao iz stanja pre
+    # prekidanja, a pošto ovde nema rerun-a, dugme bi bilo crveno tačno onda kad
+    # je pomoć zatvorena -- obrnuto od onoga što bi boja trebalo da znači.
     #
     # Bez `st.rerun()` ovde. Klik ionako pokreće nov prolaz, a rerun pre radija
     # bi odbacio stanje widgeta koji u tom prolazu nije stigao da se renderuje
     # -- `nav` bi nestao i izbor strane bi se vratio na početak.
-    if st.sidebar.button(
-        f"ℹ️ {t('app.page.help')}",
-        key="help_button",
-        width="stretch",
-        type="primary" if st.session_state.get("help_open") else "secondary",
-    ):
-        st.session_state["help_open"] = not st.session_state.get("help_open", False)
+    if st.sidebar.button(f"ℹ️ {t('app.page.help')}", key="help_button", width="stretch"):
+        st.session_state["help_open"] = True
     help_open = st.session_state.get("help_open", False)
 
     page = st.sidebar.radio(

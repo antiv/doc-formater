@@ -200,5 +200,8 @@
   "help.faq.a5": "Nur wenn Sie wissen, was Ihr Style Guide sagt. Ein leeres Feld bedeutet „der Style Guide sagt dazu nichts“, und diese Eigenschaft bleibt genau so, wie Sie sie geschrieben haben. Das ist nicht dasselbe wie null.",
   "help.opensource.title": "Open Source",
   "help.opensource.body": "StyleGuard ist frei und quelloffen unter der MIT-Lizenz. Sie können jede Zeile lesen, die Aussagen auf dieser Seite im Code überprüfen, es auf Ihrem eigenen Server betreiben oder eine Korrektur beisteuern.",
-  "help.opensource.button": "Projekt auf GitHub ansehen"
+  "help.opensource.button": "Projekt auf GitHub ansehen",
+  "help.close": "Hilfe schließen",
+  "library.bundled": "mitgeliefert",
+  "library.bundled_hint": "Wird mit der Anwendung ausgeliefert und stammt aus einem veröffentlichten Style Guide. Hier nicht änderbar oder löschbar — kopieren Sie ihn für eine eigene Fassung."
 }

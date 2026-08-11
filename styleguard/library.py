@@ -122,7 +122,16 @@ class RuleLibrary:
 
     def duplicate(self, rule_set_id: str, new_name: str | None = None) -> RuleSet:
         """Nezavisna kopija -- za "isti fakultet, drugi tip rada"."""
-        original = self.load(rule_set_id)
+        return self.duplicate_of(self.load(rule_set_id), new_name)
+
+    def duplicate_of(self, original: RuleSet, new_name: str | None = None) -> RuleSet:
+        """Kopija seta koji ne mora biti u biblioteci.
+
+        Priloženi preseti žive u `presets/` i nisu podaci instance, pa se ne
+        mogu učitati po `id`-u odavde. Kopiranje je jedini način da ih korisnik
+        prisvoji, pa mora da radi i nad objektom koji biblioteka nikad nije
+        videla.
+        """
         copy = original.model_copy(deep=True)
         copy.meta.display_name = new_name or f"{original.meta.display_name} (kopija)"
         copy.meta.id = self.unique_id(copy.meta.display_name)

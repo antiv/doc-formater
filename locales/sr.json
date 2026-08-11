@@ -200,5 +200,8 @@
   "help.faq.a5": "Samo ako znate šta vaš pravilnik kaže. Prazno polje znači „pravilnik o ovome ćuti\", i to svojstvo ostaje tačno onakvo kakvim ste ga napisali. To nije isto što i nula.",
   "help.opensource.title": "Otvoreni kod",
   "help.opensource.body": "StyleGuard je besplatan i otvorenog koda, pod MIT licencom. Možete pročitati svaku njegovu liniju, proveriti tvrdnje sa ove strane u samom kodu, pokrenuti ga na svom serveru ili doprineti ispravkom.",
-  "help.opensource.button": "Pogledajte projekat na GitHub-u"
+  "help.opensource.button": "Pogledajte projekat na GitHub-u",
+  "help.close": "Zatvori pomoć",
+  "library.bundled": "priložen",
+  "library.bundled_hint": "Isporučen uz aplikaciju i pročitan iz objavljenog pravilnika. Ovde se ne može menjati ni brisati — kopirajte ga da biste dobili svoju verziju."
 }
