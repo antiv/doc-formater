@@ -39,6 +39,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   "Preset" as the rule source. They are now listed together, marked `bundled`;
   they cannot be edited or deleted there — that would not survive a redeploy —
   but they can be copied, which is how they become yours.
+- **"From the library" and "Preset" were two doors to the same room.** The
+  distinction was which directory the file sits in, which is a delivery detail:
+  someone who picked "From the library", saw one set, and concluded there was
+  nothing for their faculty had seventeen more one radio button away. There is
+  now a single "From the library" listing both, bundled ones marked as such.
 - **The Help page had no way back.** It now carries a ✕ in the top right, which
   returns to whichever page you came from.
 - **The Help button was coloured the wrong way round.** Its `type` was computed

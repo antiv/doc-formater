@@ -294,12 +294,20 @@ def page_format(user) -> None:
     document_file = st.file_uploader(t("format.thesis"), type=["docx"], key="doc")
 
     st.subheader(t("format.rules_source"))
-    presets = load_presets()
+    # Jedna lista gotovih setova, ne dve. Odakle fajl dolazi -- `rules_library/`
+    # ili `presets/` -- je detalj isporuke; korisnik pita samo da li pravila za
+    # njegov fakultet već postoje. Razdvojeno je značilo da ko klikne
+    # „iz biblioteke" i vidi prazno zaključi da nema ničega, a osamnaest setova
+    # stoji jedan radio-taster dalje.
     saved = library.list()
+    saved_ids = {rs.meta.id for rs in saved}
+    bundled = [p for p in load_presets() if p.meta.id not in saved_ids]
+    bundled_ids = {p.meta.id for p in bundled}
+    available = saved + bundled
+
     sources = {
         "upload": t("format.source.upload"),
         "library": t("format.source.library"),
-        "preset": t("format.source.preset"),
         "json": t("format.source.json"),
     }
     source = st.radio(
@@ -319,24 +327,23 @@ def page_format(user) -> None:
             st.session_state["rule_set"] = rule_set
 
     elif source == "library":
-        if not saved:
+        if not available:
             st.info(t("format.library_empty"))
         else:
-            chosen = st.selectbox(
-                t("format.set"), saved,
-                format_func=lambda rs: f"{rs.meta.display_name}  ({rs.meta.id})",
-            )
-            if st.button(t("format.load"), type="primary"):
-                rule_set = library.load(chosen.meta.id)
-                st.session_state["rule_set"] = rule_set
+            def label(rs: RuleSet) -> str:
+                mark = f" · {t('library.bundled')}" if rs.meta.id in bundled_ids else ""
+                return f"{rs.meta.display_name}  ({rs.meta.id}){mark}"
 
-    elif source == "preset":
-        chosen = st.selectbox(
-            t("format.preset"), presets, format_func=lambda rs: rs.meta.display_name
-        )
-        if st.button(t("format.load"), type="primary"):
-            rule_set = chosen.model_copy(deep=True)
-            st.session_state["rule_set"] = rule_set
+            chosen = st.selectbox(t("format.set"), available, format_func=label)
+            if st.button(t("format.load"), type="primary"):
+                # Priložen set se kopira, ne učitava: izmene u editoru ne smeju
+                # da završe u fajlu koji je deo isporuke.
+                rule_set = (
+                    chosen.model_copy(deep=True)
+                    if chosen.meta.id in bundled_ids
+                    else library.load(chosen.meta.id)
+                )
+                st.session_state["rule_set"] = rule_set
 
     else:
         json_file = st.file_uploader("rules.json", type=["json"], key="rules_json")
