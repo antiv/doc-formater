@@ -14,7 +14,8 @@ import unicodedata
 from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
-from typing import Any, Literal, get_args
+import types
+from typing import Any, Literal, Union, get_args, get_origin
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -38,7 +39,7 @@ class CaptionPosition(str, Enum):
 
 
 class _Model(BaseModel):
-    model_config = ConfigDict(extra="ignore", use_enum_values=False)
+    model_config = ConfigDict(extra="ignore", use_enum_values=False, validate_assignment=True)
 
 
 # --------------------------------------------------------------------------
@@ -301,6 +302,60 @@ def _is_model_list(model_type: type[BaseModel], field_name: str) -> bool:
     )
 
 
+def field_type_for_path(model: BaseModel, path: str) -> type | None:
+    """Osnovni tip polja na datoj putanji (float, bool, str, Enum, list...), ili None.
+
+    Čita se iz anotacije modela, tako da radi i kada je trenutna vrednost None.
+    """
+    parts = path.split(".")
+    current: type[BaseModel] = type(model)
+    for part in parts[:-1]:
+        field = current.model_fields.get(part)
+        if field is None:
+            return None
+        candidates = [field.annotation, *get_args(field.annotation)]
+        submodel = next(
+            (
+                c for c in candidates
+                if isinstance(c, type) and c is not type(None) and issubclass(c, BaseModel)
+            ),
+            None,
+        )
+        if submodel is None:
+            return None
+        current = submodel
+
+    field = current.model_fields.get(parts[-1])
+    if field is None:
+        return None
+
+    raw = field.annotation
+    union_types = (Union, getattr(types, "UnionType", None))
+    union_types = tuple(u for u in union_types if u is not None)
+
+    origin = get_origin(raw)
+    if origin is not None and origin not in union_types:
+        return origin if isinstance(origin, type) else type(origin)
+
+    args = get_args(raw)
+    type_candidates = list(args) if args else [raw]
+
+    for candidate in type_candidates:
+        if candidate is type(None):
+            continue
+        cand_origin = get_origin(candidate)
+        if cand_origin is not None and cand_origin not in union_types and isinstance(cand_origin, type):
+            return cand_origin
+        if isinstance(candidate, type):
+            try:
+                if issubclass(candidate, type(None)):
+                    continue
+            except TypeError:
+                pass
+            return candidate
+    return None
+
+
 def enum_type_for_path(model: BaseModel, path: str) -> type[Enum] | None:
     """Enum tip polja na datoj putanji, ili None.
 
@@ -308,21 +363,9 @@ def enum_type_for_path(model: BaseModel, path: str) -> type[Enum] | None:
     (jer ga pravilnik ne propisuje) i dalje mora da se prikaže kao izbor, a ne
     kao slobodan tekst -- inače se enum vrati kao string i validacija pukne.
     """
-    parts = path.split(".")
-    current: type[BaseModel] = type(model)
-    for part in parts[:-1]:
-        field = current.model_fields.get(part)
-        if field is None or not isinstance(field.annotation, type):
-            return None
-        current = field.annotation  # type: ignore[assignment]
-
-    field = current.model_fields.get(parts[-1])
-    if field is None:
-        return None
-    candidates = [field.annotation, *get_args(field.annotation)]
-    for candidate in candidates:
-        if isinstance(candidate, type) and issubclass(candidate, Enum):
-            return candidate
+    ftype = field_type_for_path(model, path)
+    if ftype is not None and isinstance(ftype, type) and issubclass(ftype, Enum):
+        return ftype
     return None
 
 

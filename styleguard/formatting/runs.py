@@ -130,7 +130,7 @@ def apply_run_format(
 
     if size_pt is not None:
         record("font.size_pt", _pt_value(run.font.size), round(float(size_pt), 2))
-        run.font.size = Pt(size_pt)
+        run.font.size = Pt(float(size_pt))
 
     if bold is not None:
         record("font.bold", run.font.bold, bold)
@@ -187,24 +187,24 @@ def apply_paragraph_format(
 
     if space_before_pt is not None:
         record("paragraph.space_before_pt", _pt_value(fmt.space_before), round(float(space_before_pt), 2))
-        fmt.space_before = Pt(space_before_pt)
+        fmt.space_before = Pt(float(space_before_pt))
 
     if space_after_pt is not None:
         record("paragraph.space_after_pt", _pt_value(fmt.space_after), round(float(space_after_pt), 2))
-        fmt.space_after = Pt(space_after_pt)
+        fmt.space_after = Pt(float(space_after_pt))
 
     if first_line_indent_cm is not None:
         record("paragraph.first_line_indent_cm", _cm_value(fmt.first_line_indent), round(float(first_line_indent_cm), 3))
-        fmt.first_line_indent = Cm(first_line_indent_cm)
+        fmt.first_line_indent = Cm(float(first_line_indent_cm))
 
     if hanging_indent_cm is not None:
         # Viseći uvlak: levi uvlak pomeren udesno, prvi red vraćen ulevo.
         record("paragraph.left_indent_cm", _cm_value(fmt.left_indent), round(float(hanging_indent_cm), 3))
-        fmt.left_indent = Cm(hanging_indent_cm)
-        fmt.first_line_indent = Cm(-hanging_indent_cm)
+        fmt.left_indent = Cm(float(hanging_indent_cm))
+        fmt.first_line_indent = Cm(float(-hanging_indent_cm))
     elif left_indent_cm is not None:
         record("paragraph.left_indent_cm", _cm_value(fmt.left_indent), round(float(left_indent_cm), 3))
-        fmt.left_indent = Cm(left_indent_cm)
+        fmt.left_indent = Cm(float(left_indent_cm))
 
     if page_break_before is not None:
         record("paragraph.page_break_before", fmt.page_break_before, page_break_before)

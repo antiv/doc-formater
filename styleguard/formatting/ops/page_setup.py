@@ -56,7 +56,7 @@ def apply(document: DocxDocument, infos, rules: FormattingRules) -> list[Change]
 
 
 def _cm(value: float | None):
-    return Cm(value) if value is not None else None
+    return Cm(float(value)) if value is not None else None
 
 
 def _read_cm(section, attribute: str) -> float | None:

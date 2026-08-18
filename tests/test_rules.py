@@ -13,6 +13,7 @@ from styleguard.rules import (
     RuleSet,
     RuleSetMeta,
     enum_type_for_path,
+    field_type_for_path,
     get_by_path,
     iter_field_paths,
     load_rule_set,
@@ -111,6 +112,32 @@ class SlugifyTest(unittest.TestCase):
 
     def test_empty_input_has_a_fallback(self) -> None:
         self.assertEqual("rule-set", slugify("!!!"))
+
+
+class FieldTypeTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.rules = load_rule_set(AMEU_PRESET).rules
+
+    def test_margin_fields_are_detected_as_float(self) -> None:
+        self.assertIs(float, field_type_for_path(self.rules, "page_setup.margins_cm.top"))
+        self.assertIs(float, field_type_for_path(self.rules, "page_setup.margins_cm.bottom"))
+        self.assertIs(float, field_type_for_path(self.rules, "page_setup.margins_cm.inside"))
+        self.assertIs(float, field_type_for_path(self.rules, "page_setup.margins_cm.outside"))
+
+    def test_other_types_are_detected(self) -> None:
+        self.assertIs(float, field_type_for_path(self.rules, "body.size_pt"))
+        self.assertIs(bool, field_type_for_path(self.rules, "page_setup.mirror_margins"))
+        self.assertIs(Alignment, field_type_for_path(self.rules, "body.alignment"))
+        self.assertIs(list, field_type_for_path(self.rules, "typography.fallback_fonts"))
+        self.assertIs(str, field_type_for_path(self.rules, "typography.font_family"))
+
+
+class AssignmentValidationTest(unittest.TestCase):
+    def test_string_number_coerced_on_assignment(self) -> None:
+        rules = FormattingRules()
+        set_by_path(rules, "page_setup.margins_cm.top", "2.5")
+        self.assertEqual(2.5, rules.page_setup.margins_cm.top)
+        self.assertIsInstance(rules.page_setup.margins_cm.top, float)
 
 
 class SerializationTest(unittest.TestCase):

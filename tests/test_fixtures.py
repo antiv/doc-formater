@@ -146,5 +146,18 @@ class NumberedHeadingsTest(unittest.TestCase):
         self.assertEqual(Role.BODY_TEXT, roles["2. Da li je to dovoljno?"])
 
 
+class MarginsFormattingTest(unittest.TestCase):
+    def test_margins_applied_without_string_multiplication_error(self) -> None:
+        rule_set = load_rule_set(AMEU_PRESET)
+        rule_set.rules.page_setup.margins_cm.top = 2.5
+        rule_set.rules.page_setup.margins_cm.bottom = 2.5
+        rule_set.rules.page_setup.margins_cm.inside = 2.5
+        rule_set.rules.page_setup.margins_cm.outside = 2.5
+
+        source = build_rich_document()
+        result = format_document(io.BytesIO(source), rule_set)
+        self.assertIsNotNone(result.to_bytes())
+
+
 if __name__ == "__main__":
     unittest.main()

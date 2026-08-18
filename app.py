@@ -29,6 +29,7 @@ from styleguard.rules import (
     Evidence,
     RuleSet,
     enum_type_for_path,
+    field_type_for_path,
     iter_field_paths,
     load_rule_set,
     set_by_path,
@@ -182,8 +183,9 @@ def rules_editor(rule_set: RuleSet, key_prefix: str) -> RuleSet:
                 columns[0].markdown(f"`{label}`")
 
                 enum_type = enum_type_for_path(rule_set.rules, path)
+                field_type = field_type_for_path(rule_set.rules, path)
                 new_value = _render_input(
-                    path, value, f"{key_prefix}:{path}", columns[1], enum_type
+                    path, value, f"{key_prefix}:{path}", columns[1], enum_type=enum_type, field_type=field_type
                 )
                 if new_value != value:
                     set_by_path(rule_set.rules, path, new_value)
@@ -201,21 +203,26 @@ def rules_editor(rule_set: RuleSet, key_prefix: str) -> RuleSet:
     return rule_set
 
 
-def _render_input(path: str, value, key: str, column, enum_type=None):
+def _render_input(path: str, value, key: str, column, enum_type=None, field_type=None):
     """Widget koji ume da vrati `None` -- prazno polje znači 'ne diraj'."""
     if enum_type is not None:
         options = [t("editor.leave_alone")] + [member.value for member in enum_type]
-        current = value.value if value is not None else t("editor.leave_alone")
+        current = value.value if (isinstance(value, Enum)) else (value if value in options else t("editor.leave_alone"))
         chosen = column.selectbox(
             path, options, index=options.index(current), key=key, label_visibility="collapsed"
         )
         return None if chosen == t("editor.leave_alone") else enum_type(chosen)
 
-    if isinstance(value, bool) or path.endswith(
-        ("bold", "italic", "mirror_margins", "different_first_page", "allow_italic",
-         "allow_empty_paragraphs", "insert_field", "header_row_bold", "header_row_repeat",
-         "page_break_before", "keep_with_next")
-    ):
+    is_bool = (
+        (field_type is not None and isinstance(field_type, type) and issubclass(field_type, bool))
+        or isinstance(value, bool)
+        or path.endswith(
+            ("bold", "italic", "mirror_margins", "different_first_page", "allow_italic",
+             "allow_empty_paragraphs", "insert_field", "header_row_bold", "header_row_repeat",
+             "page_break_before", "keep_with_next")
+        )
+    )
+    if is_bool:
         options = [t("editor.leave_alone"), t("editor.yes"), t("editor.no")]
         current = (
             t("editor.leave_alone")
@@ -227,7 +234,12 @@ def _render_input(path: str, value, key: str, column, enum_type=None):
         )
         return None if chosen == t("editor.leave_alone") else chosen == t("editor.yes")
 
-    if isinstance(value, (int, float)) or path.endswith(("_pt", "_cm", "spacing", "levels")):
+    is_number = (
+        (field_type is not None and isinstance(field_type, type) and issubclass(field_type, (int, float)))
+        or isinstance(value, (int, float))
+        or path.endswith(("_pt", "_cm", "spacing", "levels", "top", "bottom", "inside", "outside"))
+    )
+    if is_number:
         text = "" if value is None else str(value)
         entered = column.text_input(path, text, key=key, label_visibility="collapsed",
                                     placeholder=t("editor.placeholder"))
@@ -239,9 +251,13 @@ def _render_input(path: str, value, key: str, column, enum_type=None):
             column.error(t("editor.number_expected"))
             return value
 
-    if isinstance(value, list):
+    is_list = (
+        (field_type is not None and isinstance(field_type, type) and issubclass(field_type, list))
+        or isinstance(value, list)
+    )
+    if is_list:
         entered = column.text_input(
-            path, ", ".join(str(v) for v in value), key=key, label_visibility="collapsed"
+            path, ", ".join(str(v) for v in value) if isinstance(value, list) else (str(value) if value else ""), key=key, label_visibility="collapsed"
         )
         return [part.strip() for part in entered.split(",") if part.strip()]
 
