@@ -53,6 +53,7 @@
   "format.run": "Formatiraj",
   "format.failed": "Formatiranje nije uspelo: {error}",
   "format.download": "Preuzmi formatiran .docx",
+  "extract.reading": "Učitavam i čitam pravilnik…",
   "extract.identifying": "Prepoznajem instituciju…",
   "extract.institution": "Institucija ({origin}): {name}",
   "extract.institution_unknown": "nije prepoznata",

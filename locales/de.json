@@ -53,6 +53,7 @@
   "format.run": "Formatieren",
   "format.failed": "Formatierung fehlgeschlagen: {error}",
   "format.download": "Formatierte .docx herunterladen",
+  "extract.reading": "Richtlinie wird gelesen und analysiert…",
   "extract.identifying": "Einrichtung wird erkannt…",
   "extract.institution": "Einrichtung ({origin}): {name}",
   "extract.institution_unknown": "nicht erkannt",

@@ -53,6 +53,7 @@
   "format.run": "Format",
   "format.failed": "Formatting failed: {error}",
   "format.download": "Download the formatted .docx",
+  "extract.reading": "Reading and parsing the style guide…",
   "extract.identifying": "Identifying the institution…",
   "extract.institution": "Institution ({origin}): {name}",
   "extract.institution_unknown": "not identified",

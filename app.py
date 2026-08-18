@@ -12,6 +12,7 @@ from __future__ import annotations
 import io
 import tempfile
 from contextlib import contextmanager
+from enum import Enum
 from pathlib import Path
 
 import streamlit as st
@@ -365,9 +366,19 @@ def page_format(user) -> None:
 
     if source == "upload":
         rules_file = st.file_uploader(t("format.guide_file"), type=["pdf", "docx"], key="rules")
-        if rules_file and st.button(t("format.extract"), type="primary"):
-            rule_set = _extract_flow(rules_file, library)
-            st.session_state["rule_set"] = rule_set
+        is_extracting = st.session_state.get("is_extracting", False)
+        if rules_file and st.button(
+            t("format.extract"),
+            type="primary",
+            disabled=is_extracting,
+            key="extract_rules_btn",
+        ):
+            st.session_state["is_extracting"] = True
+            try:
+                rule_set = _extract_flow(rules_file, library)
+                st.session_state["rule_set"] = rule_set
+            finally:
+                st.session_state["is_extracting"] = False
 
     elif source == "library":
         if not available:
@@ -436,19 +447,22 @@ def page_format(user) -> None:
 
 
 def _extract_flow(rules_file, library: RuleLibrary) -> RuleSet | None:
-    try:
-        with temp_upload(rules_file) as path:
-            document = read_rules_document(path)
-    except NoTextLayerError as exc:
-        st.error(str(exc))
-        return None
-    except ValueError as exc:
-        st.error(str(exc))
-        return None
+    with st.status(t("extract.reading"), expanded=True) as status:
+        try:
+            with temp_upload(rules_file) as path:
+                document = read_rules_document(path)
+        except NoTextLayerError as exc:
+            status.update(label=str(exc), state="error")
+            st.error(str(exc))
+            return None
+        except ValueError as exc:
+            status.update(label=str(exc), state="error")
+            st.error(str(exc))
+            return None
 
-    client = mate_client()
+        client = mate_client()
 
-    with st.status(t("extract.identifying"), expanded=True) as status:
+        status.update(label=t("extract.identifying"), state="running")
         institution, origin = identify_institution(document, client)
         st.write(
             t(
@@ -461,7 +475,6 @@ def _extract_flow(rules_file, library: RuleLibrary) -> RuleSet | None:
         matches = library.find_matches(institution)
         if matches and (matches[0].is_strong or matches[0].is_suggestion):
             best = matches[0]
-            status.update(label=t("extract.match_found"), state="complete")
             st.session_state["pending_match"] = best.rule_set.meta.id
             st.info(
                 t(
@@ -726,17 +739,29 @@ def page_library(user) -> None:
 def _apply_language() -> None:
     """Set the language for this session before anything is rendered.
 
-    The browser's `Accept-Language` decides the first impression; once the user
-    picks from the selector, that choice wins for the rest of the session.
+    Precedence:
+    1. Query param `lang` in URL (persists across page reloads/refreshes)
+    2. Active choice in `session_state`
+    3. Browser `Accept-Language` header
     """
+    valid = i18n.available_languages()
     chosen = st.session_state.get("language")
-    if chosen is None:
-        try:
-            header = st.context.headers.get("Accept-Language")
-        except Exception:
-            header = None
-        chosen = i18n.negotiate(header)
+    if chosen not in valid:
+        lang_param = st.query_params.get("lang")
+        if isinstance(lang_param, list):
+            lang_param = lang_param[0] if lang_param else None
+        if lang_param and lang_param in valid:
+            chosen = lang_param
+        else:
+            try:
+                header = st.context.headers.get("Accept-Language")
+            except Exception:
+                header = None
+            chosen = i18n.negotiate(header)
         st.session_state["language"] = chosen
+
+    if st.query_params.get("lang") != chosen:
+        st.query_params["lang"] = chosen
     i18n.set_language(chosen)
 
 
@@ -792,19 +817,25 @@ def page_help() -> None:
     st.link_button(t("help.opensource.button"), REPO_URL)
 
 
+def _on_language_change() -> None:
+    picked = st.session_state.get("language_picker")
+    if picked in i18n.available_languages():
+        st.session_state["language"] = picked
+        st.query_params["lang"] = picked
+
+
 def _language_selector() -> None:
     languages = list(i18n.available_languages())
     current = st.session_state.get("language", i18n.DEFAULT_LANGUAGE)
-    picked = st.sidebar.selectbox(
+    index = languages.index(current) if current in languages else 0
+    st.sidebar.selectbox(
         t("app.language"),
         languages,
-        index=languages.index(current) if current in languages else 0,
+        index=index,
         format_func=i18n.language_name,
         key="language_picker",
+        on_change=_on_language_change,
     )
-    if picked != current:
-        st.session_state["language"] = picked
-        st.rerun()
 
 
 def main() -> None:

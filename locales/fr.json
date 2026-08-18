@@ -53,6 +53,7 @@
   "format.run": "Formater",
   "format.failed": "Le formatage a échoué : {error}",
   "format.download": "Télécharger le .docx formaté",
+  "extract.reading": "Lecture et analyse du guide de style…",
   "extract.identifying": "Identification de l'établissement…",
   "extract.institution": "Établissement ({origin}) : {name}",
   "extract.institution_unknown": "non identifié",
