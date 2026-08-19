@@ -33,6 +33,7 @@ from styleguard.rules import (
     field_type_for_path,
     iter_field_paths,
     load_rule_set,
+    options_for_path,
     set_by_path,
 )
 
@@ -183,10 +184,11 @@ def rules_editor(rule_set: RuleSet, key_prefix: str) -> RuleSet:
                     label += "  ⚠️"
                 columns[0].markdown(f"`{label}`")
 
-                enum_type = enum_type_for_path(rule_set.rules, path)
+                options, enum_type = options_for_path(rule_set.rules, path)
                 field_type = field_type_for_path(rule_set.rules, path)
                 new_value = _render_input(
-                    path, value, f"{key_prefix}:{path}", columns[1], enum_type=enum_type, field_type=field_type
+                    path, value, f"{key_prefix}:{path}", columns[1],
+                    options=options, enum_type=enum_type, field_type=field_type
                 )
                 if new_value != value:
                     set_by_path(rule_set.rules, path, new_value)
@@ -204,15 +206,19 @@ def rules_editor(rule_set: RuleSet, key_prefix: str) -> RuleSet:
     return rule_set
 
 
-def _render_input(path: str, value, key: str, column, enum_type=None, field_type=None):
+def _render_input(path: str, value, key: str, column, options=None, enum_type=None, field_type=None):
     """Widget koji ume da vrati `None` -- prazno polje znači 'ne diraj'."""
-    if enum_type is not None:
-        options = [t("editor.leave_alone")] + [member.value for member in enum_type]
-        current = value.value if (isinstance(value, Enum)) else (value if value in options else t("editor.leave_alone"))
+    if options is not None:
+        select_options = [t("editor.leave_alone")] + list(options)
+        curr_str = value.value if isinstance(value, Enum) else (str(value) if value is not None else t("editor.leave_alone"))
+        if curr_str not in select_options:
+            curr_str = t("editor.leave_alone")
         chosen = column.selectbox(
-            path, options, index=options.index(current), key=key, label_visibility="collapsed"
+            path, select_options, index=select_options.index(curr_str), key=key, label_visibility="collapsed"
         )
-        return None if chosen == t("editor.leave_alone") else enum_type(chosen)
+        if chosen == t("editor.leave_alone"):
+            return None
+        return enum_type(chosen) if enum_type is not None else chosen
 
     is_bool = (
         (field_type is not None and isinstance(field_type, type) and issubclass(field_type, bool))
@@ -224,14 +230,14 @@ def _render_input(path: str, value, key: str, column, enum_type=None, field_type
         )
     )
     if is_bool:
-        options = [t("editor.leave_alone"), t("editor.yes"), t("editor.no")]
+        options_list = [t("editor.leave_alone"), t("editor.yes"), t("editor.no")]
         current = (
             t("editor.leave_alone")
             if value is None
             else (t("editor.yes") if value else t("editor.no"))
         )
         chosen = column.selectbox(
-            path, options, index=options.index(current), key=key, label_visibility="collapsed"
+            path, options_list, index=options_list.index(current), key=key, label_visibility="collapsed"
         )
         return None if chosen == t("editor.leave_alone") else chosen == t("editor.yes")
 
@@ -331,6 +337,15 @@ def _casing_input(column, value, key):
 # --------------------------------------------------------------------------
 
 
+def _set_active_rule_set(rule_set: RuleSet | None) -> None:
+    """Postavlja aktivni set pravila i čisti stanje prethodnih widgeta u editoru."""
+    for k in list(st.session_state.keys()):
+        if k.startswith("fmt:"):
+            del st.session_state[k]
+    st.session_state["rule_set"] = rule_set
+    st.session_state["rule_set_ver"] = st.session_state.get("rule_set_ver", 0) + 1
+
+
 def page_format(user) -> None:
     library = get_library()
     st.header(t("format.header"))
@@ -362,8 +377,6 @@ def page_format(user) -> None:
         label_visibility="collapsed",
     )
 
-    rule_set: RuleSet | None = st.session_state.get("rule_set")
-
     if source == "upload":
         rules_file = st.file_uploader(t("format.guide_file"), type=["pdf", "docx"], key="rules")
         is_extracting = st.session_state.get("is_extracting", False)
@@ -375,8 +388,9 @@ def page_format(user) -> None:
         ):
             st.session_state["is_extracting"] = True
             try:
-                rule_set = _extract_flow(rules_file, library)
-                st.session_state["rule_set"] = rule_set
+                extracted = _extract_flow(rules_file, library)
+                if extracted is not None:
+                    _set_active_rule_set(extracted)
             finally:
                 st.session_state["is_extracting"] = False
 
@@ -390,19 +404,20 @@ def page_format(user) -> None:
             if chosen is not None and st.button(t("format.load"), type="primary"):
                 # Priložen set se kopira, ne učitava: izmene u editoru ne smeju
                 # da završe u fajlu koji je deo isporuke.
-                rule_set = (
+                loaded = (
                     chosen.model_copy(deep=True)
                     if chosen.meta.id in bundled_ids
                     else library.load(chosen.meta.id)
                 )
-                st.session_state["rule_set"] = rule_set
+                _set_active_rule_set(loaded)
 
     else:
         json_file = st.file_uploader("rules.json", type=["json"], key="rules_json")
         if json_file and st.button(t("format.load"), type="primary"):
-            rule_set = RuleSet.model_validate_json(json_file.getvalue().decode("utf-8"))
-            st.session_state["rule_set"] = rule_set
+            loaded = RuleSet.model_validate_json(json_file.getvalue().decode("utf-8"))
+            _set_active_rule_set(loaded)
 
+    rule_set: RuleSet | None = st.session_state.get("rule_set")
     if rule_set is None:
         return
 
@@ -410,7 +425,8 @@ def page_format(user) -> None:
     st.subheader(t("format.rules_heading", name=rule_set.meta.display_name))
     if rule_set.unresolved:
         st.warning(t("format.unresolved", count=len(rule_set.unresolved)))
-    rule_set = rules_editor(rule_set, key_prefix="fmt")
+    rule_ver = st.session_state.get("rule_set_ver", 0)
+    rule_set = rules_editor(rule_set, key_prefix=f"fmt:{rule_ver}")
     st.session_state["rule_set"] = rule_set
 
     _save_to_library_controls(rule_set, library, user)
@@ -660,7 +676,11 @@ def page_library(user) -> None:
 
         columns = st.columns(4)
         if columns[0].button(t("library.edit"), width='stretch', disabled=not may_edit):
+            for k in list(st.session_state.keys()):
+                if k.startswith("lib:"):
+                    del st.session_state[k]
             st.session_state["editing"] = chosen.meta.id
+            st.session_state["lib_edit_ver"] = st.session_state.get("lib_edit_ver", 0) + 1
         # Kopiranje je namerno dozvoljeno svakome ko je prijavljen, i nad tuđim
         # setom: to je izlaz koji zabranu izmene čini neblokirajućom.
         if columns[1].button(
@@ -712,7 +732,8 @@ def page_library(user) -> None:
                 t("library.document_type"), institution.document_type or ""
             ) or None
 
-            rule_set = rules_editor(rule_set, key_prefix=f"lib:{editing}")
+            lib_ver = st.session_state.get("lib_edit_ver", 0)
+            rule_set = rules_editor(rule_set, key_prefix=f"lib:{editing}:{lib_ver}")
             if st.button(t("library.save_changes"), type="primary"):
                 library.save(rule_set)
                 st.success(t("library.saved"))

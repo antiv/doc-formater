@@ -369,6 +369,40 @@ def enum_type_for_path(model: BaseModel, path: str) -> type[Enum] | None:
     return None
 
 
+def options_for_path(model: BaseModel, path: str) -> tuple[list[str] | None, type[Enum] | None]:
+    """Vraća (lista_opcija, enum_klasa_ili_None) za Enum ili Literal polja."""
+    enum_type = enum_type_for_path(model, path)
+    if enum_type is not None:
+        return [m.value for m in enum_type], enum_type
+
+    parts = path.split(".")
+    current = type(model)
+    for part in parts[:-1]:
+        field = current.model_fields.get(part)
+        if field is None:
+            return None, None
+        raw = field.annotation
+        args = get_args(raw)
+        submodel = next(
+            (c for c in (list(args) if args else [raw]) if isinstance(c, type) and issubclass(c, BaseModel)),
+            None,
+        )
+        if submodel is None:
+            return None, None
+        current = submodel
+
+    field = current.model_fields.get(parts[-1])
+    if field is None:
+        return None, None
+
+    raw = field.annotation
+    args = get_args(raw)
+    for candidate in (list(args) if args else [raw]):
+        if get_origin(candidate) is Literal:
+            return [str(opt) for opt in get_args(candidate)], None
+    return None, None
+
+
 def get_by_path(model: BaseModel, path: str) -> Any:
     current: Any = model
     for part in path.split("."):
