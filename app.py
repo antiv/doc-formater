@@ -224,17 +224,23 @@ def mate_status_banner() -> None:
     """
     config = MateConfig.from_env()
     if not config.is_configured:
-        _html(
-            f'<div class="sg-pill" title="{esc(t("mate.heuristic_only"))}">'
-            f'<span class="sg-dot sg-dot-muted"></span>{esc(t("mate.heuristic_short"))}</div>'
-        )
+        _html(_pill_html("sg-dot-muted", t("mate.heuristic_short"), t("mate.heuristic_only")))
         return
     ok, message = _mate_ping(config.base_url, config.agent, (config.token or "")[-6:])
     state = "sg-dot-online" if ok else "sg-dot-warn"
     label = t("mate.agent_online") if ok else t("mate.agent_offline")
-    _html(
-        f'<div class="sg-pill" title="{esc(message)}">'
-        f'<span class="sg-dot {state}"></span>{esc(config.agent)} · {esc(label)}</div>'
+    _html(_pill_html(state, f"{config.agent} · {label}", message))
+
+
+def _pill_html(dot: str, label: str, title: str) -> str:
+    """Ime agenta je proizvoljno dugo, a mesto u traci nije.
+
+    Natpis se skraćuje trotačkom umesto da ispadne iz svoje kutije i legne
+    preko izbora jezika; ceo tekst ostaje u `title`.
+    """
+    return (
+        f'<div class="sg-pill" title="{esc(title)}"><span class="sg-dot {dot}"></span>'
+        f'<span class="sg-pill-label">{esc(label)}</span></div>'
     )
 
 
@@ -1553,8 +1559,14 @@ h1, h2, h3, h4, h5, h6, .sg-h1, .sg-h2, .sg-h4 {
 .st-key-sg-header [data-testid="stMarkdownContainer"] { margin-bottom: 0 !important; }
 .sg-brand, .sg-pill, .sg-avatar { line-height: 1; }
 .st-key-sg-header > [data-testid="stLayoutWrapper"]:last-child { margin-left: auto; }
+/* Grupe u traci se ne skupljaju ispod svog sadržaja: kad ponestane mesta,
+   desna grupa pada u novi red umesto da joj se natpisi preklope. */
+.st-key-sg-header > [data-testid="stLayoutWrapper"] { flex: 0 0 auto !important; }
 .st-key-sg-tools { gap: 14px !important; flex-wrap: nowrap !important; }
-.st-key-sg-tools [data-testid="stLayoutWrapper"] { width: fit-content !important; }
+.st-key-sg-tools [data-testid="stLayoutWrapper"],
+.st-key-sg-tools [data-testid="stElementContainer"] {
+  width: fit-content !important; flex: 0 0 auto !important;
+}
 .st-key-sg-nav { gap: 22px !important; }
 .st-key-sg-brand { gap: 0 !important; }
 .sg-brand { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
@@ -1578,7 +1590,9 @@ h1, h2, h3, h4, h5, h6, .sg-h1, .sg-h2, .sg-h4 {
   display: inline-flex; align-items: center; gap: 7px; font-size: 12px;
   padding: 4px 10px; border: 1px solid var(--sg-divider); border-radius: var(--sg-radius);
   color: color-mix(in srgb, var(--sg-text) 65%, transparent); white-space: nowrap;
+  max-width: 240px; overflow: hidden;
 }
+.sg-pill-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .sg-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sg-n500); }
 .sg-dot-online { background: var(--sg-accent); }
 .sg-dot-warn { background: var(--sg-accent-700); }
@@ -2199,6 +2213,7 @@ iframe[title="streamlit.components.v1.html"], iframe[height="0"] {
   .st-key-sg-header { gap: 16px !important; }
   .st-key-sg-nav { gap: 16px !important; }
   .st-key-sg-tools { gap: 10px !important; }
+  .sg-pill { max-width: 132px; }
   .sg-figrow { gap: 28px; flex-wrap: wrap; }
   .sg-review-head { flex-wrap: wrap; }
   .sg-figures { gap: 20px; }
