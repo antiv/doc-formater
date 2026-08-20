@@ -271,7 +271,7 @@ def trim_blank_bottom(path: Path, padding: int = 32) -> None:
     with Image.open(path) as image:
         rgb = image.convert("RGB")
         width, height = rgb.size
-        # The main column's background, sampled away from the sidebar.
+        # The page's background, sampled clear of the marginalia column.
         background = rgb.getpixel((int(width * 0.75), height - 4))
         last_content = 0
         for y in range(height - 1, -1, -1):
@@ -347,20 +347,18 @@ def main() -> int:
             uploads.nth(uploads.count() - 1).set_input_files(str(guide))
             page.wait_for_timeout(2500)
             page.get_by_role("button", name="Extract rules").click()
-            page.wait_for_selector("text=Rules:", timeout=300_000)
+            # The rules review opens as cards, one per group, already expanded --
+            # the evidence column is on screen without a click.
+            page.wait_for_selector(".sg-review-head", timeout=300_000)
             page.wait_for_timeout(2500)
-            # Open a group so the evidence column (origin, confidence, quote)
-            # is what the screenshot actually shows.
-            page.get_by_text("page_setup", exact=False).first.click()
-            page.wait_for_timeout(1500)
-            scroll_to(page, page.get_by_text("Rules:", exact=False).first)
+            scroll_to(page, page.locator(".sg-review-head").first)
             shoot(page, "02-rules-review.png", full_page=False)
 
             # 3 — the report, after formatting
             page.get_by_role("button", name="Format", exact=True).click()
-            page.wait_for_selector("text=Style changes", timeout=300_000)
+            page.wait_for_selector("h2:has-text('What was changed')", timeout=300_000)
             page.wait_for_timeout(2500)
-            scroll_to(page, page.get_by_text("Applying", exact=True).first)
+            scroll_to(page, page.locator("h2:has-text('What was changed')").first)
             shoot(page, "03-report.png", full_page=False)
 
             # 4 — the library, with owners

@@ -161,37 +161,68 @@ def require_gate(st) -> bool:
 
     Odvojeno pitanje od prijave: ovo je „ko sme do aplikacije", a Google
     prijava je „ko si ti". Podrazumevano je isključeno.
+
+    Obe stvari stoje na istom ekranu, jedna sa svake strane vlasi -- levo šta
+    aplikacija radi i zašto prijava uopšte postoji, desno kako se ulazi.
     """
     if gate_is_open() or st.session_state.get(_GATE_KEY):
         return True
 
-    st.image(str(ICON_PATH), width=72)
-    st.title(t("app.title"))
-    st.caption(t("auth.gate_caption"))
-    with st.form("gate"):
-        entered = st.text_input(t("auth.password"), type="password")
-        if st.form_submit_button(t("auth.enter"), type="primary"):
-            if check_password(entered, app_password()):
-                st.session_state[_GATE_KEY] = True
-                st.rerun()
-            else:
-                st.error(t("auth.wrong_password"))
+    with st.container(key="sg-gate-row"):
+        left, right = st.columns(2, gap="large")
+    with left:
+        with st.container(key="sg-gate-left"):
+            st.image(str(ICON_PATH), width=30)
+            st.markdown(
+                f'<h2 class="sg-h2">{t("app.title")}</h2>'
+                f'<p class="sg-gate-lead">{t("auth.gate_lead")}</p>',
+                unsafe_allow_html=True,
+            )
+    with right:
+        with st.container(key="sg-gate-right"):
+            with st.form("gate", border=False):
+                entered = st.text_input(t("auth.password"), type="password")
+                if st.form_submit_button(t("auth.enter"), type="primary", width="stretch"):
+                    if check_password(entered, app_password()):
+                        st.session_state[_GATE_KEY] = True
+                        st.rerun()
+                    else:
+                        st.error(t("auth.wrong_password"))
+            if oidc_configured(st):
+                st.markdown(f'<div class="sg-or">{t("auth.or")}</div>', unsafe_allow_html=True)
+                if st.button(t("auth.sign_in_google"), width="stretch", key="gate_sign_in"):
+                    st.login("google")
+            hint = " ".join(t("auth.sign_in_hint").split())
+            st.markdown(f'<p class="sg-note">{hint}</p>', unsafe_allow_html=True)
     return False
 
 
-def render_sidebar(st, user: User | None) -> None:
-    """Prijava/odjava i ko je trenutno na vezi."""
-    if not oidc_configured(st):
-        st.sidebar.caption(t("auth.local_mode"))
-        return
+def render_account(st, user: User | None) -> None:
+    """Nalog u traci na vrhu: krug sa inicijalom, ili poziv na prijavu.
 
+    Rečenica o lokalnom režimu više ne stoji ovde nego u sporednoj koloni --
+    to je stanje instance, a ne stanje naloga.
+    """
     if user is None:
-        st.sidebar.info(t("auth.sign_in_hint"))
-        if st.sidebar.button(t("auth.sign_in_google"), type="primary", width="stretch"):
-            st.login("google")
+        with st.container(key="sg-signin"):
+            if st.button(t("auth.sign_in_google"), key="sign_in_btn"):
+                st.login("google")
         return
 
-    badge = t("auth.admin_badge") if user.is_admin else ""
-    st.sidebar.success(f"{user.label}{badge}")
-    if st.sidebar.button(t("auth.sign_out"), width="stretch"):
-        st.logout()
+    initial = (user.name or user.email or "U")[0].upper()
+    badge = f" · {t('auth.admin_badge_short')}" if user.is_admin else ""
+    if user.is_local:
+        st.markdown(
+            f'<div class="sg-avatar" title="{user.label}{badge}">{initial}</div>',
+            unsafe_allow_html=True,
+        )
+        return
+
+    with st.container(key="sg-account"):
+        with st.popover(initial):
+            st.markdown(
+                f'<div class="sg-user-name">{user.label}{badge}</div>',
+                unsafe_allow_html=True,
+            )
+            if st.button(t("auth.sign_out"), key="sign_out_btn", width="stretch"):
+                st.logout()

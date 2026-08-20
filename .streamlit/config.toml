@@ -18,4 +18,21 @@ toolbarMode = "minimal"
 showErrorDetails = false
 
 [theme]
+# „Classical" iz redizajna: papirna podloga, mastilo umesto crne, zlato kao
+# potez a ne ispuna. Postavljeno ovde da Streamlit sam obriše crveno #FF4B4B i
+# sivo #F0F2F6 -- CSS u app.py onda ne mora da se bori sa njima.
 base = "light"
+primaryColor = "#b68235"
+backgroundColor = "#f3f2f2"
+secondaryBackgroundColor = "#eae9e9"
+textColor = "#201f1d"
+borderColor = "#cdcaca"
+linkColor = "#b68235"
+baseRadius = "small"
+buttonRadius = "small"
+showWidgetBorder = true
+showSidebarBorder = false
+# Fontove učitava @import u `_inject_custom_css()`; ovde stoje samo imena.
+font = "Lora, Georgia, serif"
+headingFont = "Cormorant Garamond, Georgia, serif"
+baseFontSize = 15
