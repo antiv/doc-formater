@@ -38,6 +38,7 @@ from styleguard.rules import Institution, load_rule_set  # noqa: E402
 OUT_DIR = Path(__file__).resolve().parent / "images"
 PORT = 8555
 VIEWPORT = {"width": 1500, "height": 1000}
+VIEWPORT_SCALE = 2  # device_scale_factor; CSS pixels -> image pixels
 
 
 # --------------------------------------------------------------------------
@@ -254,10 +255,37 @@ def wait_for_port(port: int, timeout: float = 90.0) -> None:
 
 
 def scroll_to(page, locator, offset: int = 90) -> None:
-    """Put `locator` near the top of the viewport, not merely inside it."""
+    """Bring `locator` into view, as close to the top as the page allows.
+
+    Only "as close as it allows": the element that scrolls is `section.stMain`,
+    not the window, and at the end of a run it is already at its maximum scroll
+    -- there is less than a viewport of content below the report, so nothing can
+    put that heading at the top. `crop_above` finishes what this cannot.
+    """
     locator.evaluate("element => element.scrollIntoView({block: 'start'})")
     page.mouse.wheel(0, -offset)
     page.wait_for_timeout(900)
+
+
+def crop_above(path: Path, top_css: float, scale: float, padding: int = 12) -> None:
+    """Cut off everything above `top_css` (a viewport-relative CSS offset).
+
+    This is what frames the two mid-page shots. Scrolling alone leaves whatever
+    happened to sit above the section in the picture -- the tail of the previous
+    step, or a sliver of the marginalia column sliced through the middle of a
+    line.
+    """
+    from PIL import Image
+
+    cut = int(max(0.0, top_css - padding) * scale)
+    if cut <= 0:
+        return
+    with Image.open(path) as image:
+        rgb = image.convert("RGB")
+        width, height = rgb.size
+        if cut >= height - 200:  # nothing worth keeping below the cut
+            return
+        rgb.crop((0, cut, width, height)).save(path)
 
 
 def trim_blank_bottom(path: Path, padding: int = 32) -> None:
@@ -284,10 +312,22 @@ def trim_blank_bottom(path: Path, padding: int = 32) -> None:
             rgb.crop((0, 0, width, cut)).save(path)
 
 
-def shoot(page, name: str, full_page: bool = True) -> None:
+def shoot(page, name: str, start=None) -> None:
+    """Save one screenshot, optionally framed to begin at `start`.
+
+    There is no `full_page` switch, because there is no full page to capture:
+    the scrolling element is `section.stMain`, so the document itself is always
+    exactly one viewport tall and Playwright's `full_page` returns the same
+    pixels as a plain shot. Framing is therefore done by cropping.
+    """
     path = OUT_DIR / name
     page.wait_for_timeout(1200)
-    page.screenshot(path=str(path), full_page=full_page)
+    # Read the box after the wait, so a settling layout cannot move it.
+    box = start.bounding_box() if start is not None else None
+    page.screenshot(path=str(path))
+    if box is not None:
+        scale = VIEWPORT_SCALE
+        crop_above(path, box["y"], scale)
     trim_blank_bottom(path)
     print(f"  {path.relative_to(ROOT)}")
 
@@ -329,7 +369,7 @@ def main() -> int:
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch()
             page = browser.new_context(
-                viewport=VIEWPORT, device_scale_factor=2,
+                viewport=VIEWPORT, device_scale_factor=VIEWPORT_SCALE,
                 extra_http_headers={"Accept-Language": "en-GB,en;q=0.9"},
             ).new_page()
             page.goto(f"http://127.0.0.1:{PORT}", wait_until="networkidle")
@@ -351,15 +391,22 @@ def main() -> int:
             # the evidence column is on screen without a click.
             page.wait_for_selector(".sg-review-head", timeout=300_000)
             page.wait_for_timeout(2500)
-            scroll_to(page, page.locator(".sg-review-head").first)
-            shoot(page, "02-rules-review.png", full_page=False)
+            review_head = page.locator(".sg-review-head").first
+            scroll_to(page, review_head)
+            # Start the frame at the heading: the marginalia column ends at a
+            # different height than the rules column, so any higher cut runs
+            # through the middle of its last line.
+            shoot(page, "02-rules-review.png", start=review_head)
 
             # 3 — the report, after formatting
             page.get_by_role("button", name="Format", exact=True).click()
             page.wait_for_selector("h2:has-text('What was changed')", timeout=300_000)
             page.wait_for_timeout(2500)
+            report_row = page.locator(".st-key-sg-report-row").first
             scroll_to(page, page.locator("h2:has-text('What was changed')").first)
-            shoot(page, "03-report.png", full_page=False)
+            # The row wraps both columns, so the frame keeps the result panel
+            # and the download button beside the summary.
+            shoot(page, "03-report.png", start=report_row)
 
             # 4 — the library, with owners
             page.get_by_text("Rule library", exact=True).first.click()
