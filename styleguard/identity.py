@@ -20,6 +20,7 @@ postaje njegova. To je izlaz koji čini zabranu neblokirajućom.
 from __future__ import annotations
 
 import hmac
+import html
 import os
 from dataclasses import dataclass
 from pathlib import Path
@@ -204,24 +205,32 @@ def render_account(st, user: User | None) -> None:
     to je stanje instance, a ne stanje naloga.
     """
     if user is None:
-        with st.container(key="sg-signin"):
+        with st.container(key="sg-signin", width="content"):
             if st.button(t("auth.sign_in_google"), key="sign_in_btn"):
                 st.login("google")
         return
 
+    # Ime stiže iz OIDC-a, dakle spolja -- u HTML ulazi propušteno kroz escape.
+    label = html.escape(user.label, quote=True)
     initial = (user.name or user.email or "U")[0].upper()
-    badge = f" · {t('auth.admin_badge_short')}" if user.is_admin else ""
     if user.is_local:
+        badge = f" · {t('auth.admin_badge_short')}" if user.is_admin else ""
         st.markdown(
-            f'<div class="sg-avatar" title="{user.label}{badge}">{initial}</div>',
+            f'<div class="sg-avatar" title="{label}{html.escape(badge)}">{initial}</div>',
             unsafe_allow_html=True,
         )
         return
 
-    with st.container(key="sg-account"):
+    role = (
+        f'<span class="sg-menu-role">{t("auth.admin_badge_short")}</span>'
+        if user.is_admin
+        else ""
+    )
+    with st.container(key="sg-account", width="content"):
         with st.popover(initial):
             st.markdown(
-                f'<div class="sg-user-name">{user.label}{badge}</div>',
+                f'<div class="sg-menu-head"><span class="sg-menu-name">{label}</span>'
+                f"{role}</div>",
                 unsafe_allow_html=True,
             )
             if st.button(t("auth.sign_out"), key="sign_out_btn", width="stretch"):

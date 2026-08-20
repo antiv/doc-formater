@@ -1641,14 +1641,45 @@ h1, h2, h3, h4, h5, h6, .sg-h1, .sg-h2, .sg-h4 {
   width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--sg-divider);
   display: grid; place-items: center; font-family: var(--sg-heading); font-size: 12px;
 }
-.st-key-sg-account button {
+.st-key-sg-account [data-testid="stPopoverButton"] {
   width: 26px !important; height: 26px !important; min-height: 26px !important;
   padding: 0 !important; border-radius: 50% !important;
   border: 1px solid var(--sg-divider) !important; background: transparent !important;
   font-family: var(--sg-heading) !important; font-size: 12px !important;
-  color: var(--sg-text) !important;
+  color: var(--sg-text) !important; overflow: hidden;
 }
-.sg-user-name { font-size: 13px; padding: 4px 10px 8px; }
+/* Krug nosi inicijal i ništa više -- strelica nadole tu nema šta da kaže. */
+.st-key-sg-account [data-testid="stPopoverButton"] svg,
+.st-key-sg-account [data-testid="stPopoverButton"] [data-testid="stIconMaterial"] {
+  display: none !important;
+}
+
+/* — meni naloga — */
+.sg-menu-head {
+  padding: 4px 10px 8px; border-bottom: 1px solid var(--sg-divider); margin-bottom: 4px;
+}
+.sg-menu-name {
+  display: block; font-size: 13px; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.sg-menu-role {
+  display: block; margin-top: 3px; font-family: var(--sg-heading); font-size: 10.5px;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--sg-accent);
+}
+/* Ista negativna margina koja je krivila redove tabele ovde je uvlačila
+   dugme „Odjavi se" u ime iznad njega. */
+[data-testid="stPopoverBody"] [data-testid="stMarkdownContainer"] { margin-bottom: 0 !important; }
+[data-testid="stPopoverBody"] [data-testid="stMarkdownContainer"] > p { margin: 0 !important; }
+[data-testid="stPopoverBody"] .stButton > button {
+  border: 0 !important; border-radius: 2px !important; background: transparent !important;
+  font-family: var(--sg-body) !important; font-weight: 400 !important;
+  font-size: 13.5px !important; color: var(--sg-text) !important;
+  justify-content: flex-start !important; padding: 7px 10px !important;
+  min-height: 0 !important;
+}
+[data-testid="stPopoverBody"] .stButton > button:hover {
+  background: rgba(32,31,29,0.06) !important; color: var(--sg-text) !important;
+}
 
 /* — sporedna kolona — */
 .sg-aside {
