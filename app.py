@@ -1638,21 +1638,42 @@ h1, h2, h3, h4, h5, h6, .sg-h1, .sg-h2, .sg-h4 {
   color: color-mix(in srgb, var(--sg-text) 50%, transparent);
 }
 .sg-avatar {
-  width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--sg-divider);
+  width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--sg-accent);
   display: grid; place-items: center; font-family: var(--sg-heading); font-size: 12px;
+  line-height: 1; color: var(--sg-accent);
 }
 .st-key-sg-account [data-testid="stPopoverButton"] {
   width: 26px !important; height: 26px !important; min-height: 26px !important;
-  padding: 0 !important; border-radius: 50% !important;
-  border: 1px solid var(--sg-divider) !important; background: transparent !important;
+  padding: 0 !important; border-radius: 50% !important; gap: 0 !important;
+  /* Isti zlatni potez kao aktivna stavka navigacije: krug je oznaka mesta,
+     ne dugme, pa ostaje bez ispune. */
+  border: 1px solid var(--sg-accent) !important; background: transparent !important;
   font-family: var(--sg-heading) !important; font-size: 12px !important;
-  color: var(--sg-text) !important; overflow: hidden;
+  color: var(--sg-accent) !important; overflow: hidden;
+  display: inline-flex !important; align-items: center !important;
+  justify-content: center !important; line-height: 1 !important;
+}
+.st-key-sg-account [data-testid="stPopoverButton"]:hover {
+  background: rgba(182,130,53,0.12) !important; color: var(--sg-accent) !important;
 }
 /* Krug nosi inicijal i ništa više -- strelica nadole tu nema šta da kaže. */
-.st-key-sg-account [data-testid="stPopoverButton"] svg,
-.st-key-sg-account [data-testid="stPopoverButton"] [data-testid="stIconMaterial"] {
+/* Skriva se ceo prorez za ikonu, ne samo ikona u njemu: prazan omotač i dalje
+   drži polovinu kruga, pa inicijal ostane levo od sredine. */
+.st-key-sg-account [data-testid="stPopoverButton"] > div > div:has([data-testid="stIconMaterial"]),
+.st-key-sg-account [data-testid="stPopoverButton"] > div > div:has(svg),
+.st-key-sg-account [data-testid="stPopoverButton"] [data-testid="stIconMaterial"],
+.st-key-sg-account [data-testid="stPopoverButton"] svg {
   display: none !important;
 }
+/* Natpis dugmeta stoji u nizu omotača koji poravnavaju ulevo i nose mesto za
+   ikonu koje ovde nema; bez izričitog centriranja kroz ceo taj niz inicijal
+   sedne uz levu ivicu kruga. */
+.st-key-sg-account [data-testid="stPopoverButton"] * {
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  width: 100% !important; margin: 0 !important; padding: 0 !important;
+  line-height: 1 !important; text-align: center !important;
+}
+
 
 /* — meni naloga — */
 .sg-menu-head {
